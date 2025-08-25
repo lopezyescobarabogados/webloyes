@@ -1,0 +1,44 @@
+# Robots.txt para López y Escobar Abogados Asociados
+# https://lopezescobarabogados.com
+
+User-agent: *
+Allow: /
+
+# Permitir acceso a páginas principales
+Allow: /servicios/
+Allow: /nosotros/
+Allow: /equipo/
+Allow: /noticias/
+Allow: /contacto/
+
+# Bloquear acceso a áreas administrativas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dashboard/
+
+# Permitir acceso a recursos públicos
+Allow: /images/
+Allow: /icons/
+Allow: /_next/static/
+
+# Sitemap
+Sitemap: https://lopezescobarabogados.com/sitemap.xml
+
+# Configuración específica para buscadores legales
+User-agent: GoogleBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: BingBot
+Allow: /
+Crawl-delay: 1
+
+# Bloquear bots no deseados
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

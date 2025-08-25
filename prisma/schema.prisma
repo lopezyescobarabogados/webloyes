@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo para noticias del bufete
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String
+  content     String
+  author      String
+  category    String
+  tags        String   // JSON string for tags
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("news")
+}
+
+// Modelo para miembros del equipo
+model TeamMember {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  description String
+  bio         String?
+  email       String?
+  phone       String?
+  imageUrl    String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  specialties String   // JSON string for specialties array
+  education   String?
+  experience  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("team_members")
+}
+
+// Modelo para mensajes de contacto
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  company   String?
+  status    String   @default("PENDING") // PENDING, READ, RESPONDED, ARCHIVED
+  priority  String   @default("MEDIUM")  // LOW, MEDIUM, HIGH, URGENT
+  source    String   @default("WEB_FORM") // WEB_FORM, EMAIL, PHONE, OTHER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contact_messages")
+}

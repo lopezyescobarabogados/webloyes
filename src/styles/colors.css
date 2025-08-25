@@ -1,0 +1,172 @@
+/* Paleta de colores Webloyes - FASE 3 UI/UX */
+
+:root {
+  /* Color principal - Azul Marino */
+  --navy: 10 35 66; /* #0a2342 */
+  --navy-rgb: #0a2342;
+
+  /* Color de fondo principal */
+  --white: 255 255 255; /* #ffffff */
+  --white-rgb: #ffffff;
+
+  /* Elementos secundarios - Gris claro */
+  --gray-light: 245 245 245; /* #f5f5f5 */
+  --gray-light-rgb: #f5f5f5;
+
+  /* Variantes de azul marino para hover y estados */
+  --navy-50: 240 242 246;
+  --navy-100: 219 225 234;
+  --navy-200: 183 197 214;
+  --navy-300: 147 169 194;
+  --navy-400: 111 141 174;
+  --navy-500: 75 113 154;
+  --navy-600: 59 90 123;
+  --navy-700: 43 67 92;
+  --navy-800: 27 44 61;
+  --navy-900: 10 35 66; /* Principal */
+  --navy-950: 5 18 33;
+
+  /* Grises para texto y elementos secundarios */
+  --gray-50: 249 250 251;
+  --gray-100: 243 244 246;
+  --gray-200: 229 231 235;
+  --gray-300: 209 213 219;
+  --gray-400: 156 163 175;
+  --gray-500: 107 114 128;
+  --gray-600: 75 85 99;
+  --gray-700: 55 65 81;
+  --gray-800: 31 41 55;
+  --gray-900: 17 24 39;
+}
+
+/* Utilidades de color principales */
+.text-navy {
+  color: rgb(var(--navy));
+}
+
+.bg-navy {
+  background-color: rgb(var(--navy));
+}
+
+.bg-secondary {
+  background-color: rgb(var(--gray-light));
+}
+
+.border-navy {
+  border-color: rgb(var(--navy));
+}
+
+/* Estados hover con sombras sutiles */
+.hover\:bg-navy:hover {
+  background-color: rgb(var(--navy));
+  box-shadow: 0 4px 12px rgba(10, 35, 66, 0.15);
+}
+
+.hover\:text-navy:hover {
+  color: rgb(var(--navy));
+}
+
+.hover\:shadow-navy:hover {
+  box-shadow: 0 4px 12px rgba(10, 35, 66, 0.1);
+}
+
+/* Efectos de elevación para cards y elementos interactivos */
+.elevation-sm {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.elevation-md {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.elevation-lg {
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.1),
+    0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.elevation-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.elevation-hover:hover {
+  box-shadow:
+    0 8px 25px rgba(10, 35, 66, 0.15),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Botones con estados mejorados */
+.btn-primary {
+  background-color: rgb(var(--navy));
+  color: white;
+  border: 2px solid rgb(var(--navy));
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: rgb(var(--navy-800));
+  border-color: rgb(var(--navy-800));
+  box-shadow: 0 4px 12px rgba(10, 35, 66, 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus {
+  outline: 2px solid rgb(var(--navy));
+  outline-offset: 2px;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: rgb(var(--navy));
+  border: 2px solid rgb(var(--navy));
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: rgb(var(--navy));
+  color: white;
+  box-shadow: 0 4px 12px rgba(10, 35, 66, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Estados de accesibilidad mejorados */
+.focus\:ring-navy:focus {
+  box-shadow:
+    0 0 0 2px white,
+    0 0 0 4px rgb(var(--navy));
+}
+
+/* Animaciones suaves para transiciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Mejoras de contraste para accesibilidad */
+.high-contrast {
+  color: rgb(var(--navy));
+  font-weight: 600;
+}
+
+.medium-contrast {
+  color: rgb(var(--gray-700));
+}
+
+.low-contrast {
+  color: rgb(var(--gray-500));
+}

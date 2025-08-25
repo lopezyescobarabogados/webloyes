@@ -1,103 +1,284 @@
-import Image from "next/image";
+'use client';
+
+import MainLayout from '@/layouts/MainLayout';
+import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <MainLayout>
+      {/* Hero Section con imagen institucional */}
+      <section
+        id="hero"
+        className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(10, 35, 66, 0.7), rgba(10, 35, 66, 0.7)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiBmaWxsPSIjZjNmNGY2Ii8+CjxjaXJjbGUgY3g9IjQ4MCIgY3k9IjI3MCIgcj0iMTIwIiBmaWxsPSIjZTVlN2ViIi8+CjxjaXJjbGUgY3g9IjE0NDAiIGN5PSI4MTAiIHI9IjE2MCIgZmlsbD0iI2U1ZTdlYiIvPgo8cGF0aCBkPSJNNjAwIDQwMEw4MDAgNjAwTDEwMDAgNDAwTDEyMDAgNjAwTDE0MDAgNDAwIiBzdHJva2U9IiNkMWQ1ZGIiIHN0cm9rZS13aWR0aD0iNCIgZmlsbD0ibm9uZSIvPgo8L3N2Zz4K')`,
+        }}
+      >
+        <div className="relative z-10 container mx-auto px-4 text-center text-white sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <h1 className="mb-6 font-serif text-4xl leading-tight font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+              <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                Compromiso y Experiencia Jurídica
+              </span>
+            </h1>
+            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl md:text-2xl">
+              López & Escobar Abogados Asociados S.A.S., ofrece servicios jurídicos especializados, con más de 25 años de experiencia.
+            </p>
+            <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
+              <Link href="/servicios">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                >
+                  Nuestros Servicios
+                </Button>
+              </Link>
+              <Link href="/contacto">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
+                >
+                  Consulta
+                </Button>
+              </Link>
+            </div>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Indicador de scroll */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 transform animate-bounce">
+            {/* Scroll indicator icon removed */}
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* Sección destacada de servicios */}
+      <section
+        id="servicios-destacados"
+        className="bg-white py-16 sm:py-20 lg:py-24"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center sm:mb-16">
+            <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
+              Servicios Jurídicos
+            </h2>
+          </div>
+          <div className="text-center">
+            <Link href="/servicios">
+              <Button size="lg" className="px-8">
+                 Servicios
+              </Button>
+            </Link>
+          </div>
+        </div>  
+      </section>
+
+      {/* Por qué elegirnos - Valores de la firma */}
+      <section className="bg-white py-16 sm:py-20 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="mb-6 font-serif text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
+              ¿Por qué elegir López & Escobar?
+            </h2>
+            <p className="mb-12 text-lg text-gray-600 sm:text-xl">
+              Porque brindamos seguridad jurídica y confianza estratégica a todos nuestros clientes, con un enfoque integral y personalizado que garantiza resultados efectivos.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Experiencia Especializada</h3>
+              <p className="text-gray-600">
+                Más de 25 años de experiencia profesional en áreas especializadas del derecho, con amplio manejo normativo y jurisprudencial.
+              </p>
+            </div>
+
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Atención Personalizada</h3>
+              <p className="text-gray-600">
+                Brindamos un acompañamiento cercano y profesional, reconociendo que cada cliente y cada caso requieren soluciones jurídicas únicas, diseñadas con dedicación y detalle.
+              </p>
+            </div>
+
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Prevención de Riesgos</h3>
+              <p className="text-gray-600">
+                Nuestro enfoque preventivo evita problemas legales costosos. Anticipamos riesgos y estructuramos soluciones antes de que surjan conflictos.
+              </p>
+            </div>
+
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Soluciones Estratégicas</h3>
+              <p className="text-gray-600">
+                Combinamos conocimiento técnico con visión estratégica para ofrecer soluciones que impulsen el crecimiento y protejan sus intereses.
+              </p>
+            </div>
+
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Transparencia Total</h3>
+              <p className="text-gray-600">
+                Garantizamos una comunicación clara y permanente, con total transparencia en cada etapa del proceso, brindando a nuestros clientes la certeza y confianza necesarias en la gestión de sus asuntos jurídicos.
+              </p>
+            </div>
+
+            <div className="text-center">
+              
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Acompañamiento Permanente</h3>
+              <p className="text-gray-600">
+                Más allá de resolver asuntos jurídicos, cultivamos relaciones de largo plazo, consolidándonos como asesores estratégicos de confianza.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link href="/nosotros">
+              <Button size="lg" variant="outline" className="mr-4">
+                Nosotros
+              </Button>
+            </Link>
+            <Link href="/contacto">
+              <Button size="lg">
+                Consulta
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Resumen de la firma: visión, valores */}
+      <section id="vision-valores" className="bg-white py-16 sm:py-20 lg:py-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center sm:mb-16">
+            <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
+              Nuestros Principios
+            </h2>
+            <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
+              Ejercemos nuestra labor con ética, excelencia y un firme compromiso en la protección de los intereses de nuestros clientes.
+            </p>
+          </div>
+
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Visión */}
+            <div className="text-center lg:text-left">
+              
+              <h3 className="text-navy mb-4 font-serif text-2xl font-bold sm:text-3xl">
+                Visión
+              </h3>
+              <p className="text-lg leading-relaxed text-gray-600">
+                Consolidarnos como una firma jurídica de referencia a nivel local, 
+                nacional e internacional, distinguida por la excelencia en nuestras áreas de práctica. 
+                Nuestra visión es ser un referente de confianza y transformación, aportando soluciones 
+                jurídicas que impacten positivamente en nuestros clientes.
+              </p>
+            </div>
+
+            {/* Valores */}
+            <div className="space-y-8">
+              <h3 className="text-navy text-center font-serif text-2xl font-bold sm:text-3xl lg:text-left">
+                Valores
+              </h3>
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">Respeto</h4>
+                    <p className="text-gray-600">
+                      Promovemos relaciones basadas en la dignidad, la equidad y la consideración hacia nuestros clientes, colegas, instituciones y la sociedad, asegurando un ejercicio jurídico íntegro y humano.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">Responsabilidad</h4>
+                    <p className="text-gray-600">
+                      Asumimos con seriedad y compromiso cada asunto encomendado, respondiendo con diligencia y rigor profesional, garantizando soluciones jurídicas oportunas y confiables para nuestros clientes.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      Excelencia
+                    </h4>
+                    <p className="text-gray-600">
+                      Ofrecemos un servicio jurídico de la más alta calidad, respaldado por rigor técnico, actualización constante y un compromiso permanente con superar las expectativas de nuestros clientes.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">Ética</h4>
+                    <p className="text-gray-600">
+                      Ejercemos nuestra profesión con integridad y transparencia, guiando cada actuación por los más altos principios morales y jurídicos, en estricto cumplimiento de la ley y en respeto a la confianza depositada por nuestros clientes.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA button to Nosotros */}
+          <div className="mt-12 text-center">
+            <Link href="/nosotros">
+              <Button size="lg" className="bg-navy hover:bg-blue-800">
+               Nosotros
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action al contacto */}
+      <section
+        id="cta-contacto"
+        className="from-navy to-navy bg-gradient-to-br via-blue-900 py-16 text-white sm:py-20 lg:py-24"
+      >
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl">
+            <h2 className="mb-6 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
+              Te Asesoramos 
+            </h2>
+            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
+              Orientación jurídica estratégica y especializada
+            </p>
+
+            <div className="mx-auto mb-12 flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
+              <Link href="/contacto">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                >
+                  Contáctanos
+                </Button>
+              </Link>
+              <Link href="/servicios">
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
+                >
+                  Nuestros Servicios
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </MainLayout>
   );
 }
