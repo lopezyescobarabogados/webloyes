@@ -182,51 +182,60 @@ export default function Home() {
             {/* Valores */}
             <div className="space-y-8">
               <h3 className="text-navy text-center font-serif text-2xl font-bold sm:text-3xl lg:text-left">
-                Valores
+               Pilares de la Organización
               </h3>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  
-                  <div>
-                    <h4 className="text-navy mb-2 font-semibold">Respeto</h4>
-                    <p className="text-gray-600">
-                      Promovemos relaciones basadas en la dignidad, la equidad y la consideración hacia nuestros clientes, colegas, instituciones y la sociedad, asegurando un ejercicio jurídico íntegro y humano.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                
-                  <div>
-                    <h4 className="text-navy mb-2 font-semibold">Responsabilidad</h4>
-                    <p className="text-gray-600">
-                      Asumimos con seriedad y compromiso cada asunto encomendado, respondiendo con diligencia y rigor profesional, garantizando soluciones jurídicas oportunas y confiables para nuestros clientes.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  
                   <div>
                     <h4 className="text-navy mb-2 font-semibold">
-                      Excelencia
-                    </h4>
-                    <p className="text-gray-600">
-                      Ofrecemos un servicio jurídico de la más alta calidad, respaldado por rigor técnico, actualización constante y un compromiso permanente con superar las expectativas de nuestros clientes.
-                    </p>
+                      - El rigor jurídico no es una virtud, es un punto de partida.
+                      </h4>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  
                   <div>
-                    <h4 className="text-navy mb-2 font-semibold">Ética</h4>
-                    <p className="text-gray-600">
-                      Ejercemos nuestra profesión con integridad y transparencia, guiando cada actuación por los más altos principios morales y jurídicos, en estricto cumplimiento de la ley y en respeto a la confianza depositada por nuestros clientes.
-                    </p>
+                    <h4 className="text-navy mb-2 font-semibold">- Los litigantes somos contadores de historias.</h4>
                   </div>
                 </div>
+
+                <div className="flex items-start gap-4">
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      - No hay enemigo pequeño ni adversario invencible
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">- Las formas sí importan.</h4>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      - Las victorias son siempre colectivas.
+                    </h4>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      - Siempre, siempre se puede hacer mejor.
+                    </h4>
+                  </div>
+                </div>
+
+                 <div className="mt-6 rounded-lg bg-blue-50 p-4">
+                    <p className="text-sm text-gray-600">
+                      <strong>Autor:</strong> Ángela María Serrano Muñoz <br />
+                      <strong>Publicado:</strong> viernes 22 de agosto de 2025 / Asuntos legales / La República
+                    </p>
+                  </div>
               </div>
             </div>
           </div>
