@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import Button from './Button';
 import { ServiceModalData } from '@/types/modal';
 
@@ -10,8 +11,27 @@ interface ServiceModalProps {
   service: ServiceModalData;
 }
 
+interface ServiceSection {
+  title: string;
+  items: string[];
+}
+
 export default function ServiceModal({ isOpen, onClose, service }: ServiceModalProps) {
+  const [openSections, setOpenSections] = useState<number[]>([]);
+
+  const toggleSection = (index: number) => {
+    setOpenSections(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
   if (!isOpen) return null;
+
+  const isServiceSection = (item: string | ServiceSection): item is ServiceSection => {
+    return typeof item === 'object' && 'title' in item && 'items' in item;
+  };
 
   return (
     <AnimatePresence>
@@ -34,13 +54,15 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
             className="relative mx-auto max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-navy to-blue-800 px-6 py-8 text-white sm:px-8">
-              <div className="flex items-start justify-between">
+            <div className="relative bg-gradient-to-r from-navy via-blue-900 to-blue-950 px-6 py-8 text-gray-800 sm:px-8 overflow-hidden">
+              {/* White gradient overlay on the right */}
+              <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-white/70 to-transparent" />
+              
+              <div className="flex items-start justify-between relative z-10">
                 <div>
                   <h2 className="text-2xl font-bold sm:text-3xl">{service.title}</h2>
-                  <p className="mt-2 text-blue-200">{service.description}</p>
+                  <p className="mt-2 text-gray-900">{service.description}</p>
                 </div>
-                
                 <button
                   onClick={onClose}
                   className="rounded-lg p-2 text-white/70 transition-colors hover:bg-white/20 hover:text-white"
@@ -62,65 +84,81 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
                 </div>
               )}
 
-              <div className="grid gap-8 lg:grid-cols-2">
-                {/* Features */}
-                {service.features && service.features.length > 0 && (
+              <div className="grid gap-8">
+                {/* Key Services / Portfolio */}
+                {service.keyServices && service.keyServices.length > 0 && (
                   <div>
-                    <h3 className="mb-4 text-xl font-semibold text-navy">¿Qué Incluye?</h3>
-                    <ul className="space-y-3">
-                      {service.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                            <svg className="h-3 w-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                            </svg>
+                    <h3 className="mb-4 text-xl font-semibold text-navy">Portafolio de Servicios</h3>
+                    
+                    {/* Check if we have structured services (accordion) */}
+                    {isServiceSection(service.keyServices[0]) ? (
+                      <div className="space-y-3">
+                        {(service.keyServices as ServiceSection[]).map((section, index) => (
+                          <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                            <button
+                              onClick={() => toggleSection(index)}
+                              className="w-full px-4 py-3 text-left bg-gray-50 hover:bg-gray-100 flex items-center justify-between transition-colors"
+                            >
+                              <span className="font-medium text-gray-900">{section.title}</span>
+                              <svg
+                                className={`h-5 w-5 text-gray-500 transition-transform ${
+                                  openSections.includes(index) ? 'rotate-180' : ''
+                                }`}
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </button>
+                            
+                            <AnimatePresence>
+                              {openSections.includes(index) && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: 'auto', opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="px-4 py-3 bg-white">
+                                    <ul className="space-y-2">
+                                      {section.items.map((item, itemIndex) => (
+                                        <li key={itemIndex} className="flex items-start gap-3">
+                                          <div className="mt-1 flex h-4 w-4 items-center justify-center rounded-full bg-green-100">
+                                            <svg className="h-2.5 w-2.5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                          </div>
+                                          <span className="text-sm text-gray-700">{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
                           </div>
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {/* Benefits */}
-                {service.benefits && service.benefits.length > 0 && (
-                  <div>
-                    <h3 className="mb-4 text-xl font-semibold text-navy">Beneficios</h3>
-                    <ul className="space-y-3">
-                      {service.benefits.map((benefit, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                          <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-blue-100">
-                            <svg className="h-3 w-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                          </div>
-                          <span className="text-gray-700">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
+                        ))}
+                      </div>
+                    ) : (
+                      /* Regular list for services without sections */
+                      <ul className="space-y-3">
+                        {(service.keyServices as string[]).map((serviceItem, index) => (
+                          <li key={index} className="flex items-start gap-3">
+                            <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
+                              <svg className="h-3 w-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                              </svg>
+                            </div>
+                            <span className="text-gray-700">{serviceItem}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 )}
               </div>
-
-              {/* Process */}
-              {service.process && service.process.length > 0 && (
-                <div className="mt-8">
-                  <h3 className="mb-4 text-xl font-semibold text-navy">Nuestro Proceso</h3>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {service.process.map((step, index) => (
-                      <div key={index} className="rounded-lg border border-gray-200 p-4">
-                        <div className="mb-2 flex items-center gap-3">
-                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
-                            {index + 1}
-                          </div>
-                          <span className="font-medium text-gray-900">Paso {index + 1}</span>
-                        </div>
-                        <p className="text-sm text-gray-700">{step}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
 
               {/* CTA */}
               <div className="mt-8 rounded-lg bg-gray-50 p-6 text-center">

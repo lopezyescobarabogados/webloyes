@@ -1,13 +1,15 @@
+interface ServiceSection {
+  title: string;
+  items: string[];
+}
+
 export interface LegalService {
   id: string;
   title: string;
   shortDescription: string;
   fullDescription: string;
   detailedDescription?: string;
-  keyServices: string[];
-  features?: string[];
-  benefits?: string[];
-  process?: string[];
+  keyServices: string[] | ServiceSection[];
   targetAudience: string;
   icon: string;
   color: string;
@@ -16,55 +18,108 @@ export interface LegalService {
 
 export const legalServices: LegalService[] = [
   {
-    id: 'derecho-civil-inmobiliario',
-    title: 'Derecho Civil e Inmobiliario',
-    shortDescription: 'Acompañamiento legal en relaciones civiles, patrimoniales y de bienes inmuebles.',
-    fullDescription: 'Brindamos acompañamiento y representación legal en todos los asuntos relacionados con relaciones civiles, patrimoniales y de bienes. Esta área es clave para quienes compran, venden, arriendan o administran bienes inmuebles, o enfrentan disputas legales entre particulares.',
-    detailedDescription: 'Nuestro equipo especializado en Derecho Civil e Inmobiliario cuenta con amplia experiencia en transacciones inmobiliarias complejas, resolución de conflictos patrimoniales y gestión de procesos civiles. Ofrecemos un servicio integral que va desde la prevención de riesgos legales hasta la representación judicial cuando sea necesario.',
+    id: 'derecho-civil',
+    title: 'Derecho Civil',
+    shortDescription:
+      'Acompañamiento especializado en contratos, responsabilidad civil y resoluciones de conflictos patrimoniales',
+    fullDescription:
+      'Nuestro equipo, con una sólida experiencia y trayectoria en Derecho Civil ofrece acompañamiento integral en la prevención y resolución de disputas patrimoniales, así como en la gestión de procesos judiciales y extrajudiciales.',
+    detailedDescription:
+      'Nuestro equipo, con una sólida experiencia y trayectoria en Derecho Civil ofrece acompañamiento integral en la prevención y resolución de disputas patrimoniales, así como en la gestión de procesos judiciales y extrajudiciales. Nos enfocamos en proteger su patrimonio, sus derechos y sus relaciones legales, mediante una asesoría especializada, representación jurídica efectiva y un acompañamiento constante en todas las etapas de los procesos civiles.',
     keyServices: [
-      'Procesos de responsabilidad civil contractual y extracontractual',
-      'Cobros jurídicos, embargos, procesos ejecutivos',
-      'Resolución de conflictos entre particulares',
-      'Contratos de compraventa, arrendamiento, usufructo, fideicomisos',
-      'Estudio de títulos y saneamiento de propiedad inmueble',
-      'Trámites notariales y registros inmobiliarios',
-      'Asesoría y litigio en propiedad horizontal'
+      {
+        title: 'Contratos y Obligaciones',
+        items: [
+          'Elaboración, revisión y negociación de contratos civiles y comerciales.',
+          'Asesoría en cumplimiento, incumplimiento y resolución de contratos.'
+        ]
+      },
+      {
+        title: 'Procesos Judiciales Civiles',
+        items: [
+          'Procesos ordinarios, abreviados y ejecutivos.',
+          'Procesos de pertenencia y usucapión.',
+          'Prescripción adquisitiva de dominio',
+          'Procesos Reivindicatorios de propiedad'
+        ]
+      },
+      {
+        title: 'Derechos Patrimoniales y Sucesorales',
+        items: [
+          'Asesoría en sucesiones (testamentarias e intestadas).',
+          'Partición y liquidación de herencias.',
+          'Protección y recuperación de bienes.',
+          'liquidación de sociedad conyugal'
+        ]
+      },
+      {
+        title: 'Propiedad y Posesión',
+        items: [
+          'Conflictos sobre propiedad, servidumbres y linderos.'
+        ]
+      },
+      {
+        title: 'Asesoría Preventiva',
+        items: [
+          'Asesoría Preventiva en asuntos civiles y patrimoniales.'
+        ]
+      }
     ],
-    features: [
-      'Análisis jurídico completo de documentos inmobiliarios',
-      'Acompañamiento en todas las etapas del proceso',
-      'Estudio de títulos con verificación completa',
-      'Gestión de trámites notariales y registrales',
-      'Asesoría preventiva para evitar futuros conflictos',
-      'Representación judicial especializada'
-    ],
-    benefits: [
-      'Seguridad jurídica en todas sus transacciones',
-      'Prevención de riesgos legales futuros',
-      'Ahorro de tiempo en trámites complejos',
-      'Protección de su patrimonio inmobiliario',
-      'Resolución eficiente de conflictos',
-      'Acceso a red de notarios y registradores'
-    ],
-    process: [
-      'Análisis inicial del caso y documentación',
-      'Estudio de títulos y verificación legal',
-      'Elaboración de estrategia jurídica',
-      'Gestión de trámites y negociaciones',
-      'Formalización y registro de operaciones',
-      'Seguimiento post-operación'
-    ],
-    targetAudience: 'Personas naturales y jurídicas que requieran asesoría en temas civiles e inmobiliarios',
+    targetAudience:
+      'Personas naturales y jurídicas que requieran asesoría en temas civiles e inmobiliarios',
     icon: 'building',
     color: 'blue',
-    slug: 'derecho-civil-inmobiliario'
+    slug: 'derecho-civil-inmobiliario',
   },
   {
-    id: 'derecho-comercial-societario',
-    title: 'Derecho Comercial y Societario',
-    shortDescription: 'Estructuración, desarrollo y defensa jurídica de negocios y sociedades.',
-    fullDescription: 'Apoyamos a empresarios, emprendedores y sociedades en la estructuración, desarrollo y defensa de sus negocios. Nuestro objetivo es blindar jurídicamente las operaciones comerciales y promover relaciones empresariales estables y transparentes.',
-    detailedDescription: 'Contamos con experiencia probada en el acompañamiento jurídico empresarial, desde startups hasta grandes corporaciones. Nuestro enfoque integral combina conocimiento técnico, visión de negocio y capacidad de negociación para estructurar operaciones comerciales exitosas y sostenibles.',
+    id: 'derecho-inmobiliario',
+    title: 'Derecho Inmobiliario',
+    shortDescription:
+      'Nuestro equipo asesora de manera integral importantes proyectos inmobiliarios públicos y privados en Colombia.',
+    fullDescription:
+      'Nuestra firma comprende a profundidad la dinámica del mercado inmobiliario y las necesidades estratégicas de sus actores. Por ello, ofrecemos un portafolio integral de servicios jurídicos orientado a garantizar el desarrollo eficiente, seguro y exitoso de los negocios inmobiliarios.',
+    detailedDescription: `Nuestra práctica inmobiliaria brinda asesoría integral en la estructuración, negociación, documentación y cierre de transacciones de diversa naturaleza, asegurando solidez jurídica y acompañamiento permanente en cada etapa del proceso.
+
+Hemos asesorado de manera integral proyectos inmobiliarios de gran relevancia, tanto públicos como privados en Colombia, lo que nos ha permitido consolidar una experiencia reconocida en: 
+i) Derecho inmobiliario comercial; 
+ii) Derecho urbanístico y regulatorio; 
+iii) Proyectos de hotelería y turismo; 
+iv) Agroindustria y desarrollo rural.`,
+    keyServices: [
+      'Diseño jurídico de proyectos urbanísticos, residenciales, comerciales, hoteleros y agroindustriales',
+      'Análisis de viabilidad legal y regulatoria',
+      'Definición de esquemas contractuales y de financiamiento',
+      'Revisión de la tradición y situación jurídica de inmuebles',
+      'Identificación de gravámenes, limitaciones al dominio y riesgos legales',
+      'Elaboración de informes de debida diligencia para inversionistas y desarrolladores',
+      'Asesoría en normas de uso del suelo y planes de ordenamiento territorial (POT)',
+      'Gestión y obtención de licencias urbanísticas',
+      'Análisis de cargas urbanísticas, cesiones obligatorias y obligaciones urbanísticas',
+      'Redacción, revisión y negociación de promesas y contratos de compraventa, arrendamiento, leasing, usufructo y servidumbres',
+      'Asesoría en contratos de fiducia inmobiliaria y patrimonios autónomos',
+      'Cierre de operaciones inmobiliarias con soporte jurídico integral',
+      'Creación y gestión de encargos fiduciarios y patrimonios autónomos',
+      'Estructuración de esquemas fiduciarios para proyectos de vivienda, oficinas, centros comerciales y agroindustria',
+      'Asesoría en financiación de proyectos inmobiliarios y garantías asociadas',
+      'Representación judicial y arbitral en disputas sobre propiedad, posesión, servidumbres, arrendamientos y contratos inmobiliarios',
+      'Defensa en procesos administrativos relacionados con urbanismo y ordenamiento territorial',
+      'Estrategias de conciliación y mecanismos alternativos de solución de conflictos',
+    ],
+    targetAudience:
+      'Personas naturales y jurídicas que requieran asesoría en temas civiles e inmobiliarios, desarrolladores, inversionistas, entidades públicas y privadas',
+    icon: 'building',
+    color: 'blue',
+    slug: 'derecho-inmobiliario',
+  },
+  {
+    id: 'derecho-comercial',
+    title: 'Derecho Comercial',
+    shortDescription:
+      'Estructuración, desarrollo y defensa jurídica de negocios y sociedades.',
+    fullDescription:
+      'Apoyamos a empresarios, emprendedores y sociedades en la estructuración, desarrollo y defensa de sus negocios. Nuestro objetivo es blindar jurídicamente las operaciones comerciales y promover relaciones empresariales estables y transparentes.',
+    detailedDescription:
+      'Contamos con experiencia probada en el acompañamiento jurídico empresarial, desde startups hasta grandes corporaciones. Nuestro enfoque integral combina conocimiento técnico, visión de negocio y capacidad de negociación para estructurar operaciones comerciales exitosas y sostenibles.',
     keyServices: [
       'Constitución y formalización de empresas',
       'Reestructuración empresarial y transformación de sociedades',
@@ -72,113 +127,183 @@ export const legalServices: LegalService[] = [
       'Representación judicial en procesos de incumplimiento contractual',
       'Asesoría en juntas de socios y gobierno corporativo',
       'Resolución de conflictos entre accionistas o socios',
-      'Reformas estatutarias y transformación societaria'
+      'Reformas estatutarias y transformación societaria',
     ],
-    features: [
-      'Constitución de empresas en tiempo récord',
-      'Estructuras societarias optimizadas',
-      'Contratos mercantiles blindados jurídicamente',
-      'Gobierno corporativo moderno y eficiente',
-      'Resolución alternativa de conflictos',
-      'Acompañamiento en operaciones M&A'
-    ],
-    benefits: [
-      'Estructura empresarial sólida y protegida',
-      'Reducción de riesgos contractuales',
-      'Optimización de costos societarios',
-      'Relaciones comerciales más estables',
-      'Acceso a mercados y oportunidades',
-      'Crecimiento empresarial sostenible'
-    ],
-    process: [
-      'Análisis de la estructura empresarial actual',
-      'Diseño de estrategia jurídico-comercial',
-      'Elaboración de documentos societarios',
-      'Gestión de trámites de constitución',
-      'Implementación de gobierno corporativo',
-      'Monitoreo y actualización continua'
-    ],
-    targetAudience: 'Empresarios, emprendedores, sociedades y empresas de todos los tamaños',
+    targetAudience:
+      'Empresarios, emprendedores, sociedades y empresas de todos los tamaños',
     icon: 'briefcase',
     color: 'green',
-    slug: 'derecho-comercial-societario'
+    slug: 'derecho-comercial',
   },
   {
     id: 'derecho-tributario',
     title: 'Derecho Tributario',
-    shortDescription: 'Soluciones legales frente a obligaciones tributarias y fiscales.',
-    fullDescription: 'Ofrecemos soluciones legales frente a las obligaciones tributarias de personas naturales y jurídicas. Nuestra asesoría tributaria permite optimizar cargas fiscales dentro del marco legal, prevenir sanciones y garantizar el cumplimiento normativo.',
+    shortDescription:
+      'Asesoría integral en materia fiscal, tributaria y aduanera para empresas y personas naturales.',
+    fullDescription:
+      'Ofrecemos asesoría especializada en derecho tributario, ayudando a nuestros clientes a cumplir con sus obligaciones fiscales de manera eficiente y estratégica, minimizando riesgos y optimizando su situación tributaria.',
+    detailedDescription:
+      'Nuestro equipo tributario cuenta con amplia experiencia en la legislación fiscal colombiana y sus constantes cambios. Brindamos acompañamiento integral desde la planeación tributaria hasta la defensa en procesos administrativos y judiciales.',
     keyServices: [
-      'Planeación fiscal y tributaria empresarial',
-      'Defensa en procesos sancionatorios de la DIAN',
-      'Revisión y auditoría de obligaciones fiscales',
-      'Recursos administrativos contra liquidaciones oficiales',
-      'Gestión de devoluciones, compensaciones y retenciones',
-      'Estrategias para minimizar riesgos tributarios',
-      'Acciones judiciales tributarias'
+      'Planeación y estrategia tributaria empresarial',
+      'Asesoría en cumplimiento de obligaciones fiscales',
+      'Representación en procesos de fiscalización',
+      'Defensa ante la DIAN y entidades territoriales',
+      'Recursos y procesos tributarios administrativos',
+      'Asesoría en reorganizaciones empresariales',
+      'Consultoría en precios de transferencia',
+      'Régimen aduanero y comercio exterior',
     ],
-    targetAudience: 'Personas naturales y jurídicas con obligaciones tributarias',
+    targetAudience:
+      'Empresas, personas naturales con actividad económica, contribuyentes especiales',
     icon: 'calculator',
-    color: 'purple',
-    slug: 'derecho-tributario'
+    color: 'orange',
+    slug: 'derecho-tributario',
+  },
+  {
+    id: 'beneficio-tributario-zese',
+    title: 'BENEFICIO TRIBUTARIO ZESE',
+    shortDescription:
+      'Acompañamiento especializado en la estructuración, cumplimiento y defensa de empresas acogidas al régimen ZESE.',
+    fullDescription:
+      'Nuestro equipo, con amplia experiencia en Derecho Tributario y Regímenes Especiales, brinda asesoría integral a empresas y emprendedores que desean acogerse o ya se encuentran bajo el beneficio ZESE (Zonas Económicas y Sociales Especiales).',
+    detailedDescription:
+      'Nuestro equipo, con amplia experiencia en Derecho Tributario y Regímenes Especiales, brinda asesoría integral a empresas y emprendedores que desean acogerse o ya se encuentran bajo el beneficio ZESE (Zonas Económicas y Sociales Especiales). Nos enfocamos en maximizar los beneficios tributarios, prevenir riesgos de pérdida del régimen y garantizar el cumplimiento de las condiciones legales, mediante asesoría preventiva, acompañamiento en la gestión ante la DIAN y defensa en caso de procesos de fiscalización.',
+    keyServices: [
+      'Diagnóstico de requisitos para acogerse al beneficio.',
+      'Estructuración jurídica, tributaria y contable para nuevas empresas ZESE.',
+      'Control y seguimiento de la condición de reinversión de utilidades.',
+      'Asesoría en la creación de nuevos empleos exigidos por la norma.',
+      'Respuesta a requerimientos de la DIAN.',
+      'Representación en procesos de fiscalización, pliegos de cargos y actos administrativos.',
+      'Defensa judicial mediante demandas de nulidad y restablecimiento del derecho por pérdida del beneficio.',
+      'Diseño de esquemas empresariales para optimizar la carga tributaria bajo ZESE.',
+      'Estrategias patrimoniales para la permanencia en el régimen.',
+    ],
+    targetAudience:
+      'Empresas y emprendedores que desean acogerse o ya se encuentran bajo el beneficio ZESE',
+    icon: 'calculator',
+    color: 'amber',
+    slug: 'beneficio-tributario-zese',
   },
   {
     id: 'derecho-laboral',
     title: 'Derecho Laboral y Seguridad Social',
-    shortDescription: 'Asesoría integral en normatividad laboral y sistema de seguridad social.',
-    fullDescription: 'Acompañamos a empresas y trabajadores en la correcta interpretación y aplicación de la normatividad laboral y del sistema de seguridad social colombiano. Esto permite a las empresas reducir riesgos de demandas laborales y mantener relaciones laborales sanas, eficientes y conforme a la ley.',
+    shortDescription:
+      'Construimos equilibrio y confianza a través de soluciones legales estratégicas dirigidas a empresas y trabajadores.',
+    fullDescription:
+      'Construimos equilibrio y confianza a través de soluciones legales estratégicas dirigidas a empresas y trabajadores.',
+    detailedDescription:
+      'Construimos equilibrio y confianza a través de soluciones legales estratégicas dirigidas a empresas y trabajadores.',
     keyServices: [
-      'Elaboración y revisión de contratos de trabajo',
-      'Estrategias de contratación laboral y tercerización',
-      'Procesos disciplinarios y terminaciones con justa causa',
-      'Defensa en demandas laborales ante juzgados',
-      'Asesoría en aportes al sistema de seguridad social',
-      'Conciliaciones laborales extrajudiciales',
-      'Representación ante el Ministerio de Trabajo'
+      {
+        title: 'Para las Empresas',
+        items: [
+          'Fortalecemos la gestión laboral de las empresas con un enfoque estratégico y preventivo, orientado a reducir litigios, evitar sanciones, garantizar el cumplimiento normativo y consolidar la seguridad jurídica organizacional. Combinamos prevención, defensa y estrategia, para que las compañías operen con confianza y cuenten con un soporte legal sólido en cada decisión.',
+          'Contratación laboral: Redacción y revisión de contratos en todas sus modalidades (individuales, de aprendizaje, teletrabajo, prestación de servicios subordinados y especiales), asegurando su correcta estructuración legal.',
+          'Auditorías legales y de seguridad social: Identificación de riesgos, pasivos laborales, contingencias, obligaciones con la UGPP, la DIAN, Ministerio de Trabajo y demás autoridades de control.',
+          'Políticas internas y reglamentos de trabajo: Diseño, implementación y actualización de reglamentos, protocolos de acoso laboral y teletrabajo, desconexión laboral, igualdad de género, inclusión y Sistema de Gestión en Seguridad y Salud en el Trabajo (SG-SST).',
+          'Gestión y resolución de conflictos: Estrategias de prevención, conciliación, participación, representación judicial y acompañamiento en procesos administrativos.',
+          'Capacitación y formación de programas dirigidos para la correcta interpretación y aplicación de la normatividad laboral, fomentando prácticas sostenibles y eficientes.',
+          'Procesos de reorganización empresarial: Asesoría en fusiones, adquisiciones o liquidaciones, con énfasis en planeación laboral, reestructuración de nóminas, desvinculación de personal y protección frente a contingencias legales.',
+          'Defensa legal ante autoridades Judiciales y administrativas: Representación en procesos sancionatorios y actuaciones administrativas ante el Ministerio de Trabajo, la UGPP y demás entidades competentes.'
+        ]
+      },
+      {
+        title: 'Para los Trabajadores',
+        items: [
+          'Aportamos soluciones jurídicas y representación confiable, enfocadas en la protección de los derechos laborales y de seguridad social. Defendemos a los trabajadores en casos de despido, acoso laboral, reclamaciones pensionales y demás vulneraciones, con el respaldo de un acompañamiento jurídico sólido y especializado.',
+          'Reclamación de indemnizaciones por despidos injustificados: Reclamación de indemnizaciones y reintegros laborales. Defensa en procesos disciplinarios y terminación de contratos.',
+          'Acoso laboral y vulneración de derechos fundamentales: Acciones legales para detener conductas de hostigamiento. Reclamación de indemnizaciones y medidas de protección.',
+          'Reclamaciones pensionales y de seguridad social: Asesoría en trámites ante Colpensiones y fondos privados. Revisión de semanas cotizadas, reliquidaciones y pensiones negadas.',
+          'Prestaciones sociales e indemnizaciones: Cálculo y reclamación de cesantías, primas, vacaciones e intereses. Reconocimiento de incapacidades y prestaciones económicas.',
+          'Estabilidad laboral reforzada: Defensa en casos de despido por enfermedad, maternidad o discapacidad. Acciones constitucionales para garantizar la permanencia en el empleo.',
+          'Tutelas, acciones de cumplimiento y representación en demandas laborales: Acciones legales para detener conductas de hostigamiento. Reclamación de indemnizaciones y medidas de protección.'
+        ]
+      }
     ],
-    targetAudience: 'Empresas empleadoras y trabajadores que requieran asesoría laboral',
+    targetAudience:
+      'Empresas de todos los sectores, empleadores, trabajadores y sindicatos',
     icon: 'users',
-    color: 'orange',
-    slug: 'derecho-laboral'
+    color: 'purple',
+    slug: 'derecho-laboral',
   },
   {
-    id: 'sgsst',
-    title: 'SG-SST (Sistema de Gestión en Seguridad y Salud en el Trabajo)',
-    shortDescription: 'Implementación del Sistema de Gestión de Seguridad y Salud en el Trabajo.',
-    fullDescription: 'Implementamos estrategias legales y técnicas para la conformidad del Sistema de Gestión de la Seguridad y Salud en el Trabajo (SG-SST), obligatorio según la legislación colombiana. Un SG-SST bien implementado protege a los trabajadores, reduce accidentes laborales y evita sanciones por incumplimiento normativo.',
+    id: 'sg-sst',
+    title: 'SISTEMA DE GESTIÓN DE SEGURIDAD Y SALUD EN EL TRABAJO(SG-SST)',
+    shortDescription:
+      'Nuestro equipo ofrece servicios en el área de SG-SST',
+    fullDescription:
+      'Con nuestra asesoría en SG-SST, su organización contará con un sistema diseñado a la medida, adaptado al tamaño, nivel de riesgo y sector económico de la empresa.',
+    detailedDescription:
+      'Con nuestra asesoría en SG-SST, su organización contará con un sistema diseñado a la medida, adaptado al tamaño, nivel de riesgo y sector económico de la empresa. Nuestro acompañamiento garantiza que cada componente del sistema esté plenamente alineado con la legislación vigente (Decreto 1072 de 2015, Resolución 0312 de 2019, Ley 1562 de 2012 y demás normas aplicables), reduciendo riesgos legales, administrativos y laborales.',
     keyServices: [
-      'Diseño e implementación del SG-SST conforme al Decreto 1072 de 2015',
-      'Auditorías internas y acompañamiento en inspecciones',
-      'Diagnóstico de cumplimiento y planes de mejora',
-      'Capacitaciones en prevención de riesgos laborales',
-      'Documentación legal del sistema (políticas, formatos, matrices)',
-      'Procedimientos de seguridad y salud ocupacional',
-      'Seguimiento y evaluación del sistema'
+      'Diagnóstico inicial del SG-SST',
+      'Diseño del SG-SST acorde al tamaño de la empresa y nivel de riesgo.',
+      'Planes de mejora',
+      'Auditoría, actualización y seguimiento',
+      'Capacitación en SG-SST',
+      'Acompañamiento en auditorías internas y visitas de entes de control',
+      'Políticas, reglamentos, procedimientos e indicadores de gestión.',
+      'Defensa y representación legal',
     ],
-    targetAudience: 'Empresas obligadas a implementar el Sistema de Gestión SG-SST',
+    targetAudience:
+      'Empresas de todos los sectores que requieran implementar o mejorar su SG-SST',
     icon: 'shield',
     color: 'red',
-    slug: 'sgsst'
+    slug: 'sg-sst',
   },
   {
     id: 'sagrilaft',
-    title: 'SAGRILAFT (Sistema de Autocontrol LA/FT/FPADM)',
-    shortDescription: 'Sistema de prevención de lavado de activos y financiamiento del terrorismo.',
-    fullDescription: 'Asesoramos a empresas obligadas en la adopción del Sistema de Autocontrol y Gestión del Riesgo de Lavado de Activos, Financiamiento del Terrorismo y Proliferación de Armas de Destrucción Masiva (SAGRILAFT). Este sistema es esencial para garantizar la legalidad en la operación empresarial, evitar sanciones y proteger la reputación corporativa.',
+    title: 'Sistema de Prevención de Riesgos LA/FT/FPADM (SAGRILAFT / SARLAFT)',
+    shortDescription:
+      'Asesoría integral en la implementación, actualización y cumplimiento de sistemas de prevención de riesgos de lavado de activos y financiación del terrorismo.',
+    fullDescription:
+      'Nuestro equipo especializado en Cumplimiento y Derecho Corporativo acompaña a empresas de todos los sectores en la implementación, auditoría y actualización de los sistemas SARLAFT y SAGRILAFT, garantizando el cumplimiento de las normas expedidas por la Superintendencia Financiera y la Superintendencia de Sociedades.',
+    detailedDescription:
+      'Nuestro equipo especializado en Cumplimiento y Derecho Corporativo acompaña a empresas de todos los sectores en la implementación, auditoría y actualización de los sistemas SARLAFT y SAGRILAFT, garantizando el cumplimiento de las normas expedidas por la Superintendencia Financiera y la Superintendencia de Sociedades. Nos enfocamos en prevenir riesgos legales, reputacionales y económicos derivados de operaciones sospechosas, asegurando que su organización cuente con políticas claras, procedimientos efectivos y una cultura de cumplimiento sólido frente al lavado de activos y la financiación del terrorismo (LA/FT).',
     keyServices: [
-      'Diagnóstico de cumplimiento frente a la normativa SAGRILAFT',
-      'Diseño e implementación según el tamaño y riesgo de la empresa',
-      'Elaboración de políticas y manuales internos de prevención',
-      'Capacitación al oficial de cumplimiento y empleados',
-      'Reportes a la UIAF y soporte ante inspecciones',
-      'Auditorías de cumplimiento periódicas',
-      'Actualización normativa y mejores prácticas'
+      'Diagnóstico inicial de riesgos de LA/FT en la organización.',
+      'Diseño de políticas, manuales y procedimientos internos.',
+      'Implementación de controles según el tamaño, sector y nivel de exposición al riesgo.',
+      'Asesoría en el cumplimiento de las obligaciones establecidas por la Superintendencia Financiera (Sarlaft) y la Superintendencia de Sociedades (Sagrilaft).',
+      'Elaboración y presentación de informes de cumplimiento.',
+      'Auditorías periódicas para garantizar la correcta aplicación del SARLAFT/SAGRILAFT según aplique.',
+      'Representación en procesos incumplimientos.',
+      'Asesoría en respuestas a requerimientos de entes de control.',
     ],
-    targetAudience: 'Empresas obligadas por la Superintendencia de Sociedades',
+    targetAudience:
+      'Empresas de todos los sectores obligadas por normativa a implementar SAGRILAFT/SARLAFT y aquellas que buscan fortalecer sus controles',
     icon: 'eye',
-    color: 'indigo',
-    slug: 'sagrilaft'
-  }
+    color: 'teal',
+    slug: 'sagrilaft',
+  },
+  {
+    id: 'gestion-patrimonial',
+    title: 'Gestión Patrimonial',
+    shortDescription:
+      'Seguridad jurídica y eficiencia en la administración de tu patrimonio familiar y empresarial',
+    fullDescription:
+      'Nuestra práctica de Gestión Patrimonial está orientada a la protección, preservación y crecimiento del patrimonio familiar y empresarial, mediante el diseño de estructuras jurídicas y fiscales eficientes que garantizan seguridad y continuidad en el tiempo.',
+    detailedDescription:
+      'Nuestra práctica de Gestión Patrimonial está orientada a la protección, preservación y crecimiento del patrimonio familiar y empresarial, mediante el diseño de estructuras jurídicas y fiscales eficientes que garantizan seguridad y continuidad en el tiempo. Brindamos un acompañamiento integral en planeación patrimonial y sucesoral, diseñando esquemas jurídicos que permiten la transmisión ordenada del patrimonio entre generaciones, reduciendo riesgos de conflictividad familiar y optimizando las cargas fiscales. Para ello, estructuramos vehículos patrimoniales a la medida, como sociedades de familia, patrimonios autónomos y fideicomisos, que facilitan una gestión más eficiente y segura de los activos estratégicos. Asimismo, asesoramos en la protección y blindaje de activos, implementando mecanismos legales que resguardan los bienes frente a contingencias legales, fiscales o comerciales que puedan poner en riesgo su estabilidad. Nuestro equipo también acompaña a los clientes en la gestión fiscal y tributaria del patrimonio, asegurando el cumplimiento riguroso de las obligaciones legales, aprovechando los beneficios normativos disponibles y diseñando estrategias de optimización tributaria tanto a nivel nacional como internacional. De igual manera, apoyamos en la estructuración de inversiones y esquemas internacionales, mediante la creación de holdings, vehículos de inversión y estructuras offshore, siempre en estricto cumplimiento de las regulaciones cambiarias y tributarias aplicables. Nuestro enfoque combina conocimiento jurídico, experiencia tributaria y visión estratégica de negocios, lo que nos permite ofrecer soluciones integrales que articulan aspectos familiares, corporativos y financieros. De esta forma, aseguramos que cada cliente cuente con un esquema sólido para proteger, administrar y proyectar su patrimonio de manera segura y sostenible en el tiempo.',
+    keyServices: [
+      'Planeación patrimonial y sucesoral.',
+      'Estructuración de vehículos patrimoniales:',
+      'Protección y blindaje de activos.',
+      'Asesoría en inversiones y estructuras internacionales.',
+      'Estructuras de planeación tributaria y corporativa de reorganización de empresas familiares.',
+      'Asesoría tributaria y corporativa en planeación de venta y reorganización de empresas familiares.',
+      'Acuerdos de accionistas en empresas familiares.',
+      'Protocolos o constituciones de familia.'
+    ],
+    targetAudience:
+      'Familias empresariales, personas de alto patrimonio, empresarios y inversionistas que buscan proteger y optimizar su patrimonio',
+    icon: 'shield',
+    color: 'emerald',
+    slug: 'gestion-patrimonial',
+  },
+  // Puedes agregar más servicios aquí siguiendo el mismo formato
 ];
 
 export const getServiceBySlug = (slug: string): LegalService | undefined => {
@@ -187,12 +312,17 @@ export const getServiceBySlug = (slug: string): LegalService | undefined => {
 
 export const getServiceIcon = (iconName: string): string => {
   const icons: Record<string, string> = {
-    building: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
-    briefcase: 'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z',
-    calculator: 'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
-    users: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z',
-    shield: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    eye: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'
+    building:
+      'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+    briefcase:
+      'M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z',
+    calculator:
+      'M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z',
+    users:
+      'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z',
+    shield:
+      'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    eye: 'M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z',
   };
   return icons[iconName] || icons.briefcase;
 };
