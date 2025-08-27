@@ -82,7 +82,7 @@ export default function Footer() {
                   </a>
                 </div>
                 <p className="text-xs text-gray-400 mt-1">
-                  Lunes a Viernes, 7:30 - 17:30
+                  Lunes a Viernes, 7:30-13:00/14:00-17:30
                 </p>
               </div>
 

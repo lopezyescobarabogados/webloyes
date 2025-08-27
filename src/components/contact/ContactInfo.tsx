@@ -118,7 +118,7 @@ export default function ContactInfo() {
         <div className="space-y-3">
           <div className="flex items-center justify-between border-b border-gray-100 py-2">
             <span className="text-gray-600">Lunes - Viernes</span>
-            <span className="font-semibold text-gray-900">7:30 - 17:30</span>
+            <span className="font-semibold text-gray-900">7:30-13:00/14:00-17:30</span>
           </div>
           <div className="flex items-center justify-between border-b border-gray-100 py-2">
             <span className="text-gray-600">Sábados</span>

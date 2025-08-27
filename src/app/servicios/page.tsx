@@ -46,22 +46,20 @@ export default function ServiciosPage() {
               <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full border-white bg-white hover:bg-blue-50 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
-                  Contáctenos 
+                  Contáctenos
                 </Button>
               </Link>
               <Link href="#servicios">
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="w-full border-white text-white hover:bg-white/10 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Servicios
                 </Button>
               </Link>
-            </div>
+            </div> 
           </div>
         </div>
       </section>
@@ -120,7 +118,7 @@ export default function ServiciosPage() {
                 className="group flex h-full cursor-pointer flex-col p-8 transition-all duration-300 hover:shadow-xl"
               >
                 <h3
-                  className="text-navy mb-4 font-serif text-xl font-semibold transition-colors duration-200 hover:text-blue-600 sm:text-2xl text-center"
+                  className="text-navy mb-4 text-center font-serif text-xl font-semibold transition-colors duration-200 hover:text-blue-600 sm:text-2xl"
                   onClick={() => openServiceModal(service)}
                 >
                   {service.title}
@@ -135,18 +133,11 @@ export default function ServiciosPage() {
       <section className="from-navy to-navy bg-gradient-to-br via-blue-900 py-16 text-white sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center text-white">
-            <h2 className="mb-6 font-serif text-3xl font-bold sm:text-4xl">
-              Te Asesoramos
-            </h2>
-            <p className="mb-8 text-lg leading-relaxed text-blue-100">
-              Orientación jurídica estratégica y especializada
-            </p>
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
               <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full border-white bg-white hover:bg-blue-50 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Contáctenos
                 </Button>
@@ -154,17 +145,18 @@ export default function ServiciosPage() {
               <Link href="/equipo">
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="w-full border-white text-white hover:bg-white/10 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Equipo
                 </Button>
               </Link>
-            </div>
+            </div><br />
+            <p className="mb-8 text-lg leading-relaxed text-blue-100">
+              Orientación jurídica estratégica y especializada
+            </p>
           </div>
         </div>
       </section>
-
       {/* Service Modal */}
       {selectedService && (
         <ServiceModal

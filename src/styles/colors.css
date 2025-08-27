@@ -134,6 +134,21 @@
   transform: translateY(-1px);
 }
 
+/* Añade esto en tu color.css */
+.btn-outline-white {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-white:hover {
+  background-color: white;
+  color: rgb(var(--navy));
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
 /* Estados de accesibilidad mejorados */
 .focus\:ring-navy:focus {
   box-shadow:

@@ -77,7 +77,7 @@ export default function Navbar() {
     },
     {
       href: '/contacto',
-      label: 'Contacto',
+      label: 'Contáctenos',
       labelEn: 'Contact',
     },
   ];

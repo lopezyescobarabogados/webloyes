@@ -228,19 +228,11 @@ export default function NosotrosPage() {
       <section className="from-navy to-navy bg-gradient-to-br via-blue-900 py-16 text-white sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h3 className="mb-6 font-serif text-2xl font-bold sm:text-3xl">
-              Te Asesoramos
-            </h3>
-            <p className="mb-8 text-lg leading-relaxed text-gray-200">
-              Orientación jurídica estratégica y especializada
-            </p>
-
             <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
-              <Link href="/contacto">
+             <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Contáctenos
                 </Button>
@@ -248,13 +240,15 @@ export default function NosotrosPage() {
               <Link href="/servicios">
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Servicios
                 </Button>
               </Link>
-            </div>
+            </div><br />
+            <p className="mb-8 text-lg leading-relaxed text-gray-200">
+              Orientación jurídica estratégica y especializada
+            </p>
           </div>
         </div>
       </section>

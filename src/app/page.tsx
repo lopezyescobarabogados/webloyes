@@ -23,23 +23,22 @@ export default function Home() {
               </span>
             </h1>
             <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl md:text-2xl">
-              López & Escobar Abogados Asociados S.A.S., ofrece servicios jurídicos especializados, con más de 25 años de experiencia.
+              López & Escobar Abogados Asociados S.A.S., ofrece servicios
+              jurídicos especializados, con más de 25 años de experiencia.
             </p>
             <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
               <Link href="/servicios">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
-                 Servicios
+                  Servicios
                 </Button>
               </Link>
               <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Contáctenos
                 </Button>
@@ -56,8 +55,7 @@ export default function Home() {
 
       {/* Por qué elegirnos - Valores de la firma */}
       <section className="bg-white py-16 sm:py-20 lg:py-24">
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="container mx-auto mb-16 px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
               Servicios Jurídicos
@@ -66,7 +64,7 @@ export default function Home() {
           <div className="text-center">
             <Link href="/servicios">
               <Button size="lg" className="px-8">
-           Servicios
+                Servicios
               </Button>
             </Link>
           </div>
@@ -74,60 +72,81 @@ export default function Home() {
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="mb-6 font-serif text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
+            <h2 className="text-navy mb-6 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
               ¿Por qué elegir López & Escobar?
             </h2>
             <p className="mb-12 text-lg text-gray-600 sm:text-xl">
-              Porque brindamos seguridad jurídica y confianza estratégica a todos nuestros clientes, con un enfoque integral y personalizado que garantiza resultados efectivos.
+              Porque brindamos seguridad jurídica y confianza estratégica a
+              todos nuestros clientes, con un enfoque integral y personalizado
+              que garantiza resultados efectivos.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Experiencia Especializada</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Experiencia Especializada
+              </h3>
               <p className="text-gray-600">
-                Más de 25 años de experiencia profesional en áreas especializadas del derecho, con amplio manejo normativo y jurisprudencial.
+                Más de 25 años de experiencia profesional en áreas
+                especializadas del derecho, con amplio manejo normativo y
+                jurisprudencial.
               </p>
             </div>
 
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Atención Personalizada</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Atención Personalizada
+              </h3>
               <p className="text-gray-600">
-                Brindamos un acompañamiento cercano y profesional, reconociendo que cada cliente y cada caso requieren soluciones jurídicas únicas, diseñadas con dedicación y detalle.
+                Brindamos un acompañamiento cercano y profesional, reconociendo
+                que cada cliente y cada caso requieren soluciones jurídicas
+                únicas, diseñadas con dedicación y detalle.
               </p>
             </div>
 
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Prevención de Riesgos</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Prevención de Riesgos
+              </h3>
               <p className="text-gray-600">
-                Consolidamos prácticas legales preventivas que fortalecen la seguridad jurídica, protegen los intereses de nuestros clientes y preservan la continuidad de sus negocios.
+                Consolidamos prácticas legales preventivas que fortalecen la
+                seguridad jurídica, protegen los intereses de nuestros clientes
+                y preservan la continuidad de sus negocios.
               </p>
             </div>
 
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Soluciones Estratégicas</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Soluciones Estratégicas
+              </h3>
               <p className="text-gray-600">
-                Combinamos conocimiento técnico con visión estratégica para ofrecer soluciones que impulsen el crecimiento y protejan sus intereses.
+                Combinamos conocimiento técnico con visión estratégica para
+                ofrecer soluciones que impulsen el crecimiento y protejan sus
+                intereses.
               </p>
             </div>
 
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Transparencia</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Transparencia
+              </h3>
               <p className="text-gray-600">
-                Garantizamos una comunicación clara y permanente, con total transparencia en cada etapa del proceso, brindando a nuestros clientes la certeza y confianza necesarias en la gestión de sus asuntos jurídicos.
+                Garantizamos una comunicación clara y permanente, con total
+                transparencia en cada etapa del proceso, brindando a nuestros
+                clientes la certeza y confianza necesarias en la gestión de sus
+                asuntos jurídicos.
               </p>
             </div>
 
             <div className="text-center">
-              
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Acompañamiento</h3>
+              <h3 className="text-navy mb-4 font-serif text-xl font-semibold">
+                Acompañamiento
+              </h3>
               <p className="text-gray-600">
-                Brindamos un soporte legal continuo que garantiza estabilidad, confianza y visión estratégica en las decisiones de nuestros clientes.
+                Brindamos un soporte legal continuo que garantiza estabilidad,
+                confianza y visión estratégica en las decisiones de nuestros
+                clientes.
               </p>
             </div>
           </div>
@@ -139,9 +158,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/contacto">
-              <Button size="lg">
-                Contáctenos 
-              </Button>
+              <Button size="lg">Contáctenos</Button>
             </Link>
           </div>
         </div>
@@ -155,43 +172,47 @@ export default function Home() {
               Nuestros Principios
             </h2>
             <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
-              Ejercemos nuestra labor con ética, excelencia y un firme compromiso en la protección de los intereses de nuestros clientes.
+              Ejercemos nuestra labor con ética, excelencia y un firme
+              compromiso en la protección de los intereses de nuestros clientes.
             </p>
           </div>
 
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Visión */}
             <div className="text-center lg:text-left">
-              
               <h3 className="text-navy mb-4 font-serif text-2xl font-bold sm:text-3xl">
                 Visión
               </h3>
-                <p className="text-lg leading-relaxed text-gray-600 text-justify">
-                Consolidarnos como una firma jurídica de referencia a nivel local, 
-                nacional e internacional, distinguida por la excelencia en nuestras áreas de práctica. 
-                Nuestra visión es ser un referente de confianza y transformación, aportando soluciones 
+              <p className="text-justify text-lg leading-relaxed text-gray-600">
+                Consolidarnos como una firma jurídica de referencia a nivel
+                local, nacional e internacional, distinguida por la excelencia
+                en nuestras áreas de práctica. Nuestra visión es ser un
+                referente de confianza y transformación, aportando soluciones
                 jurídicas que impacten positivamente en nuestros clientes.
-                </p>
+              </p>
             </div>
 
             {/* Valores */}
             <div className="space-y-8">
               <h3 className="text-navy text-center font-serif text-2xl font-bold sm:text-3xl lg:text-left">
-               Pilares de la Organización
+                Pilares de la Organización
               </h3>
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div>
                     <h4 className="text-navy mb-2 font-semibold">
-                      - El rigor jurídico no es una virtud, es un punto de partida.
-                      </h4>
+                      - El rigor jurídico no es una virtud, es un punto de
+                      partida.
+                    </h4>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div>
-                    <h4 className="text-navy mb-2 font-semibold">- Los litigantes somos contadores de historias.</h4>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      - Los litigantes somos contadores de historias.
+                    </h4>
                   </div>
                 </div>
 
@@ -205,7 +226,9 @@ export default function Home() {
 
                 <div className="flex items-start gap-4">
                   <div>
-                    <h4 className="text-navy mb-2 font-semibold">- Las formas sí importan.</h4>
+                    <h4 className="text-navy mb-2 font-semibold">
+                      - Las formas sí importan.
+                    </h4>
                   </div>
                 </div>
 
@@ -225,12 +248,13 @@ export default function Home() {
                   </div>
                 </div>
 
-                 <div className="mt-6 rounded-lg bg-blue-50 p-4">
-                    <p className="text-sm text-gray-600">
-                      <strong>Autor:</strong> Ángela María Serrano Muñoz <br />
-                      <strong>Publicado:</strong> viernes 22 de agosto de 2025 / Asuntos legales / La República
-                    </p>
-                  </div>
+                <div className="mt-6 rounded-lg bg-blue-50 p-4">
+                  <p className="text-sm text-gray-600">
+                    <strong>Autor:</strong> Ángela María Serrano Muñoz <br />
+                    <strong>Publicado:</strong> viernes 22 de agosto de 2025 /
+                    Asuntos legales / La República
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -239,7 +263,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link href="/nosotros">
               <Button size="lg" className="bg-navy hover:bg-blue-800">
-               Nosotros
+                Nosotros
               </Button>
             </Link>
           </div>
@@ -257,14 +281,13 @@ export default function Home() {
               <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:border-gray-300 focus:border-gray-300 active:border-gray-300 hover:bg-gray-100 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Contáctenos
                 </Button>
               </Link>
             </div>
-             <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
+            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
               Orientación jurídica estratégica y especializada
             </p>
           </div>

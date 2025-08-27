@@ -56,7 +56,7 @@ export default function NoticiasPage() {
     if (news.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % news.length);
+      setCurrentIndex(prev => (prev + 1) % news.length);
     }, 10000);
 
     return () => clearInterval(timer);
@@ -64,11 +64,11 @@ export default function NoticiasPage() {
 
   // Funciones de navegación del carrusel
   const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + news.length) % news.length);
+    setCurrentIndex(prev => (prev - 1 + news.length) % news.length);
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % news.length);
+    setCurrentIndex(prev => (prev + 1) % news.length);
   };
 
   const goToSlide = (index: number) => {
@@ -78,10 +78,10 @@ export default function NoticiasPage() {
   // Parsear tags desde JSON string
   const parseTags = (tags?: string): string[] => {
     if (!tags) return [];
-    
+
     // Si ya es un array, devolverlo
     if (Array.isArray(tags)) return tags;
-    
+
     try {
       const parsed = JSON.parse(tags);
       // Si el resultado es un array, devolverlo
@@ -102,7 +102,7 @@ export default function NoticiasPage() {
     return date.toLocaleDateString('es-ES', {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     });
   };
 
@@ -157,8 +157,8 @@ export default function NoticiasPage() {
               </span>
             </h1>
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl md:text-2xl">
-              Mantente informado sobre las últimas novedades jurídicas, 
-              cambios normativos y análisis legales especializados.
+              Mantente informado sobre las últimas novedades jurídicas, cambios
+              normativos y análisis legales especializados.
             </p>
           </div>
         </div>
@@ -177,7 +177,8 @@ export default function NoticiasPage() {
               </p>
             ) : (
               <p className="text-lg text-gray-600 sm:text-xl">
-                Próximamente tendrás acceso a nuestras noticias y análisis jurídicos
+                Próximamente tendrás acceso a nuestras noticias y análisis
+                jurídicos
               </p>
             )}
           </div>
@@ -186,17 +187,14 @@ export default function NoticiasPage() {
             <div className="relative">
               {/* Carrusel Horizontal */}
               <div className="overflow-hidden rounded-2xl">
-                <div 
+                <div
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                  {news.map((article) => (
-                    <div
-                      key={article.id}
-                      className="w-full flex-shrink-0"
-                    >
-                      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-                        <div className="grid lg:grid-cols-2 gap-0">
+                  {news.map(article => (
+                    <div key={article.id} className="w-full flex-shrink-0">
+                      <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
+                        <div className="grid gap-0 lg:grid-cols-2">
                           {/* Imagen del artículo */}
                           <div className="relative h-64 lg:h-96">
                             {article.imageUrl ? (
@@ -207,10 +205,18 @@ export default function NoticiasPage() {
                                 className="object-cover"
                               />
                             ) : (
-                              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-navy to-blue-700 text-white">
-                                <div className="text-center p-8">
-                                  <svg className="h-16 w-16 mx-auto mb-4 opacity-80" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
+                              <div className="from-navy flex h-full w-full items-center justify-center bg-gradient-to-br to-blue-700 text-white">
+                                <div className="p-8 text-center">
+                                  <svg
+                                    className="mx-auto mb-4 h-16 w-16 opacity-80"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                      clipRule="evenodd"
+                                    />
                                     <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z" />
                                   </svg>
                                   <p className="text-lg font-medium opacity-90">
@@ -221,13 +227,13 @@ export default function NoticiasPage() {
                             )}
                             {/* Badge de categoría */}
                             <div className="absolute top-4 left-4">
-                              <span className="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">
+                              <span className="bg-navy rounded-full px-3 py-1 text-sm font-medium text-white">
                                 {article.category}
                               </span>
                             </div>
                             {article.featured && (
                               <div className="absolute top-4 right-4">
-                                <span className="bg-yellow-500 text-yellow-900 px-3 py-1 rounded-full text-sm font-medium">
+                                <span className="rounded-full bg-yellow-500 px-3 py-1 text-sm font-medium text-yellow-900">
                                   Destacado
                                 </span>
                               </div>
@@ -235,7 +241,7 @@ export default function NoticiasPage() {
                           </div>
 
                           {/* Contenido del artículo */}
-                          <div className="p-8 lg:p-12 flex flex-col justify-center">
+                          <div className="flex flex-col justify-center p-8 lg:p-12">
                             {/* Fecha y autor */}
                             <div className="mb-4 flex items-center text-sm text-gray-500">
                               <time dateTime={article.createdAt}>
@@ -251,32 +257,34 @@ export default function NoticiasPage() {
                             </h3>
 
                             {/* Extracto truncado */}
-                            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+                            <p className="mb-6 text-justify leading-relaxed text-gray-700">
                               {truncateText(article.excerpt, 160)}
                             </p>
 
                             {/* Tags */}
                             {(() => {
                               const tags = parseTags(article.tags);
-                              return tags.length > 0 && (
-                                <div className="mb-6">
-                                  <div className="flex flex-wrap gap-2">
-                                    {tags.slice(0, 4).map((tag, idx) => (
-                                      <span
-                                        key={idx}
-                                        className="px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full"
-                                      >
-                                        {tag}
-                                      </span>
-                                    ))}
+                              return (
+                                tags.length > 0 && (
+                                  <div className="mb-6">
+                                    <div className="flex flex-wrap gap-2">
+                                      {tags.slice(0, 4).map((tag, idx) => (
+                                        <span
+                                          key={idx}
+                                          className="rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800"
+                                        >
+                                          {tag}
+                                        </span>
+                                      ))}
+                                    </div>
                                   </div>
-                                </div>
+                                )
                               );
                             })()}
 
                             {/* Botón Ver noticia completa */}
-                            <Button 
-                              size="lg" 
+                            <Button
+                              size="lg"
                               className="w-full sm:w-auto"
                               onClick={() => openModal(article)}
                             >
@@ -309,21 +317,41 @@ export default function NoticiasPage() {
                   {/* Botones de navegación */}
                   <button
                     onClick={goToPrevious}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-xl z-10"
+                    className="absolute top-1/2 left-4 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-xl"
                     aria-label="Noticia anterior"
                   >
-                    <svg className="h-6 w-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    <svg
+                      className="text-navy h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
                     </svg>
                   </button>
 
                   <button
                     onClick={goToNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-xl z-10"
+                    className="absolute top-1/2 right-4 z-10 -translate-y-1/2 rounded-full bg-white p-3 shadow-lg transition-all duration-300 hover:bg-gray-50 hover:shadow-xl"
                     aria-label="Siguiente noticia"
                   >
-                    <svg className="h-6 w-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="text-navy h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </button>
 
@@ -334,8 +362,8 @@ export default function NoticiasPage() {
                         key={index}
                         onClick={() => goToSlide(index)}
                         className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                          index === currentIndex 
-                            ? 'bg-navy' 
+                          index === currentIndex
+                            ? 'bg-navy'
                             : 'bg-gray-300 hover:bg-gray-400'
                         }`}
                         aria-label={`Ver noticia ${index + 1}`}
@@ -367,8 +395,8 @@ export default function NoticiasPage() {
                 Noticias en Desarrollo
               </h3>
               <p className="mx-auto mb-8 max-w-md text-lg text-gray-500">
-                Estamos preparando contenido jurídico especializado y análisis 
-                de actualidad normativa. Próximamente tendrás acceso a nuestras 
+                Estamos preparando contenido jurídico especializado y análisis
+                de actualidad normativa. Próximamente tendrás acceso a nuestras
                 publicaciones especializadas.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
@@ -378,7 +406,11 @@ export default function NoticiasPage() {
                   </Button>
                 </Link>
                 <Link href="/nosotros">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="w-full sm:w-auto"
+                  >
                     Nosotros
                   </Button>
                 </Link>
@@ -392,33 +424,27 @@ export default function NoticiasPage() {
       <section className="from-navy to-navy bg-gradient-to-br via-blue-900 py-16 text-white sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="mb-6 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
-              Acompañamiento Personalizado
-            </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
-              Orientación jurídica estratégica y especializada
-            </p>
-
             <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
               <Link href="/contacto">
                 <Button
                   size="lg"
-                  variant="outline"
-                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
-                  Contáctanos
+                  Contáctenos
                 </Button>
               </Link>
               <Link href="/nosotros">
                 <Button
                   size="lg"
-                  variant="ghost"
-                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
+                  className="btn-outline-white w-full transform transition-all duration-300 hover:scale-105 sm:w-auto"
                 >
                   Nosotros
                 </Button>
               </Link>
-            </div>
+            </div><br />
+            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
+              Orientación jurídica estratégica y especializada
+            </p>
           </div>
         </div>
       </section>
