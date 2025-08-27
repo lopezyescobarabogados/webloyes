@@ -80,7 +80,7 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
               {service.detailedDescription && (
                 <div className="mb-8">
                   <h3 className="mb-4 text-xl font-semibold text-navy">Descripción Detallada</h3>
-                  <p className="leading-relaxed text-gray-700">{service.detailedDescription}</p>
+                  <p className="leading-relaxed text-gray-700 text-justify">{service.detailedDescription}</p>
                 </div>
               )}
 
@@ -130,7 +130,7 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
                                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                             </svg>
                                           </div>
-                                          <span className="text-sm text-gray-700">{item}</span>
+                                          <span className="text-sm text-gray-700 text-justify">{item}</span>
                                         </li>
                                       ))}
                                     </ul>
@@ -151,7 +151,7 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                               </svg>
                             </div>
-                            <span className="text-gray-700">{serviceItem}</span>
+                            <span className="text-gray-700 text-justify">{serviceItem}</span>
                           </li>
                         ))}
                       </ul>
@@ -165,7 +165,7 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
                 <h3 className="mb-2 text-lg font-semibold text-navy">
                   ¿Necesitas este servicio?
                 </h3>
-                <p className="mb-4 text-gray-600">
+                <p className="mb-4 text-gray-600 ">
                   Contáctanos para una consulta personalizada y sin compromiso
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
@@ -176,7 +176,7 @@ export default function ServiceModal({ isOpen, onClose, service }: ServiceModalP
                       window.location.href = '/contacto';
                     }}
                   >
-                    Solicitar Consulta
+                    Contáctenos
                   </Button>
                   <Button variant="outline" size="lg" onClick={onClose}>
                     Cerrar

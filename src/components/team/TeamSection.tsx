@@ -117,15 +117,6 @@ export default function TeamSection() {
           <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
             Conoce a Nuestro Equipo
           </h2>
-          {teamMembers.length > 0 ? (
-            <p className="text-lg text-gray-600 sm:text-xl">
-              Profesionales especializados y comprometidos con su labor
-            </p>
-          ) : (
-            <p className="text-lg text-gray-600 sm:text-xl">
-              Próximamente conocerás a nuestro equipo de profesionales especializados
-            </p>
-          )}
         </div>
 
         {teamMembers.length > 0 ? (

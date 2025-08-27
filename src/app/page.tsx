@@ -32,7 +32,7 @@ export default function Home() {
                   variant="outline"
                   className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
                 >
-                  Nuestros Servicios
+                 Servicios
                 </Button>
               </Link>
               <Link href="/contacto">
@@ -41,7 +41,7 @@ export default function Home() {
                   variant="ghost"
                   className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
                 >
-                  Consulta
+                  Contáctenos
                 </Button>
               </Link>
             </div>
@@ -54,12 +54,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección destacada de servicios */}
-      <section
-        id="servicios-destacados"
-        className="bg-white py-16 sm:py-20 lg:py-24"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Por qué elegirnos - Valores de la firma */}
+      <section className="bg-white py-16 sm:py-20 lg:py-24">
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <div className="mb-12 text-center sm:mb-16">
             <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
               Servicios Jurídicos
@@ -68,15 +66,12 @@ export default function Home() {
           <div className="text-center">
             <Link href="/servicios">
               <Button size="lg" className="px-8">
-                 Servicios
+           Servicios
               </Button>
             </Link>
           </div>
-        </div>  
-      </section>
+        </div>
 
-      {/* Por qué elegirnos - Valores de la firma */}
-      <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl text-center">
             <h2 className="mb-6 font-serif text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
@@ -108,7 +103,7 @@ export default function Home() {
               
               <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Prevención de Riesgos</h3>
               <p className="text-gray-600">
-                Nuestro enfoque preventivo evita problemas legales costosos. Anticipamos riesgos y estructuramos soluciones antes de que surjan conflictos.
+                Consolidamos prácticas legales preventivas que fortalecen la seguridad jurídica, protegen los intereses de nuestros clientes y preservan la continuidad de sus negocios.
               </p>
             </div>
 
@@ -122,7 +117,7 @@ export default function Home() {
 
             <div className="text-center">
               
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Transparencia Total</h3>
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Transparencia</h3>
               <p className="text-gray-600">
                 Garantizamos una comunicación clara y permanente, con total transparencia en cada etapa del proceso, brindando a nuestros clientes la certeza y confianza necesarias en la gestión de sus asuntos jurídicos.
               </p>
@@ -130,9 +125,9 @@ export default function Home() {
 
             <div className="text-center">
               
-              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Acompañamiento Permanente</h3>
+              <h3 className="mb-4 font-serif text-xl font-semibold text-navy">Acompañamiento</h3>
               <p className="text-gray-600">
-                Más allá de resolver asuntos jurídicos, cultivamos relaciones de largo plazo, consolidándonos como asesores estratégicos de confianza.
+                Brindamos un soporte legal continuo que garantiza estabilidad, confianza y visión estratégica en las decisiones de nuestros clientes.
               </p>
             </div>
           </div>
@@ -145,7 +140,7 @@ export default function Home() {
             </Link>
             <Link href="/contacto">
               <Button size="lg">
-                Consulta
+                Contáctenos 
               </Button>
             </Link>
           </div>
@@ -171,12 +166,12 @@ export default function Home() {
               <h3 className="text-navy mb-4 font-serif text-2xl font-bold sm:text-3xl">
                 Visión
               </h3>
-              <p className="text-lg leading-relaxed text-gray-600">
+                <p className="text-lg leading-relaxed text-gray-600 text-justify">
                 Consolidarnos como una firma jurídica de referencia a nivel local, 
                 nacional e internacional, distinguida por la excelencia en nuestras áreas de práctica. 
                 Nuestra visión es ser un referente de confianza y transformación, aportando soluciones 
                 jurídicas que impacten positivamente en nuestros clientes.
-              </p>
+                </p>
             </div>
 
             {/* Valores */}
@@ -258,33 +253,20 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
-            <h2 className="mb-6 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
-              Te Asesoramos 
-            </h2>
-            <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
-              Orientación jurídica estratégica y especializada
-            </p>
-
             <div className="mx-auto mb-12 flex max-w-md flex-col justify-center gap-4 sm:max-w-none sm:flex-row">
               <Link href="/contacto">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:bg-gray-100 sm:w-auto"
+                  className="text-navy w-full transform border-white bg-white transition-all duration-300 hover:scale-105 hover:border-gray-300 focus:border-gray-300 active:border-gray-300 hover:bg-gray-100 sm:w-auto"
                 >
-                  Contáctanos
-                </Button>
-              </Link>
-              <Link href="/servicios">
-                <Button
-                  size="lg"
-                  variant="ghost"
-                  className="hover:text-navy w-full transform border-white text-white transition-all duration-300 hover:scale-105 hover:bg-white sm:w-auto"
-                >
-                  Nuestros Servicios
+                  Contáctenos
                 </Button>
               </Link>
             </div>
+             <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl">
+              Orientación jurídica estratégica y especializada
+            </p>
           </div>
         </div>
       </section>

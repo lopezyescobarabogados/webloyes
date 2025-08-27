@@ -125,7 +125,7 @@ export default function Navbar() {
               className="rounded-md px-2 py-1 transition-all duration-300 hover:opacity-80 focus:ring-2 focus:ring-navy focus:ring-offset-2 focus:outline-none"
               aria-label="López y Escobar Abogados - Ir a página de inicio"
             >
-              <Logo size="sm" />
+              <Logo  />
             </Link>
           </div>
 

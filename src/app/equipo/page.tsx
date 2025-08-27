@@ -31,9 +31,7 @@ export default function EquipoPage() {
               </span>
             </h1>
             <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl md:text-2xl">
-              Profesionales dedicados, mediante la integración jurídica
-              de competencia especializada
-              y compromiso riguroso.
+             Contamos con un equipo multidisciplinario que combina conocimiento jurídico especializado, visión estratégica y compromiso permanente con los intereses de nuestros clientes.
             </p>
           </div>
         </div>

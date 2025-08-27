@@ -25,12 +25,9 @@ export default function ContactoPage() {
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="mb-6 font-serif text-4xl leading-tight font-bold sm:text-5xl md:text-6xl lg:text-7xl">
               <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-                Contáctanos
+                Contáctenos 
               </span>
             </h1>
-            <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-200 sm:text-xl md:text-2xl">
-              Estamos a su disposición para analizar sus requerimientos legales y proporcionar asesoría jurídica especializada. Procedamos.
-            </p>
           </div>
         </div>
       </section>

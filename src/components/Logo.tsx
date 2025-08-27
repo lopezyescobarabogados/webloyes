@@ -5,28 +5,27 @@ interface LogoProps {
   className?: string;
 }
 
-export default function Logo({ size = 'md', className = '' }: LogoProps) {
-  const sizeClasses = {
-    sm: 'h-8 w-auto md:h-10 lg:h-12', // Para navbar - altura fija
-    md: 'w-20 h-auto md:w-28 lg:w-40', // Para uso general
-    lg: 'w-32 h-auto md:w-40 lg:w-48'  // Para hero sections
-  };
+const logoSrc = '/Logo1.png'; // Usa un PNG de alta resolución
 
-  const dimensions = {
-    sm: { width: 48, height: 48 }, // Cuadrado pequeño para navbar
-    md: { width: 160, height: 80 },
-    lg: { width: 192, height: 96 }
-  };
+const sizeMap = {
+  sm: { width: 56, height: 28 },
+  md: { width: 96, height: 48 },
+  lg: { width: 140, height: 70 }
+};
+
+export default function Logo({ size = 'md', className = '' }: LogoProps) {
+  const { width, height } = sizeMap[size];
 
   return (
     <div className={`flex justify-center ${className}`}>
       <Image
-        src="/Logo2.svg"
+        src={logoSrc}
         alt="Logotipo López y Escobar Abogados"
-        width={dimensions[size].width}
-        height={dimensions[size].height}
-        className={`${sizeClasses[size]} hover:opacity-90 transition-opacity`}
+        width={width}
+        height={height}
+        className="h-auto w-auto max-w-full hover:opacity-90 transition-opacity"
         priority
+        style={{ height, width }}
       />
     </div>
   );

@@ -49,7 +49,7 @@ export default function ServiciosPage() {
                   variant="outline"
                   className="text-navy w-full border-white bg-white hover:bg-blue-50 sm:w-auto"
                 >
-                  Contáctanos
+                  Contáctenos 
                 </Button>
               </Link>
               <Link href="#servicios">
@@ -58,7 +58,7 @@ export default function ServiciosPage() {
                   variant="ghost"
                   className="w-full border-white text-white hover:bg-white/10 sm:w-auto"
                 >
-                  Ver Servicios
+                  Servicios
                 </Button>
               </Link>
             </div>
@@ -120,7 +120,7 @@ export default function ServiciosPage() {
                 className="group flex h-full cursor-pointer flex-col p-8 transition-all duration-300 hover:shadow-xl"
               >
                 <h3
-                  className="text-navy mb-4 font-serif text-xl font-semibold transition-colors duration-200 hover:text-blue-600 sm:text-2xl"
+                  className="text-navy mb-4 font-serif text-xl font-semibold transition-colors duration-200 hover:text-blue-600 sm:text-2xl text-center"
                   onClick={() => openServiceModal(service)}
                 >
                   {service.title}
@@ -148,7 +148,7 @@ export default function ServiciosPage() {
                   variant="outline"
                   className="text-navy w-full border-white bg-white hover:bg-blue-50 sm:w-auto"
                 >
-                  Contáctanos
+                  Contáctenos
                 </Button>
               </Link>
               <Link href="/equipo">
