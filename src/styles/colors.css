@@ -48,6 +48,22 @@
   background-color: rgb(var(--navy));
 }
 
+.bg-navy-100 {
+  background-color: rgb(var(--navy-100));
+}
+
+.bg-navy-50 {
+  background-color: rgb(var(--navy-50));
+}
+
+.text-navy-800 {
+  color: rgb(var(--navy-800));
+}
+
+.text-navy-700 {
+  color: rgb(var(--navy-700));
+}
+
 .bg-secondary {
   background-color: rgb(var(--gray-light));
 }

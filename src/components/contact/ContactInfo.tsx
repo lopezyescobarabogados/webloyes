@@ -38,7 +38,7 @@ export default function ContactInfo() {
                 </a>
               </div>
               <p className="mt-1 text-sm text-gray-500">
-                Lunes a Viernes, 7:30 - 17:30
+                Lunes a Viernes, 7:30-13:00/14:00-17:30
               </p>
             </div>
           </div>

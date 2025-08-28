@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logo from '@/components/Logo';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,23 +25,23 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-navy-50 text-navy">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-          {/* Brand */}
+          {/* Brand with Logo */}
           <div className="md:col-span-1">
-            <Link href="/" className="text-2xl font-bold">
+            <h2 className="text-lg font-bold mb-3 text-navy">
               López & Escobar Abogados Asociados S.A.S.
-            </Link>
-            <p className="mt-4 text-gray-300">
-              Firma de abogados Litigio y Asesorías en Derecho| Civil - Inmobiliario | Comercial - Societario | Tributario | Laboral y Seguridad Social | SG-SST | SAGRILAFT/SARLAFT/PTEE | Planeación en dichas materias con mas de 25 años de experiencia.
+            </h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Firma de abogados Litigio y Asesorías en Derecho| Civil - Inmobiliario | Comercial - Societario | Tributario | Laboral y Seguridad Social | SG-SST | SAGRILAFT/SARLAFT/PTEE | Planeación en dichas materias con mas de 25 años de experiencia.
             </p>
           </div>
 
           {/* Footer sections */}
           {footerSections.map(section => (
             <div key={section.title}>
-              <h3 className="text-sm font-semibold tracking-wider uppercase">
+              <h3 className="text-sm font-semibold tracking-wider uppercase text-navy">
                 {section.title}
               </h3>
               <ul className="mt-4 space-y-2">
@@ -48,7 +49,7 @@ export default function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-gray-300 hover:text-white"
+                      className="text-gray-600 hover:text-navy transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -60,50 +61,50 @@ export default function Footer() {
 
           {/* Contacto Section */}
           <div>
-            <h3 className="text-sm font-semibold tracking-wider uppercase">
+            <h3 className="text-sm font-semibold tracking-wider uppercase text-navy">
               Contacto
             </h3>
             <div className="mt-4 space-y-4">
               {/* Teléfonos */}
               <div>
-                <h4 className="text-sm font-medium text-white mb-2">Teléfono</h4>
+                <h4 className="text-sm font-medium text-navy mb-2">Teléfono</h4>
                 <div className="space-y-1">
                   <a
                     href="tel:+573004308692"
-                    className="block text-gray-300 hover:text-white transition-colors"
+                    className="block text-gray-600 hover:text-navy transition-colors"
                   >
                     300 4308692
                   </a>
                   <a
                     href="tel:+573113835833"
-                    className="block text-gray-300 hover:text-white transition-colors"
+                    className="block text-gray-600 hover:text-navy transition-colors"
                   >
                     311 3835833
                   </a>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Lunes a Viernes, 7:30-13:00/14:00-17:30
                 </p>
               </div>
 
               {/* Emails */}
               <div>
-                <h4 className="text-sm font-medium text-white mb-2">Email</h4>
+                <h4 className="text-sm font-medium text-navy mb-2">Email</h4>
                 <div className="space-y-1">
                   <a
                     href="mailto:mescobarm@lopezyescobarabogados.com"
-                    className="block text-gray-300 hover:text-white transition-colors text-sm"
+                    className="block text-gray-600 hover:text-navy transition-colors text-sm"
                   >
                     mescobarm@lopezyescobarabogados.com
                   </a>
                   <a
                     href="mailto:blopez@lopezyescobarabogados.com"
-                    className="block text-gray-300 hover:text-white transition-colors text-sm"
+                    className="block text-gray-600 hover:text-navy transition-colors text-sm"
                   >
                     blopez@lopezyescobarabogados.com
                   </a>
                 </div>
-                <p className="text-xs text-gray-400 mt-1">
+                <p className="text-xs text-gray-500 mt-1">
                   Respuesta en menos de 24h
                 </p>
               </div>
@@ -111,8 +112,11 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-700 pt-8">
-          <p className="text-center text-gray-400">
+        <div className="mt-8 border-t border-gray-300 pt-8">
+          <div className="flex justify-center mb-4">
+            <Logo size="md" className="h-10 w-auto" />
+          </div>
+          <p className="text-center text-gray-500">
             © {currentYear} López & Escobar Abogados. Todos los derechos reservados.
           </p>
         </div>

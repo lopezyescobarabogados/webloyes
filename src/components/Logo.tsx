@@ -5,27 +5,31 @@ interface LogoProps {
   className?: string;
 }
 
-const logoSrc = '/Logo1.png'; // Usa un PNG de alta resolución
+const logoSrc = '/Logo2.svg'; // Usa un SVG de alta resolución
 
 const sizeMap = {
-  sm: { width: 56, height: 28 },
-  md: { width: 96, height: 48 },
-  lg: { width: 140, height: 70 }
+  sm: { width: 100, height: 50 },
+  md: { width: 140, height: 70 },
+  lg: { width: 200, height: 100 }
 };
 
 export default function Logo({ size = 'md', className = '' }: LogoProps) {
   const { width, height } = sizeMap[size];
 
   return (
-    <div className={`flex justify-center ${className}`}>
+    <div className={`flex items-center ${className}`}>
       <Image
         src={logoSrc}
         alt="Logotipo López y Escobar Abogados"
         width={width}
         height={height}
-        className="h-auto w-auto max-w-full hover:opacity-90 transition-opacity"
+        className="object-contain hover:opacity-90 transition-opacity duration-300"
         priority
-        style={{ height, width }}
+        style={{
+          width: 'auto',
+          height: `${height}px`,
+          maxWidth: `${width}px`,
+        }}
       />
     </div>
   );

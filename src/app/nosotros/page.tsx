@@ -51,7 +51,7 @@ export default function NosotrosPage() {
             {/* Presentación de la firma */}
             <article className="space-y-6 bg-white p-8 text-justify sm:p-12">
               <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
-                Servicios legales integrales y altamente profesionales, con
+                Servicios legales integrales y profesionales, con
                 especialización en las áreas de Derecho Comercial, Societario,
                 Administrativo, Laboral - SSG ST y Tributario. Nuestra asesoría
                 está dirigida tanto a personas naturales como jurídicas, con un
