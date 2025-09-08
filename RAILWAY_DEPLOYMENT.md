@@ -46,17 +46,179 @@ NEXT_PUBLIC_VERCEL_URL=https://tu-proyecto.railway.app
 2. Busca y agrega "PostgreSQL"
 3. Railway generará automáticamente la `DATABASE_URL`
 
-### 2. Ejecutar Migraciones
+### 2. Crear Migraciones y Tablas
+
+**CRÍTICO:** El proyecto necesita crear las migraciones antes del despliegue:
+
+```bash
+# 1. Crear la migración inicial (REQUERIDO)
+npx prisma migrate dev --name init
+
+# 2. Verificar que se creó la migración
+ls prisma/migrations/
+
+# 3. Generar el cliente Prisma
+npx prisma generate
+```
+
+### 3. Ejecutar Migraciones en Producción
 
 Las migraciones se ejecutarán automáticamente durante el build gracias al script `postinstall`.
 
-Si necesitas ejecutarlas manualmente:
+Si necesitas ejecutarlas manualmente en Railway:
 
 ```bash
+# Aplicar migraciones en producción
 npm run db:migrate
+
+# Verificar conexión y tablas
+npm run db:studio
 ```
 
-## 🚀 Pasos de Despliegue
+### 4. Verificar Tablas Creadas
+
+Después del despliegue, verifica que las tablas existen:
+
+```sql
+-- Conectar a Railway PostgreSQL y verificar:
+\dt  -- Listar todas las tablas
+
+-- Deberías ver:
+-- news
+-- team_members  
+-- contact_messages
+```
+
+## � **PROBLEMA ESPECÍFICO: Error "tabla news no existe"**
+
+### Descripción del Error
+```
+Error [PrismaClientKnownRequestError]:
+Invalid `prisma.news.findMany()` invocation:
+The table `public.news` does not exist in the current database.
+```
+
+### 🔧 **Solución Paso a Paso (EJECUTAR EN ORDEN)**
+
+### 🔧 **Solución Paso a Paso (EJECUTAR EN ORDEN)**
+
+#### **OPCIÓN A: Usando Railway CLI (Recomendado)**
+
+```bash
+# 1. Instalar Railway CLI (si no está instalado)
+curl -fsSL https://railway.app/install.sh | sh
+
+# 2. Ejecutar script automatizado
+./scripts/apply-migrations-railway.sh
+```
+
+#### **OPCIÓN B: Usando Prisma Localmente**
+
+```bash
+# 1. Crear migración inicial
+npx prisma migrate dev --name init
+
+# 2. Verificar migración creada
+ls -la prisma/migrations/
+
+# 3. Commit y deploy a Railway
+git add prisma/migrations/
+git commit -m "feat: add database migrations"
+git push origin main
+```
+
+#### **OPCIÓN C: SQL Manual en Railway Dashboard**
+
+1. Ve a Railway Dashboard → PostgreSQL Plugin → Connect
+2. Ejecuta el siguiente SQL:
+
+```sql
+-- Crear tabla news
+CREATE TABLE "news" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "excerpt" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "author" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
+    "tags" TEXT NOT NULL,
+    "published" BOOLEAN NOT NULL DEFAULT false,
+    "featured" BOOLEAN NOT NULL DEFAULT false,
+    "imageUrl" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "news_pkey" PRIMARY KEY ("id")
+);
+
+CREATE UNIQUE INDEX "news_slug_key" ON "news"("slug");
+
+-- Crear tabla team_members
+CREATE TABLE "team_members" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "position" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "bio" TEXT,
+    "email" TEXT,
+    "phone" TEXT,
+    "imageUrl" TEXT,
+    "order" INTEGER NOT NULL DEFAULT 0,
+    "active" BOOLEAN NOT NULL DEFAULT true,
+    "specialties" TEXT NOT NULL,
+    "education" TEXT,
+    "experience" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "team_members_pkey" PRIMARY KEY ("id")
+);
+
+-- Crear tabla contact_messages
+CREATE TABLE "contact_messages" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT,
+    "subject" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "company" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'PENDING',
+    "priority" TEXT NOT NULL DEFAULT 'MEDIUM',
+    "source" TEXT NOT NULL DEFAULT 'WEB_FORM',
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "contact_messages_pkey" PRIMARY KEY ("id")
+);
+```
+
+### 🎯 **Comandos Directos para Railway CLI**
+
+Si tienes Railway CLI instalado:
+
+```bash
+# 1. Conectar a tu proyecto
+railway login
+railway link
+
+# 2. Aplicar migraciones directamente
+railway run npx prisma migrate deploy
+
+# 3. Verificar tablas creadas
+railway connect
+# Dentro de PostgreSQL: \dt
+```
+
+### ✅ **Verificación de Éxito**
+
+Después de aplicar las migraciones, deberías poder:
+1. **Cargar noticias** sin error 500
+2. **Crear nuevas noticias** en `/admin`
+3. **Ver las tablas** en Railway PostgreSQL:
+   - `news` 
+   - `team_members`
+   - `contact_messages`
+
+## �🚀 Pasos de Despliegue
 
 ### 1. Preparación del Repositorio
 
