@@ -17,9 +17,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start -p ${PORT:-3000}",
+    "start:standalone": "node .next/standalone/server.js",
     "start:railway": "cd .next/standalone && PORT=${PORT:-3000} node server.js",
-    "deploy": "prisma migrate deploy && prisma generate && node .next/standalone/server.js",
+    "deploy": "prisma migrate deploy && prisma generate && next start -p ${PORT:-3000}",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
