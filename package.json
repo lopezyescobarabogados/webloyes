@@ -18,7 +18,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "node .next/standalone/server.js",
-    "start:traditional": "next start",
+    "start:railway": "cd .next/standalone && PORT=${PORT:-3000} node server.js",
     "deploy": "prisma migrate deploy && prisma generate && node .next/standalone/server.js",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

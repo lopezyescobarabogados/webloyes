@@ -1,6 +1,19 @@
 #!/bin/bash
 
-# Script de inicio para producción en Railway
+# Scri# Variables de entorno optimizadas para Railway
+export PORT=${PORT:-3000}
+export HOSTNAME=${HOSTNAME:-0.0.0.0}
+export NODE_ENV=${NODE_ENV:-production}
+
+echo "🌐 Iniciando servidor en puerto $PORT (sin healthcheck)"
+
+# Cambiar al directorio standalone y validar
+cd .next/standalone || { echo "❌ Error accediendo a .next/standalone"; exit 1; }
+
+echo "✅ Iniciando aplicación sin healthcheck de Railway..."
+
+# Iniciar servidor Next.js directamente
+exec node server.js para producción en Railway
 # Optimizado para deploy sin healthcheck
 
 set -e  # Salir si hay algún error
