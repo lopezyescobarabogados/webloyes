@@ -1,16 +1,14 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 
 export async function GET() {
   try {
-    // Verificar conexión a la base de datos
-    await prisma.$queryRaw`SELECT 1`
-    
+    // Healthcheck básico y rápido - solo verificar que el servidor responde
+    // No verificamos la DB durante el healthcheck inicial para evitar timeouts
     return NextResponse.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
-      database: 'connected',
-      environment: process.env.NODE_ENV
+      service: 'lopez-escobar-abogados',
+      environment: process.env.NODE_ENV || 'production'
     })
   } catch (error) {
     console.error('Health check failed:', error)
@@ -18,8 +16,7 @@ export async function GET() {
     return NextResponse.json({
       status: 'error',
       timestamp: new Date().toISOString(),
-      database: 'disconnected',
-      error: 'Database connection failed'
+      error: 'Service unavailable'
     }, { status: 503 })
   }
 }

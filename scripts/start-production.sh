@@ -66,6 +66,10 @@ echo "   - NODE_ENV: ${NODE_ENV:-development}"
 echo "   - PORT: $PORT"
 echo "   - DATABASE_URL: [CONFIGURADA]"
 
+# Pequeña pausa para asegurar que todo esté listo
+echo "⏳ Preparando servidor..."
+sleep 2
+
 # Iniciar el servidor con el puerto correcto
 echo "🎯 Ejecutando: node .next/standalone/server.js"
 exec node .next/standalone/server.js
