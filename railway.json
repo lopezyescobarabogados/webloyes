@@ -1,11 +1,9 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS",
-    "buildCommand": "npm ci --omit=dev && prisma generate && npm run build"
+    "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "./scripts/start-production.sh",
     "healthcheckPath": "/api/health",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
