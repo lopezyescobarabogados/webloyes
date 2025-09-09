@@ -24,42 +24,51 @@ fi
 
 echo "✅ Archivo standalone encontrado"
 
-# Ejecutar migraciones con reintentos optimizados
-echo "🗄️ Ejecutando migraciones de base de datos..."
-MAX_RETRIES=3
-RETRY_COUNT=0
+# Ejecutar migraciones en background para no bloquear el startup
+echo "🗄️ Iniciando migraciones en background..."
 
-while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+(
+  MAX_RETRIES=3
+  RETRY_COUNT=0
+  
+  while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
     echo "🔄 Intento de migración $((RETRY_COUNT + 1))/${MAX_RETRIES}..."
     
     if npx prisma migrate deploy 2>/dev/null; then
-        echo "✅ Migraciones aplicadas exitosamente"
-        break
+      echo "✅ Migraciones aplicadas exitosamente"
+      break
     else
-        RETRY_COUNT=$((RETRY_COUNT + 1))
-        
-        if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
-            echo "⚠️  Continuando sin migraciones - se aplicarán en la próxima solicitud"
-            break
-        fi
-        
-        echo "⚠️  Migración falló, reintentando en 5 segundos..."
-        sleep 5
+      RETRY_COUNT=$((RETRY_COUNT + 1))
+      
+      if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+        echo "⚠️  Migraciones fallaron - se aplicarán en la próxima solicitud"
+        break
+      fi
+      
+      echo "⚠️  Migración falló, reintentando en 5 segundos..."
+      sleep 5
     fi
-done
+  done
+) &
+
+# No esperar a las migraciones para arrancar el servidor
+echo "✅ Migraciones iniciadas en background"
 
 echo "🔥 Iniciando servidor Next.js en modo standalone..."
 
-# Configurar puerto para Railway
+# Configurar puerto para Railway - CRÍTICO
 export PORT=${PORT:-3000}
-echo "🌐 Servidor iniciando en puerto $PORT"
+export HOSTNAME=${HOSTNAME:-0.0.0.0}
+
+echo "🌐 Servidor iniciando en $HOSTNAME:$PORT"
 
 # Mostrar información del entorno
 echo "📊 Información del entorno:"
 echo "   - NODE_ENV: ${NODE_ENV:-development}"
 echo "   - PORT: $PORT"
+echo "   - HOSTNAME: $HOSTNAME"
 echo "   - DATABASE_URL: [CONFIGURADA]"
 
-# Iniciar el servidor inmediatamente
-echo "🎯 Ejecutando: node .next/standalone/server.js"
-exec node .next/standalone/server.js
+# Iniciar el servidor con variables explícitas
+echo "🎯 Ejecutando: PORT=$PORT HOSTNAME=$HOSTNAME node .next/standalone/server.js"
+PORT=$PORT HOSTNAME=$HOSTNAME exec node .next/standalone/server.js
