@@ -28,8 +28,12 @@
 ### 🔧 Variables de Entorno Requeridas
 
 En Railway configura:
-- `DATABASE_URL`: URL de PostgreSQL
+- `DATABASE_URL`: URL de PostgreSQL (auto-generada)
 - `NODE_ENV`: production
+- `PORT`: AUTO (Railway lo asigna automáticamente)
+- `ADMIN_KEY`: clave_admin_muy_segura_minimo_8_caracteres (CRÍTICO)
+
+⚠️ **IMPORTANTE**: Sin `ADMIN_KEY` el panel `/admin` no funcionará
 
 ### 🏥 Health Check
 
@@ -74,3 +78,31 @@ Si el deploy falla:
 - ✅ Las migraciones se aplican automáticamente en cada deploy
 - ✅ El servidor usa modo standalone para mejor rendimiento
 - ✅ `--legacy-peer-deps` resuelve conflictos de peer dependencies
+
+## 🚨 Troubleshooting - Error "1/1 replicas never became healthy"
+
+### ✅ Soluciones Implementadas:
+
+1. **Script de inicio mejorado** (`scripts/start-production.sh`):
+   - ✅ 5 reintentos para migraciones con delays de 10s
+   - ✅ Detección automática del PORT de Railway
+   - ✅ Verificaciones de archivos antes de inicio
+   - ✅ Logging detallado para debugging
+
+2. **Healthcheck optimizado** (`railway.json`):
+   - ✅ Timeout extendido a 300 segundos
+   - ✅ Máximo 10 reintentos con política ON_FAILURE
+   - ✅ Endpoint `/api/health` que verifica DB
+
+3. **Variables críticas**:
+   - ✅ `DATABASE_URL`: Auto-generada por Railway
+   - ✅ `PORT`: Auto-asignada por Railway
+   - ✅ `ADMIN_KEY`: DEBE configurarse manualmente
+   - ✅ `NODE_ENV=production`
+
+### 🔍 Si el deploy aún falla:
+
+1. **Verificar logs en Railway Dashboard**
+2. **Confirmar que PostgreSQL addon está conectado**
+3. **Verificar que ADMIN_KEY esté configurada**
+4. **Esperar hasta 5 minutos para migraciones lentas**

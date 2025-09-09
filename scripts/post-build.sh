@@ -12,6 +12,12 @@ STANDALONE_DIR=".next/standalone"
 PRISMA_CLIENT_DIR="node_modules/.prisma/client"
 STANDALONE_PRISMA_DIR="$STANDALONE_DIR/node_modules/.prisma/client"
 
+# Verificar que standalone existe
+if [ ! -d "$STANDALONE_DIR" ]; then
+    echo "❌ ERROR: Directorio standalone no encontrado: $STANDALONE_DIR"
+    exit 1
+fi
+
 # Crear directorio si no existe
 mkdir -p "$STANDALONE_PRISMA_DIR"
 
@@ -25,10 +31,10 @@ if [ -d "$PRISMA_CLIENT_DIR" ]; then
         echo "✅ Binarios de Prisma copiados exitosamente:"
         ls -la "$STANDALONE_PRISMA_DIR"/*.node
     else
-        echo "⚠️  No se encontraron binarios .node"
+        echo "⚠️  No se encontraron binarios .node, pero continuando..."
     fi
 else
-    echo "❌ ERROR: Directorio de Prisma client no encontrado"
+    echo "❌ ERROR: Directorio de Prisma client no encontrado: $PRISMA_CLIENT_DIR"
     exit 1
 fi
 
@@ -39,6 +45,14 @@ mkdir -p "$STANDALONE_MODULES_DIR"
 if [ -d "node_modules/@prisma/client" ]; then
     echo "📦 Copiando @prisma/client..."
     cp -r "node_modules/@prisma/client" "$STANDALONE_MODULES_DIR/"
+else
+    echo "⚠️  @prisma/client no encontrado, pero continuando..."
 fi
 
-echo "✅ Script post-build completado"
+# Copiar archivos de prisma para migraciones
+if [ -d "prisma" ]; then
+    echo "📦 Copiando archivos de schema y migraciones..."
+    cp -r "prisma" "$STANDALONE_DIR/"
+fi
+
+echo "✅ Script post-build completado exitosamente"
