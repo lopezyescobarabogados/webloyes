@@ -6,11 +6,12 @@
 
 - **`nixpacks.toml`**: Controla el proceso de build en Railway
 - **`railway.json`**: Configuración específica de Railway
+- **`package-lock.json`**: Lockfile para instalación determinística con npm ci
 - **`scripts/start-production.sh`**: Script de inicio con migraciones automáticas
 
 ### 🔄 Proceso de Deploy Automático
 
-1. **Install**: `npm ci --omit=dev --prefer-offline --no-audit --no-fund`
+1. **Install**: `npm ci --omit=dev --prefer-offline --no-audit --no-fund --legacy-peer-deps`
 2. **Build**: 
    - `npx prisma generate`
    - `npm run build`
@@ -35,16 +36,25 @@ En Railway configura:
 - **Endpoint**: `/api/health`
 - **Verifica**: Conexión a base de datos y estado del servidor
 
-### 🚨 Solución a Error EBUSY
+### 🚨 Solución Implementada
 
-La configuración en `nixpacks.toml` evita el conflicto entre `npm i` y `npm ci` que causaba:
-```
-npm error EBUSY: resource busy or locked, rmdir '/app/node_modules/.cache'
-```
+✅ **Error EBUSY**: Configuración Nixpacks evita conflicto npm i/npm ci
+✅ **Error EUSAGE**: package-lock.json generado y versionado
+✅ **Migraciones automáticas**: Script robusto con reintentos
+✅ **Build determinístico**: npm ci con lockfile garantiza reproducibilidad
+
+### 🔍 Troubleshooting
+
+Si el deploy falla:
+1. Verificar que `package-lock.json` esté en el repo
+2. Verificar variables `DATABASE_URL` en Railway
+3. Revisar logs en Railway dashboard
+4. Health check: `GET /api/health`
 
 ## 📝 Notas para Desarrolladores
 
-- El archivo `.env.local` es solo para desarrollo local
-- Railway usa las variables de entorno configuradas en el dashboard
-- Las migraciones se aplican automáticamente en cada deploy
-- El servidor usa modo standalone para mejor rendimiento
+- ✅ `package-lock.json` DEBE estar versionado en git
+- ✅ Railway usa las variables de entorno del dashboard
+- ✅ Las migraciones se aplican automáticamente en cada deploy
+- ✅ El servidor usa modo standalone para mejor rendimiento
+- ✅ `--legacy-peer-deps` resuelve conflictos de peer dependencies

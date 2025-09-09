@@ -3,7 +3,7 @@ nixPkgs = ['nodejs_18', 'openssl']
 
 [phases.install]
 cmds = [
-    'npm ci --omit=dev --prefer-offline --no-audit --no-fund'
+    'npm ci --omit=dev --prefer-offline --no-audit --no-fund --legacy-peer-deps'
 ]
 
 [phases.build]
