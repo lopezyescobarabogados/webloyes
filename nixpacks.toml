@@ -3,13 +3,15 @@ nixPkgs = ['nodejs_18', 'openssl']
 
 [phases.install]
 cmds = [
-    'npm ci --omit=dev --prefer-offline --no-audit --no-fund --legacy-peer-deps'
+    'npm ci --prefer-offline --no-audit --no-fund --legacy-peer-deps'
 ]
 
 [phases.build]
 cmds = [
     'npx prisma generate',
-    'npm run build'
+    'npm run build',
+    './scripts/post-build.sh',
+    'npm prune --omit=dev'
 ]
 
 [start]

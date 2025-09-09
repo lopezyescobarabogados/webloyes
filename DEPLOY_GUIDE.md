@@ -40,8 +40,24 @@ En Railway configura:
 
 ✅ **Error EBUSY**: Configuración Nixpacks evita conflicto npm i/npm ci
 ✅ **Error EUSAGE**: package-lock.json generado y versionado
+✅ **Error Prisma Query Engine**: Binary targets y script post-build
 ✅ **Migraciones automáticas**: Script robusto con reintentos
 ✅ **Build determinístico**: npm ci con lockfile garantiza reproducibilidad
+
+### 🔧 Solución Prisma Query Engine
+
+El error "Prisma Client could not locate the Query Engine for runtime debian-openssl-3.0.x" se resolvió con:
+
+1. **Binary Targets en schema.prisma**:
+   ```prisma
+   generator client {
+     provider      = "prisma-client-js"
+     binaryTargets = ["native", "debian-openssl-3.0.x"]
+   }
+   ```
+
+2. **Script post-build**: Copia automáticamente los binarios al standalone
+3. **Instalación completa**: Se instalan todas las dependencias para build, luego se hace prune
 
 ### 🔍 Troubleshooting
 
