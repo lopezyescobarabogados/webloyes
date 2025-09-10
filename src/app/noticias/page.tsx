@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import NewsModal from '@/components/NewsModal';
-import { truncateText } from '@/utils/textUtils';
+import { truncateFormattedText } from '@/utils/textUtils';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -228,7 +228,7 @@ export default function NoticiasPage() {
                             {/* Badge de categoría */}
                             <div className="absolute top-4 left-4">
                               <span className="bg-navy rounded-full px-3 py-1 text-sm font-medium text-white">
-                                {article.category}
+                                {Array.isArray(article.category) ? article.category[0] : article.category}
                               </span>
                             </div>
                             {article.featured && (
@@ -256,10 +256,13 @@ export default function NoticiasPage() {
                               {article.title}
                             </h3>
 
-                            {/* Extracto truncado */}
-                            <p className="mb-6 text-justify leading-relaxed text-gray-700">
-                              {truncateText(article.excerpt, 160)}
-                            </p>
+                            {/* Extracto truncado con formato */}
+                            <div 
+                              className="mb-6 text-justify leading-relaxed text-gray-700"
+                              dangerouslySetInnerHTML={{
+                                __html: truncateFormattedText(article.excerpt, 160)
+                              }}
+                            />
 
                             {/* Tags */}
                             {(() => {
