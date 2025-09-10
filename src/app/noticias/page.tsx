@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import NewsModal from '@/components/NewsModal';
+import SubscriptionModal from '@/components/newsletter/SubscriptionModal';
+import NewsShareButton from '@/components/newsletter/NewsShareButton';
+import { useSubscriptionModal } from '@/hooks/useSubscriptionModal';
 import { truncateFormattedText } from '@/utils/textUtils';
 import { normalizeNewsArray, normalizeCategory } from '@/utils/newsNormalizer';
 import Link from 'next/link';
@@ -31,6 +34,9 @@ export default function NoticiasPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedArticle, setSelectedArticle] = useState<NewsItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Hook para manejo del modal de suscripción
+  const subscriptionModal = useSubscriptionModal();
 
   // Cargar noticias desde la API
   useEffect(() => {
@@ -196,7 +202,7 @@ export default function NoticiasPage() {
                 >
                   {news.map(article => (
                     <div key={article.id} className="w-full flex-shrink-0">
-                      <div className="overflow-hidden rounded-2xl bg-white shadow-lg">
+                      <div className="group overflow-hidden rounded-2xl bg-white shadow-lg">
                         <div className="grid gap-0 lg:grid-cols-2">
                           {/* Imagen del artículo */}
                           <div className="relative h-64 lg:h-96">
@@ -289,26 +295,36 @@ export default function NoticiasPage() {
                             })()}
 
                             {/* Botón Ver noticia completa */}
-                            <Button
-                              size="lg"
-                              className="w-full sm:w-auto"
-                              onClick={() => openModal(article)}
-                            >
-                              Ver noticia completa
-                              <svg
-                                className="ml-2 h-5 w-5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                            <div className="flex items-center justify-between">
+                              <Button
+                                size="lg"
+                                className="w-full sm:w-auto"
+                                onClick={() => openModal(article)}
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M9 5l7 7-7 7"
-                                />
-                              </svg>
-                            </Button>
+                                Ver noticia completa
+                                <svg
+                                  className="ml-2 h-5 w-5"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M9 5l7 7-7 7"
+                                  />
+                                </svg>
+                              </Button>
+                              
+                              {/* Botón de Compartir */}
+                              <NewsShareButton
+                                title={article.title}
+                                slug={article.slug}
+                                excerpt={article.excerpt}
+                                className="opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -423,7 +439,68 @@ export default function NoticiasPage() {
               </div>
             </div>
           )}
+        </div><br />
+
+         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative mx-auto max-w-4xl">
+            {/* Contenido */}
+            <div className="relative z-10 rounded-2xl bg-white/10 p-8 text-white backdrop-blur-sm sm:p-12">
+              <div className="text-center">
+
+                {/* Título */}
+                <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
+                  Boletín Informativo
+                </h2>
+
+                {/* Descripción */}
+                <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-gray-600 sm:text-xl">
+                  Recibe las últimas noticias jurídicas, análisis de casos relevantes y 
+                  actualizaciones normativas directamente en tu correo electrónico.
+                </p>
+
+                {/* Botón de Suscripción */}
+                <div className="mb-6">
+                  <Button
+                    size="lg"
+                    className="group bg-white text-navy px-8 py-3 font-semibold transition-all duration-300 hover:bg-blue-50 hover:shadow-lg transform hover:scale-105"
+                    onClick={subscriptionModal.openModal}
+                  >
+                    <svg className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    Suscríbete al Boletín
+                  </Button>
+                </div>
+
+                {/* Información de confianza */}
+                <div className="flex flex-col items-center justify-center space-y-2 text-gray-600 sm:flex-row sm:space-y-0 sm:space-x-2">
+                  <div className="flex items-center space-x-2 text-sm">
+                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Información confiable</span>
+                  </div>
+                  <span className="hidden sm:inline">•</span>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 018.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" />
+                    </svg>
+                    <span>Sin spam</span>
+                  </div>
+                  <span className="hidden sm:inline">•</span>
+                  <div className="flex items-center space-x-2 text-sm">
+                    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                    <span>Cancela cuando quieras</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
       </section>
 
       {/* CTA Section */}
@@ -465,6 +542,12 @@ export default function NoticiasPage() {
           formatDate={formatDate}
         />
       )}
+
+      {/* Modal de Suscripción al Newsletter */}
+      <SubscriptionModal
+        isOpen={subscriptionModal.isOpen}
+        onClose={subscriptionModal.closeModal}
+      />
     </MainLayout>
   );
 }

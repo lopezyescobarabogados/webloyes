@@ -71,3 +71,15 @@ model ContactMessage {
 
   @@map("contact_messages")
 }
+
+// Modelo para suscripciones al boletín
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("newsletter_subscriptions")
+}
