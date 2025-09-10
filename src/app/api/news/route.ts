@@ -26,6 +26,12 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { title, excerpt, content, author, category, tags, published, featured, imageUrl } = body
 
+    // Debug: verificar el tipo de category
+    console.log('Category received:', category, 'Type:', typeof category, 'Is Array:', Array.isArray(category))
+
+    // Asegurar que category sea siempre string
+    const normalizedCategory = Array.isArray(category) ? category[0] : category
+
     // Generar slug único
     let slug = slugify(title, { lower: true, strict: true })
     
@@ -45,7 +51,7 @@ export async function POST(request: NextRequest) {
         excerpt,
         content,
         author,
-        category,
+        category: normalizedCategory,
         tags: JSON.stringify(tags || []),
         published: published || false,
         featured: featured || false,

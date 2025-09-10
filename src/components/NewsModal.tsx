@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { normalizeCategory } from '@/utils/newsNormalizer';
 
 interface NewsModalProps {
   isOpen: boolean;
@@ -55,7 +56,7 @@ export default function NewsModal({
           <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white p-6">
             <div className="flex items-center space-x-4">
               <span className="bg-navy text-white px-3 py-1 rounded-full text-sm font-medium">
-                {Array.isArray(article.category) ? article.category[0] : article.category}
+                {normalizeCategory(article.category)}
               </span>
               <span className="text-gray-500 text-sm">
                 {formatDate(article.createdAt)}

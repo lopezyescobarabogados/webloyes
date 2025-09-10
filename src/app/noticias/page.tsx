@@ -5,6 +5,7 @@ import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import NewsModal from '@/components/NewsModal';
 import { truncateFormattedText } from '@/utils/textUtils';
+import { normalizeNewsArray, normalizeCategory } from '@/utils/newsNormalizer';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -37,9 +38,11 @@ export default function NoticiasPage() {
       try {
         const response = await fetch('/api/news');
         if (response.ok) {
-          const data = await response.json();
-          const publishedNews = data.filter((item: NewsItem) => item.published);
-          setNews(publishedNews);
+          const rawData = await response.json();
+          const publishedNews = rawData.filter((item: NewsItem) => item.published);
+          // Normalizar las noticias para asegurar categorías como strings
+          const normalizedNews = normalizeNewsArray(publishedNews);
+          setNews(normalizedNews);
         }
       } catch (error) {
         console.error('Error loading news:', error);
@@ -228,7 +231,7 @@ export default function NoticiasPage() {
                             {/* Badge de categoría */}
                             <div className="absolute top-4 left-4">
                               <span className="bg-navy rounded-full px-3 py-1 text-sm font-medium text-white">
-                                {Array.isArray(article.category) ? article.category[0] : article.category}
+                                {normalizeCategory(article.category)}
                               </span>
                             </div>
                             {article.featured && (

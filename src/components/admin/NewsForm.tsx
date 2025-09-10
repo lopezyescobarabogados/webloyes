@@ -7,6 +7,7 @@ import { z } from 'zod';
 import Image from 'next/image';
 import { NewsItem } from './NewsManagement';
 import { previewFormattedText, processWhatsAppFormatting } from '@/utils/textFormatting';
+import { normalizeCategory } from '@/utils/newsNormalizer';
 
 // Schema de validación simplificado - solo campos esenciales
 const newsSchema = z.object({
@@ -82,7 +83,7 @@ export default function NewsForm({
       setValue('title', news.title);
       setValue('excerpt', news.excerpt);
       setValue('author', news.author);
-      setValue('category', news.category);
+      setValue('category', normalizeCategory(news.category));
       setValue('imageUrl', news.imageUrl || '');
       setImagePreview(news.imageUrl || '');
     }

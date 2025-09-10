@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NewsTable from './NewsTable';
 import NewsForm from './NewsForm';
+import { normalizeNewsArray } from '@/utils/newsNormalizer';
 
 export interface NewsItem {
   id: string;
@@ -45,8 +46,10 @@ export default function NewsManagement() {
         throw new Error('Error al cargar las noticias');
       }
 
-      const data = await response.json();
-      setNews(data || []);
+      const rawData = await response.json();
+      // Normalizar las noticias para asegurar que category sea siempre string
+      const normalizedData = normalizeNewsArray(rawData || []);
+      setNews(normalizedData);
     } catch (err) {
       console.error('Error loading news:', err);
       setError('Error al cargar las noticias');

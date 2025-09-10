@@ -40,6 +40,12 @@ export async function PUT(
     const body = await request.json()
     const { title, excerpt, content, author, category, tags, published, featured, imageUrl } = body
 
+    // Debug: verificar el tipo de category
+    console.log('Category received for update:', category, 'Type:', typeof category, 'Is Array:', Array.isArray(category))
+
+    // Asegurar que category sea siempre string
+    const normalizedCategory = Array.isArray(category) ? category[0] : category
+
     // Verificar si la noticia existe
     const existingNews = await prisma.news.findUnique({
       where: { id }
@@ -75,7 +81,7 @@ export async function PUT(
         excerpt,
         content,
         author,
-        category,
+        category: normalizedCategory,
         tags: JSON.stringify(tags || []),
         published: published || false,
         featured: featured || false,

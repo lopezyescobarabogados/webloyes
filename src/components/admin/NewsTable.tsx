@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { NewsItem } from './NewsManagement';
+import { normalizeCategory } from '@/utils/newsNormalizer';
 
 interface NewsTableProps {
   news: NewsItem[];
@@ -121,7 +122,7 @@ export default function NewsTable({ news, onEdit, onDelete }: NewsTableProps) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                    {Array.isArray(item.category) ? item.category[0] : item.category}
+                    {normalizeCategory(item.category)}
                   </span>
                 </td>
                 <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
