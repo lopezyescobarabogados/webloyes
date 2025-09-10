@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   robots: 'index, follow',
 };
 
+const horarios = {
+  "lunes_viernes": {
+    "inicio": "07:30",
+    "almuerzo": "12:00 - 13:00",
+    "fin": "17:30"
+  },
+  "sabado": "cerrado",
+  "domingo_festivo": "cerrado"
+};
+
 export default function CookiesPage() {
   return (
     <MainLayout>
@@ -15,195 +25,152 @@ export default function CookiesPage() {
           <div className="mx-auto max-w-4xl">
             <div className="mb-12 text-center">
               <h1 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl lg:text-5xl">
-                Política de Cookies
+                POLÍTICA DE COOKIES
               </h1>
               <p className="text-lg text-gray-600 sm:text-xl">
-                Información sobre el uso de cookies en nuestro sitio web
+                INFORMACIÓN SOBRE EL USO DE COOKIES EN NUESTRO SITIO WEB
               </p>
+              <div className="mt-4">
+                <p className="text-gray-700 font-medium">López & Escobar Abogados Asociados S.A.S.</p>
+                <p className="text-gray-600">Nit 901.850.566-8</p>
+              </div>
             </div>
 
             <div className="space-y-8 rounded-2xl bg-white p-8 shadow-lg">
               <section>
                 <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  ¿Qué son las Cookies?
+                  I. ¿QUÉ SON LAS COOKIES?
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  Las cookies son pequeños archivos de texto que se almacenan en su 
-                  dispositivo cuando visita un sitio web. Conforme a la Circular Externa 
-                  002 de 2015 de la Superintendencia de Industria y Comercio (SIC), 
-                  informamos sobre su uso para garantizar la transparencia en el 
-                  tratamiento de datos personales.
+                  Las cookies son pequeños archivos de texto que se instalan en el dispositivo del usuario al acceder a un sitio web. Permiten reconocer al usuario, recordar sus preferencias y mejorar su experiencia de navegación.
                 </p>
                 <p className="mb-4 text-gray-700">
-                  En López & Escobar Abogados utilizamos cookies para mejorar la 
-                  funcionalidad de nuestro sitio web y proporcionar una mejor experiencia 
-                  a nuestros usuarios en la búsqueda de servicios jurídicos especializados.
+                  En cumplimiento de la Ley 1581 de 2012, el Decreto 1377 de 2013, la Circular Externa 002 de 2015 de la Superintendencia de Industria y Comercio (SIC) y la Ley 1480 de 2011 – Estatuto del Consumidor, informamos sobre el uso de cookies en nuestro sitio web con el fin de garantizar la transparencia en el tratamiento de datos personales y brindar a los usuarios control sobre su información.
+                </p>
+                <p className="mb-4 text-gray-700">
+                  En López & Escobar Abogados utilizamos cookies con fines legítimos, principalmente para optimizar la funcionalidad del sitio, facilitar la navegación y ofrecer una experiencia digital segura y personalizada a quienes consultan nuestros servicios jurídicos especializados.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  ¿Cómo Utilizamos las Cookies?
+                  II. ¿QUÉ TIPO DE COOKIES UTILIZA ESTA PÁGINA WEB?
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  En López & Escobar Abogados utilizamos cookies para mejorar su experiencia 
-                  como usuario y optimizar nuestros servicios jurídicos digitales:
+                  En López & Escobar Abogados utilizamos las siguientes cookies para mejorar su experiencia como usuario y optimizar nuestros servicios jurídicos digitales:
+                </p>
+                <ul className="mb-4 space-y-3 text-gray-700">
+                  <li>- <strong>Cookies de Funcionalidad:</strong> Permiten recordar configuraciones del usuario, como idioma, formato de visualización y preferencias de acceso, con el fin de facilitar una navegación más ágil.</li>
+                  
+                  <li>- <strong>Cookies de análisis de uso:</strong> Son aquéllas que bien tratadas por nosotros o por terceros, nos permiten cuantificar el número de usuarios y así realizar la medición y análisis estadístico de la utilización que hacen los usuarios del servicio ofertado. Para ello se analiza su navegación en nuestra página web con el fin de mejorar la oferta de servicios que ofrecemos.</li>
+
+                  <li>- <strong>Cookies de Personalización:</strong> Facilitan la adaptación de contenidos y recursos jurídicos a los intereses del usuario, ofreciendo una experiencia más acorde con sus necesidades.</li>
+
+                  <li>- <strong>Cookies de Seguridad:</strong> Se emplean para proteger la confidencialidad de las consultas y garantizar que las interacciones dentro del sitio web se desarrollen en un entorno seguro.</li>
+
+                  <li>- <strong>Formularios de contacto:</strong> Facilitar el envío de consultas jurídicas y contacto.</li>
+
+                  <li>- <strong>Cookies de Rendimiento:</strong> Nos ayudan a comprender cómo interactúan los usuarios con nuestro sitio, recopilando información sobre páginas visitadas, tiempo de permanencia y posibles errores de navegación. Esto permite mejorar la calidad y eficacia de nuestros servicios jurídicos digitales.</li>
+
+                  <li>- <strong>Cookies Estrictamente Necesarias.</strong> Son esenciales para el funcionamiento básico del sitio web y no pueden desactivarse. Permiten, entre otros, la navegación, la seguridad y el acceso a áreas restringidas del portal.</li>
+
+                  <li>- <strong>Cookies de Terceros:</strong> Nuestro sitio web puede utilizar servicios de terceros que establecen sus propias cookies, como:
+                    <ul className="mt-2 ml-4 space-y-1">
+                      <li>✓ Google Analytics: Análisis del tráfico web</li>
+                      <li>✓ Google Fonts: Optimización en la carga de fuentes web</li>
+                      <li>✓ Otros servicios de análisis y funcionalidad: Algunas cookies son esenciales para el funcionamiento del sitio, por ejemplo, el buscador incorporado o herramientas digitales asociadas al portal.</li>
+                    </ul>
+                  </li>
+                </ul>
+              </section>
+
+              <section>
+                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
+                  III. DERECHOS DEL USUARIO Y CONTROL DE COOKIES
+                </h2>
+                <p className="mb-4 text-gray-700">
+                  Conforme a la Ley 1581 de 2012 y las directrices de la SIC, el usuario cuenta con los siguientes derechos frente al uso de cookies:
                 </p>
                 <ul className="mb-4 space-y-2 text-gray-700">
-                  <li>• <strong>Funcionalidad del sitio:</strong> Mejorar la navegación y acceso a información jurídica</li>
-                  <li>• <strong>Análisis de uso:</strong> Entender qué servicios legales son más consultados</li>
-                  <li>• <strong>Personalización:</strong> Adaptar el contenido jurídico a sus intereses</li>
-                  <li>• <strong>Preferencias del usuario:</strong> Recordar configuraciones de idioma y formato</li>
-                  <li>• <strong>Seguridad:</strong> Proteger la confidencialidad de las consultas</li>
-                  <li>• <strong>Formularios de contacto:</strong> Facilitar el envío de consultas jurídicas</li>
+                  <li>- Derecho a ser informado sobre el uso de cookies.</li>
+                  <li>- Derecho de acceso, para conocer qué cookies están activas en su dispositivo.</li>
+                  <li>- Derecho de rectificación, para modificar configuraciones.</li>
+                  <li>- Derecho de supresión, para eliminar cookies instaladas.</li>
+                  <li>- Derecho de oposición, para rechazar cookies no esenciales.</li>
                 </ul>
-                <div className="p-4 bg-amber-50 rounded-lg mt-4">
-                  <p className="text-amber-800">
-                    <strong>Nota importante:</strong> Las cookies no almacenan información 
-                    confidencial sobre casos jurídicos ni datos sensibles de consultas legales.
+                <p className="mb-4 text-gray-700">
+                  El usuario podrá configurar su navegador para permitir, bloquear o eliminar cookies según sus preferencias. Es importante señalar que, si se bloquean todas las cookies, es posible que ciertas funcionalidades del sitio no se encuentren disponibles o que la experiencia de navegación se vea limitada.
+                </p>
+              </section>
+
+              <section>
+                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
+                  IV. GUÍAS RÁPIDAS DE CONFIGURACIÓN
+                </h2>
+                <p className="mb-4 text-gray-700">
+                  El Usuario puede permitir, bloquear o eliminar las cookies instaladas en su equipo mediante la configuración de las opciones del navegador instalado en su ordenador.
+                </p>
+                <p className="mb-4 text-gray-700">
+                  En la mayoría de los navegadores web se ofrece la posibilidad de permitir, bloquear o eliminar las cookies instaladas en su equipo.
+                </p>
+                <ul className="mb-4 space-y-2 text-gray-700">
+                  <li>- Configurar su navegador para evitar nuevas cookies</li>
+                  <li>- Modificar la configuración para cookies específicas</li>
+                  <li>- Contactarnos para ejercer sus derechos</li>
+                </ul>
+                <p className="mb-4 text-gray-700">
+                  El Usuario puede eliminar y bloquear todas las cookies de este sitio, pero parte del sitio no funcionará o la calidad de la página web y de los Contenidos pueden verse afectados.
+                </p>
+
+                <div className="mt-6">
+                  <h3 className="text-navy mb-3 font-semibold text-lg">
+                    IV.1. Configuración del Navegador
+                  </h3>
+                  <p className="mb-3 text-gray-700">
+                    Para obtener información sobre cómo controlar las cookies en los navegadores más populares, visite:
                   </p>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Tipos de Cookies que Utilizamos
-                </h2>
-                
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="mb-2 font-semibold text-gray-900">
-                      Cookies Estrictamente Necesarias
-                    </h3>
-                    <p className="text-gray-700">
-                      Estas cookies son esenciales para el funcionamiento del sitio web 
-                      y no se pueden desactivar. Incluyen cookies de seguridad y 
-                      funcionalidad básica.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="mb-2 font-semibold text-gray-900">
-                      Cookies de Rendimiento
-                    </h3>
-                    <p className="text-gray-700">
-                      Nos ayudan a entender cómo los visitantes interactúan con nuestro 
-                      sitio web, proporcionando información sobre las páginas visitadas, 
-                      el tiempo de permanencia y cualquier mensaje de error.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="mb-2 font-semibold text-gray-900">
-                      Cookies de Funcionalidad
-                    </h3>
-                    <p className="text-gray-700">
-                      Permiten que el sitio web recuerde las elecciones que hace (como 
-                      su idioma preferido) y proporcionan características mejoradas y 
-                      más personales.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Cookies de Terceros
-                </h2>
-                <p className="mb-4 text-gray-700">
-                  Nuestro sitio web puede utilizar servicios de terceros que establecen 
-                  sus propias cookies, como:
-                </p>
-                <ul className="mb-4 space-y-2 text-gray-700">
-                  <li>• Google Analytics: para análisis del tráfico web</li>
-                  <li>• Google Fonts: para la carga de fuentes web</li>
-                  <li>• Otros servicios de análisis y funcionalidad</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Control de Cookies y Derechos del Usuario
-                </h2>
-                <p className="mb-4 text-gray-700">
-                  Conforme a la Ley 1581 de 2012 y las directrices de la SIC, usted puede 
-                  controlar y/o eliminar las cookies como desee:
-                </p>
-                <ul className="mb-4 space-y-2 text-gray-700">
-                  <li>• <strong>Derecho al conocimiento:</strong> Ser informado sobre el uso de cookies</li>
-                  <li>• <strong>Derecho de acceso:</strong> Conocer qué cookies están activas</li>
-                  <li>• <strong>Derecho de rectificación:</strong> Modificar configuraciones de cookies</li>
-                  <li>• <strong>Derecho de supresión:</strong> Eliminar cookies de su dispositivo</li>
-                  <li>• <strong>Derecho de oposición:</strong> Rechazar cookies no esenciales</li>
-                </ul>
-                <div className="p-4 bg-blue-50 rounded-lg mt-4">
-                  <h4 className="font-semibold text-gray-900 mb-2">Opciones de Control</h4>
-                  <ul className="space-y-1 text-gray-700">
-                    <li>• Eliminar todas las cookies existentes en su dispositivo</li>
-                    <li>• Configurar su navegador para evitar nuevas cookies</li>
-                    <li>• Modificar la configuración para cookies específicas</li>
-                    <li>• Contactarnos para ejercer sus derechos</li>
+                  <ul className="space-y-2 text-gray-700">
+                    <li>✓ Chrome: Configuración → Privacidad y seguridad → Cookies</li>
+                    <li>✓ Firefox: Preferencias → Privacidad y seguridad</li>
+                    <li>✓ Safari: Preferencias → Privacidad</li>
+                    <li>✓ Microsoft Edge: Configuración → Privacidad, búsqueda y servicios</li>
                   </ul>
                 </div>
-                <p className="mb-4 text-gray-700 mt-4">
-                  <strong>Importante:</strong> Deshabilitar ciertas cookies puede afectar 
-                  la funcionalidad del sitio web.
-                </p>
               </section>
 
               <section>
                 <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Configuración del Navegador
+                  V. MARCO NORMATIVO
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  Para obtener información sobre cómo controlar las cookies en los 
-                  navegadores más populares, visite:
+                  Nuestra política de cookies se fundamenta en la normatividad colombiana vigente:
                 </p>
                 <ul className="mb-4 space-y-2 text-gray-700">
-                  <li>• <strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies</li>
-                  <li>• <strong>Firefox:</strong> Preferencias → Privacidad y seguridad</li>
-                  <li>• <strong>Safari:</strong> Preferencias → Privacidad</li>
-                  <li>• <strong>Edge:</strong> Configuración → Privacidad, búsqueda y servicios</li>
-                </ul>
-              </section>
-
-              <section>
-                <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Marco Normativo y Actualizaciones
-                </h2>
-                <p className="mb-4 text-gray-700">
-                  Esta política de cookies se fundamenta en la normatividad colombiana vigente:
-                </p>
-                <ul className="mb-4 space-y-2 text-gray-700">
-                  <li>• <strong>Ley 1581 de 2012:</strong> Protección de datos personales</li>
-                  <li>• <strong>Decreto 1377 de 2013:</strong> Reglamentario de la Ley 1581</li>
-                  <li>• <strong>Circular Externa 002 de 2015:</strong> SIC sobre cookies y tecnologías similares</li>
-                  <li>• <strong>Ley 1480 de 2011:</strong> Estatuto del Consumidor</li>
+                  <li>- Ley 1581 de 2012: Protección de datos personales</li>
+                  <li>- Decreto 1377 de 2013: Reglamentario de la Ley 1581</li>
+                  <li>- Circular Externa 002 de 2015: Superintendencia de Industria y Comercio</li>
+                  <li>- Ley 1480 de 2011: Estatuto del Consumidor</li>
                 </ul>
                 <p className="mb-4 text-gray-700">
-                  Podemos actualizar esta política de cookies ocasionalmente para cumplir 
-                  con cambios normativos de la Superintendencia de Industria y Comercio (SIC) 
-                  o mejoras en nuestros servicios digitales. Se informará sobre cambios 
-                  sustanciales conforme a la legislación vigente.
+                  Nos reservamos el derecho de actualizar esta política en caso de cambios regulatorios o tecnológicos. Cualquier modificación sustancial será comunicada oportunamente, en cumplimiento de la normatividad vigente.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-navy mb-4 font-serif text-2xl font-bold">
-                  Información de Contacto
+                  VI. INFORMACIÓN DE CONTACTO
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  Si tiene preguntas sobre nuestra política de cookies, puede contactarnos:
+                  Para ejercer sus derechos relacionados con el uso de cookies o resolver inquietudes sobre esta política, puede contactarnos en:
                 </p>
                 
                 <div className="grid md:grid-cols-2 gap-6 mt-6">
                   <div>
                     <h4 className="font-semibold text-gray-900 mb-2">Oficina Principal</h4>
                     <div className="text-gray-700 space-y-1">
-                      <p>Calle 6 Norte No.17-33</p>
-                      <p>Zona Los Profesionales</p>
-                      <p>Armenia, Quindío - Colombia</p>
-                      <p className="text-sm text-gray-600 mt-2">Visitas con cita previa</p>
+                      <p>Calle 6 Norte No.17-33 - Zona Los Profesionales</p>
+                      <p>Armenia, Quindío – Colombia</p>
+                      <p className="text-sm text-gray-600 mt-2">(cita previa)</p>
                     </div>
                   </div>
                   
@@ -212,34 +179,26 @@ export default function CookiesPage() {
                     <div className="text-gray-700 space-y-2">
                       <div>
                         <p><strong>Teléfonos:</strong></p>
-                        <p>300 4308692</p>
-                        <p>311 3835833</p>
+                        <p>300 4308692 – 311 3835833</p>
                       </div>
                       <div>
-                        <p><strong>Emails:</strong></p>
+                        <p><strong>Correos:</strong></p>
                         <p>mescobarm@lopezyescobarabogados.com</p>
                         <p>blopez@lopezyescobarabogados.com</p>
-                        <p className="text-sm text-gray-600">Respuesta en menos de 24h</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <h4 className="font-semibold text-gray-900 mb-2">Horarios de Atención</h4>
+                  <h4 className="font-semibold text-gray-900 mb-2">Horarios</h4>
                   <div className="text-gray-700">
-                    <p><strong>Lunes - Viernes:</strong> 7:30 - 17:30</p>
-                    <p><strong>Sábados:</strong> Cerrado</p>
-                    <p><strong>Domingos:</strong> Cerrado</p>
+                    <p><strong>Lunes a viernes:</strong> {horarios.lunes_viernes.inicio} a.m. – {horarios.lunes_viernes.fin} p.m.</p>
+                    <p><strong>Almuerzo:</strong> {horarios.lunes_viernes.almuerzo}</p>
+                    <p><strong>Sábados, domingos y festivos:</strong> cerrado</p>
                   </div>
                 </div>
               </section>
-
-              <div className="mt-8 border-t pt-8">
-                <p className="text-center text-sm text-gray-500">
-                  Última actualización: {new Date().toLocaleDateString('es-ES')}
-                </p>
-              </div>
             </div>
           </div>
         </div>
