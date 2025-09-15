@@ -19,7 +19,6 @@
     "build": "next build",
     "start": "next start",
     "start:railway": "next start -p ${PORT:-3000}",
-    "deploy": "prisma migrate deploy && prisma generate && next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
@@ -29,7 +28,8 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "railway:build": "echo '🚂 Railway Build Started' && prisma generate && echo '✅ Prisma client generated' && prisma migrate deploy && echo '✅ Migrations applied' && next build && echo '✅ Next.js build completed'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
@@ -63,6 +63,7 @@
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
+    "sharp": "^0.34.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

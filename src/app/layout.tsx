@@ -39,10 +39,14 @@ export default function RootLayout({
     <html lang="es" className="font-sans">
       <head>
         <PreloadResources />
+        <link rel="icon" href="/icons/icon-48.png" sizes="48x48" type="image/png" />
         <link rel="icon" href="/Logo2.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0a2342" />
+        <meta name="msapplication-TileColor" content="#0a2342" />
+        <meta name="msapplication-TileImage" content="/icons/icon-256.png" />
       </head>
       <body className="font-sans antialiased">
         <main id="main-content">

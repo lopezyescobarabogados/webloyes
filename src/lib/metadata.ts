@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'López y Escobar Abogados Asociados',
   description: 'Firma de abogados especializada en derecho corporativo, civil, penal y administrativo. Experiencia, profesionalismo y resultados efectivos.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com',
-  ogImage: '/images/og-image.jpg',
+  ogImage: '/icons/icon-512.png',
   icon: '/Logo2.svg',
   links: {
     twitter: 'https://twitter.com/lopezescobarabogados',
@@ -88,10 +88,11 @@ export const defaultMetadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/icons/icon-48.png', sizes: '48x48', type: 'image/png' },
       { url: '/Logo2.svg', type: 'image/svg+xml' },
       { url: '/favicon.ico', sizes: 'any' }
     ],
-    apple: '/apple-touch-icon.png',
+    apple: '/icons/icon-192.png',
   },
 };
 
