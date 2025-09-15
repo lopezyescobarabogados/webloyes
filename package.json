@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
+    "start": "echo '🚀 Starting app...' && prisma migrate deploy && echo '✅ Migrations applied' && next start",
     "start:railway": "next start -p ${PORT:-3000}",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -29,7 +29,7 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
     "db:studio": "prisma studio",
-    "railway:build": "echo '🚂 Railway Build Started' && prisma generate && echo '✅ Prisma client generated' && prisma migrate deploy && echo '✅ Migrations applied' && next build && echo '✅ Next.js build completed'"
+    "railway:build": "echo '🚂 Railway Build Started' && prisma generate && echo '✅ Prisma client generated' && next build && echo '✅ Next.js build completed'"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
