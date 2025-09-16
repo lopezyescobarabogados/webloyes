@@ -10,7 +10,7 @@ import { useSubscriptionModal } from '@/hooks/useSubscriptionModal';
 import { truncateFormattedText } from '@/utils/textUtils';
 import { normalizeNewsArray, normalizeCategory } from '@/utils/newsNormalizer';
 import Link from 'next/link';
-import Image from 'next/image';
+import SmartNewsImage from '@/components/news/SmartNewsImage';
 
 interface NewsItem {
   id: string;
@@ -207,11 +207,11 @@ export default function NoticiasPage() {
                           {/* Imagen del artículo */}
                           <div className="relative h-64 lg:h-96">
                             {article.imageUrl ? (
-                              <Image
-                                src={article.imageUrl}
-                                alt={article.title}
-                                fill
+                              <SmartNewsImage
+                                news={article}
+                                fill={true}
                                 className="object-cover"
+                                priority={currentIndex === 0} // Prioridad para primera imagen
                               />
                             ) : (
                               <div className="from-navy flex h-full w-full items-center justify-center bg-gradient-to-br to-blue-700 text-white">

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import SmartNewsImage from '@/components/news/SmartNewsImage';
 import { NewsItem } from './NewsManagement';
 import { normalizeCategory } from '@/utils/newsNormalizer';
 
@@ -83,16 +83,10 @@ export default function NewsTable({ news, onEdit, onDelete }: NewsTableProps) {
                   <div className="flex items-center">
                     <div className="h-12 w-12 flex-shrink-0">
                       {item.imageUrl ? (
-                        <Image
+                        <SmartNewsImage
+                          news={item}
+                          size="sm"
                           className="h-12 w-12 rounded-lg object-cover"
-                          src={item.imageUrl}
-                          alt={item.title}
-                          width={48}
-                          height={48}
-                          onError={e => {
-                            (e.target as HTMLImageElement).src =
-                              '/images/placeholder.jpg';
-                          }}
                         />
                       ) : (
                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-200">

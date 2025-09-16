@@ -33,6 +33,7 @@
     "migrate:images:dry": "DRY_RUN=true node scripts/migrate-images-to-postgresql.js",
     "migrate:images:verbose": "VERBOSE=true node scripts/migrate-images-to-postgresql.js",
     "migrate:verify": "node scripts/verify-migration.js",
+    "diagnose:images": "node scripts/diagnose-image-issues.js",
     "railway:build": "echo '🚂 Railway Build Started' && prisma generate && echo '✅ Prisma client generated' && next build && echo '✅ Next.js build completed'"
   },
   "dependencies": {
