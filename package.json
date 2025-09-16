@@ -29,6 +29,10 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate deploy",
     "db:studio": "prisma studio",
+    "migrate:images": "node scripts/migrate-images-to-postgresql.js",
+    "migrate:images:dry": "DRY_RUN=true node scripts/migrate-images-to-postgresql.js",
+    "migrate:images:verbose": "VERBOSE=true node scripts/migrate-images-to-postgresql.js",
+    "migrate:verify": "node scripts/verify-migration.js",
     "railway:build": "echo '🚂 Railway Build Started' && prisma generate && echo '✅ Prisma client generated' && next build && echo '✅ Next.js build completed'"
   },
   "dependencies": {
