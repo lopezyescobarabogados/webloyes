@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import SmartNewsImage from '@/components/news/SmartNewsImage';
 import { useNewsUpload, validateNewsForm, type NewsFormData } from '@/utils/news-upload';
 
 interface NewsEditFormProps {
@@ -233,14 +234,22 @@ export function NewsEditForm({ newsId, initialData, onSuccess, onCancel }: NewsE
         {displayImageUrl && !formData.removeImage && (
           <div className="mb-4">
             <div className="relative inline-block">
-              <Image
-                src={displayImageUrl}
-                alt="Imagen actual"
-                width={300}
-                height={200}
-                className="object-cover rounded-lg border"
-                unoptimized={displayImageUrl.startsWith('/api/images/')}
-              />
+              {displayImageUrl.startsWith('/api/images/') ? (
+                <SmartNewsImage
+                  news={{ id: newsId, title: formData.title || 'Vista previa', imageUrl: displayImageUrl }}
+                  size="md"
+                  className="rounded-lg border"
+                />
+              ) : (
+                <Image
+                  src={displayImageUrl}
+                  alt="Imagen actual"
+                  width={300}
+                  height={200}
+                  className="object-cover rounded-lg border"
+                  unoptimized={displayImageUrl.startsWith('/api/images/')}
+                />
+              )}
               <button
                 type="button"
                 onClick={handleRemoveImage}

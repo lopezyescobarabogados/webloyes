@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
+import SmartNewsImage from '@/components/news/SmartNewsImage';
 import { normalizeCategory } from '@/utils/newsNormalizer';
 
 interface NewsModalProps {
@@ -81,10 +81,10 @@ export default function NewsModal({
             {/* Imagen */}
             {article.imageUrl && (
               <div className="relative mb-6 h-64 lg:h-96 rounded-xl overflow-hidden">
-                <Image
-                  src={article.imageUrl}
-                  alt={article.title}
-                  fill
+                <SmartNewsImage
+                  news={article}
+                  fill={true}
+                  priority={true}
                   className="object-cover"
                 />
               </div>

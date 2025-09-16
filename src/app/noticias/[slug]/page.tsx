@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import Image from 'next/image';
+import SmartNewsImage from '@/components/news/SmartNewsImage';
 
 interface NewsItem {
   id: string;
@@ -219,15 +219,11 @@ export default function NoticiaPage({ params }: Props) {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
               <div className="relative h-64 overflow-hidden rounded-2xl shadow-lg sm:h-80 md:h-96">
-                <Image
-                  src={article.imageUrl}
-                  alt={article.title}
-                  fill
+                <SmartNewsImage
+                  news={article}
+                  fill={true}
+                  priority={true}
                   className="object-cover"
-                  priority
-                  onError={e => {
-                    e.currentTarget.style.display = 'none';
-                  }}
                 />
               </div>
             </div>
