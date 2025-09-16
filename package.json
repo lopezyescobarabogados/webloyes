@@ -15,14 +15,17 @@
   "author": "López y Escobar Abogados Asociados",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
+    "railway:build": "npm run build",
     "start": "next start",
     "lint": "next lint",
-    "migrate:images": "node scripts/migrate-images-to-postgresql.js",
-    "migrate:images:dry": "node scripts/migrate-images-to-postgresql.js --dry-run",
-    "diagnose:images": "node scripts/diagnose-image-issues.js",
-    "test:image-endpoint": "node scripts/test-image-endpoint.js"
+    "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio",
+    "seed": "npx prisma db seed",
+    "fix:images": "node scripts/fixImages.js",
+    "fix:images:dry": "node scripts/fixImages.js --dry-run"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

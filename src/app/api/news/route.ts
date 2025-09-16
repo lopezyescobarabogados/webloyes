@@ -65,21 +65,51 @@ export async function GET() {
   }
 }
 
-// POST - Crear nueva noticia con FormData e imagen binaria
+// POST - Crear nueva noticia con FormData e imagen binaria O JSON
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData();
+    const contentType = request.headers.get('content-type') || '';
     
-    // Extraer campos del FormData
-    const title = sanitizeString(formData.get('title') as string || '');
-    const content = sanitizeString(formData.get('content') as string || '');
-    const excerpt = sanitizeString(formData.get('excerpt') as string || content.substring(0, 200));
-    const author = sanitizeString(formData.get('author') as string || '');
-    const category = sanitizeString(formData.get('category') as string || '');
-    const tags = processTags(formData.get('tags'));
-    const published = formData.get('published') === 'true';
-    const featured = formData.get('featured') === 'true';
-    const imageFile = formData.get('image') as File | null;
+    let title: string, content: string, excerpt: string, author: string, category: string;
+    let tags: string[], published: boolean, featured: boolean;
+    let imageFile: File | null = null;
+
+    // Detectar si es FormData o JSON
+    if (contentType.includes('multipart/form-data')) {
+      // Manejo de FormData (con imagen)
+      const formData = await request.formData();
+      
+      title = sanitizeString(formData.get('title') as string || '');
+      content = sanitizeString(formData.get('content') as string || '');
+      excerpt = sanitizeString(formData.get('excerpt') as string || content.substring(0, 200));
+      author = sanitizeString(formData.get('author') as string || '');
+      category = sanitizeString(formData.get('category') as string || '');
+      tags = processTags(formData.get('tags'));
+      published = formData.get('published') === 'true';
+      featured = formData.get('featured') === 'true';
+      imageFile = formData.get('image') as File | null;
+    } else {
+      // Manejo de JSON (sin imagen)
+      const body = await request.json();
+      
+      title = sanitizeString(body.title || '');
+      content = sanitizeString(body.content || '');
+      excerpt = sanitizeString(body.excerpt || content.substring(0, 200));
+      author = sanitizeString(body.author || '');
+      category = sanitizeString(body.category || '');
+      tags = Array.isArray(body.tags) ? body.tags : [];
+      published = Boolean(body.published);
+      featured = Boolean(body.featured);
+      
+      // Procesar tags si viene como string JSON
+      if (typeof body.tags === 'string') {
+        try {
+          tags = JSON.parse(body.tags);
+        } catch {
+          tags = [];
+        }
+      }
+    }
 
     // Validar campos requeridos
     const errors = validateRequiredFields({ title, content, author, category });

@@ -223,13 +223,35 @@ export default function NewsForm({
         : `/api/news/${news?.id}`;
       const method = isCreating ? 'POST' : 'PUT';
 
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newsData),
-      });
+      let response;
+
+      // Si hay archivo seleccionado, usar FormData para el endpoint /api/news
+      if (selectedFile) {
+        const formData = new FormData();
+        formData.append('title', newsData.title);
+        formData.append('content', newsData.content);
+        formData.append('excerpt', newsData.excerpt);
+        formData.append('author', newsData.author);
+        formData.append('category', newsData.category);
+        formData.append('tags', newsData.tags);
+        formData.append('published', String(newsData.published));
+        formData.append('featured', String(newsData.featured));
+        formData.append('image', selectedFile);
+
+        response = await fetch(url, {
+          method,
+          body: formData, // Sin Content-Type para FormData
+        });
+      } else {
+        // Sin archivo, usar JSON como antes
+        response = await fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newsData),
+        });
+      }
 
       if (!response.ok) {
         throw new Error('Error al guardar la noticia');
