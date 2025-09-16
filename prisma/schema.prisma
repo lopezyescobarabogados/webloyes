@@ -26,7 +26,9 @@ model News {
   tags        String   // JSON string for tags
   published   Boolean  @default(false)
   featured    Boolean  @default(false)
-  imageUrl    String?
+  imageUrl    String?  // Mantener para compatibilidad y URLs externas
+  imageData   Bytes?   // Datos binarios de la imagen en PostgreSQL
+  imageType   String?  // MIME type de la imagen (image/jpeg, image/png, etc.)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
