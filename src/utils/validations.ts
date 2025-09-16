@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { validateImageUrl } from './image-validation';
 
 // Esquemas de validación para formularios
 
@@ -137,9 +138,14 @@ export const newsItemSchema = z.object({
     .optional(),
   imageUrl: z
     .string()
-    .url('Debe ser una URL válida')
-    .or(z.string().regex(/^\//, 'Debe ser una ruta válida que inicie con /'))
-    .optional(),
+    .optional()
+    .refine((url) => {
+      if (!url || url.trim() === '') return true; // URL opcional
+      const validation = validateImageUrl(url);
+      return validation.isValid;
+    }, {
+      message: 'URL de imagen inválida. Debe ser HTTP/HTTPS válida o data URL de imagen válida'
+    }),
   tags: z
     .array(z.string().min(1).max(50))
     .min(1, 'Debe tener al menos una etiqueta')
@@ -149,6 +155,33 @@ export const newsItemSchema = z.object({
     .min(1, 'La categoría es requerida')
     .max(50, 'La categoría no puede exceder 50 caracteres'),
   featured: z.boolean(),
+});
+
+// Esquema simplificado para formulario de noticias (campos esenciales)
+export const newsSchema = z.object({
+  title: z
+    .string()
+    .min(5, 'El título debe tener al menos 5 caracteres')
+    .max(200, 'El título no puede superar 200 caracteres'),
+  excerpt: z
+    .string()
+    .min(20, 'El resumen debe tener al menos 20 caracteres')
+    .max(10000, 'El resumen no puede superar 10,000 caracteres'),
+  author: z
+    .string()
+    .min(2, 'El autor debe tener al menos 2 caracteres')
+    .max(100, 'El autor no puede superar 100 caracteres'),
+  category: z.string().min(2, 'La categoría es requerida'),
+  imageUrl: z
+    .string()
+    .optional()
+    .refine((url) => {
+      if (!url || url.trim() === '') return true; // URL opcional
+      const validation = validateImageUrl(url);
+      return validation.isValid;
+    }, {
+      message: 'URL de imagen inválida. Debe ser HTTP/HTTPS válida o data URL de imagen válida'
+    })
 });
 
 // Funciones de validación adicionales
@@ -201,3 +234,4 @@ export type CommentData = z.infer<typeof commentSchema>;
 export type AdminAuthData = z.infer<typeof adminAuthSchema>;
 export type TeamMemberData = z.infer<typeof teamMemberSchema>;
 export type NewsItemData = z.infer<typeof newsItemSchema>;
+export type NewsData = z.infer<typeof newsSchema>;
