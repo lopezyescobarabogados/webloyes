@@ -19,16 +19,24 @@ export function useNewsImage(news: NewsImageData) {
   const [hasValidImage, setHasValidImage] = useState(false);
 
   useEffect(() => {
-    if (!news.imageUrl) {
-      setImageUrl(null);
-      setHasValidImage(false);
+    // Si tenemos una imageUrl válida, usarla directamente
+    if (news.imageUrl && news.imageUrl.trim().length > 0) {
+      setImageUrl(news.imageUrl);
+      setHasValidImage(true);
       return;
     }
 
-    // Usar directamente la URL sin verificación previa
-    // El componente ApiImage maneja los errores internamente
-    setImageUrl(news.imageUrl);
-    setHasValidImage(true);
+    // Si no hay imageUrl pero tenemos un ID, usar el endpoint de imagen
+    if (news.id) {
+      const fallbackUrl = `/api/images/${news.id}`;
+      setImageUrl(fallbackUrl);
+      setHasValidImage(true);
+      return;
+    }
+
+    // Si no hay nada, establecer como sin imagen
+    setImageUrl(null);
+    setHasValidImage(false);
   }, [news.imageUrl, news.id]);
 
   return {
