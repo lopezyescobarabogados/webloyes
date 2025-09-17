@@ -16,49 +16,24 @@ interface NewsImageData {
  */
 export function useNewsImage(news: NewsImageData) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [hasValidImage, setHasValidImage] = useState(false);
 
   useEffect(() => {
-    const checkImage = async () => {
-      if (!news.imageUrl) {
-        setImageUrl(null);
-        setHasValidImage(false);
-        return;
-      }
+    if (!news.imageUrl) {
+      setImageUrl(null);
+      setHasValidImage(false);
+      return;
+    }
 
-      // Si es una URL de API local, verificar que existe
-      if (news.imageUrl.startsWith('/api/images/')) {
-        setIsLoading(true);
-        try {
-          const response = await fetch(news.imageUrl, { method: 'HEAD' });
-          if (response.ok) {
-            setImageUrl(news.imageUrl);
-            setHasValidImage(true);
-          } else {
-            setImageUrl(null);
-            setHasValidImage(false);
-          }
-        } catch {
-          setImageUrl(null);
-          setHasValidImage(false);
-        } finally {
-          setIsLoading(false);
-        }
-      } else {
-        // URL externa, asumir que es válida
-        setImageUrl(news.imageUrl);
-        setHasValidImage(true);
-      }
-    };
-
-    checkImage();
+    // Usar directamente la URL sin verificación previa
+    // El componente ApiImage maneja los errores internamente
+    setImageUrl(news.imageUrl);
+    setHasValidImage(true);
   }, [news.imageUrl, news.id]);
 
   return {
     imageUrl,
     hasValidImage,
-    isLoading,
     // URL por defecto usando el ID de la noticia
     fallbackUrl: `/api/images/${news.id}`,
   };
