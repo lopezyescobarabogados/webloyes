@@ -349,36 +349,72 @@ export default function NoticiaPage({ params }: Props) {
                 {relatedNews.map(relatedArticle => (
                   <article
                     key={relatedArticle.id}
-                    className="rounded-2xl bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl"
+                    className="group overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
                   >
-                    <div className="mb-3">
-                      <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700">
-                        {relatedArticle.category}
-                      </span>
+                    {/* Imagen del artículo relacionado */}
+                    <div className="relative h-40 overflow-hidden">
+                      {relatedArticle.imageUrl ? (
+                        <SmartNewsImage
+                          news={relatedArticle}
+                          fill={true}
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          priority={false}
+                        />
+                      ) : (
+                        <div className="from-navy flex h-full w-full items-center justify-center bg-gradient-to-br to-blue-700 text-white">
+                          <div className="p-4 text-center">
+                            <svg
+                              className="mx-auto mb-2 h-8 w-8 opacity-80"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                clipRule="evenodd"
+                              />
+                              <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z" />
+                            </svg>
+                            <p className="text-xs font-medium opacity-90">
+                              Artículo
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Badge de categoría */}
+                      <div className="absolute top-2 left-2">
+                        <span className="bg-navy rounded-full px-2 py-1 text-xs font-medium text-white">
+                          {relatedArticle.category}
+                        </span>
+                      </div>
                     </div>
 
-                    <h3 className="text-navy mb-3 font-serif text-lg font-semibold">
-                      <Link
-                        href={`/noticias/${relatedArticle.slug}`}
-                        className="transition-colors duration-300 hover:text-blue-700"
-                      >
-                        {relatedArticle.title}
+                    {/* Contenido de la tarjeta */}
+                    <div className="p-6">
+                      <h3 className="text-navy mb-3 font-serif text-lg font-semibold line-clamp-2">
+                        <Link
+                          href={`/noticias/${relatedArticle.slug}`}
+                          className="transition-colors duration-300 hover:text-blue-700"
+                        >
+                          {relatedArticle.title}
+                        </Link>
+                      </h3>
+
+                      <p className="mb-4 line-clamp-3 text-sm text-gray-600">
+                        {relatedArticle.excerpt}
+                      </p>
+
+                      <div className="mb-4 text-xs text-gray-500">
+                        {formatDate(relatedArticle.createdAt)}
+                      </div>
+
+                      <Link href={`/noticias/${relatedArticle.slug}`}>
+                        <Button variant="ghost" size="sm" className="w-full">
+                          Leer artículo
+                        </Button>
                       </Link>
-                    </h3>
-
-                    <p className="mb-4 line-clamp-3 text-sm text-gray-600">
-                      {relatedArticle.excerpt}
-                    </p>
-
-                    <div className="mb-4 text-xs text-gray-500">
-                      {formatDate(relatedArticle.createdAt)}
                     </div>
-
-                    <Link href={`/noticias/${relatedArticle.slug}`}>
-                      <Button variant="ghost" size="sm" className="w-full">
-                        Leer artículo
-                      </Button>
-                    </Link>
                   </article>
                 ))}
               </div>

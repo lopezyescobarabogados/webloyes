@@ -45,9 +45,12 @@ export default function NoticiasPage() {
         const response = await fetch('/api/news');
         if (response.ok) {
           const rawData = await response.json();
+          console.log('📊 Datos de noticias cargados:', rawData); // DEBUG
           const publishedNews = rawData.filter((item: NewsItem) => item.published);
+          console.log('📰 Noticias publicadas:', publishedNews); // DEBUG
           // Normalizar las noticias para asegurar categorías como strings
           const normalizedNews = normalizeNewsArray(publishedNews);
+          console.log('✅ Noticias normalizadas:', normalizedNews); // DEBUG
           setNews(normalizedNews);
         }
       } catch (error) {
@@ -436,6 +439,136 @@ export default function NoticiasPage() {
                     Nosotros
                   </Button>
                 </Link>
+              </div>
+            </div>
+          )}
+
+          {/* Grilla de todas las noticias */}
+          {news.length > 0 && (
+            <div className="mt-16">
+              <div className="mx-auto mb-12 max-w-4xl text-center">
+                <h2 className="text-navy mb-4 font-serif text-3xl font-bold sm:text-4xl">
+                  Todas las Noticias
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Explora nuestro archivo completo de análisis jurídicos
+                </p>
+              </div>
+
+              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {news.map(article => (
+                  <article
+                    key={article.id}
+                    className="group overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+                  >
+                    {/* Imagen del artículo */}
+                    <div className="relative h-48 overflow-hidden">
+                      {article.imageUrl ? (
+                        <SmartNewsImage
+                          news={article}
+                          fill={true}
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          priority={false}
+                        />
+                      ) : (
+                        <div className="from-navy flex h-full w-full items-center justify-center bg-gradient-to-br to-blue-700 text-white">
+                          <div className="p-6 text-center">
+                            <svg
+                              className="mx-auto mb-3 h-12 w-12 opacity-80"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                                clipRule="evenodd"
+                              />
+                              <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z" />
+                            </svg>
+                            <p className="text-sm font-medium opacity-90">
+                              Noticia Jurídica
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Badge de categoría */}
+                      <div className="absolute top-3 left-3">
+                        <span className="bg-navy rounded-full px-3 py-1 text-xs font-medium text-white">
+                          {normalizeCategory(article.category)}
+                        </span>
+                      </div>
+                      
+                      {article.featured && (
+                        <div className="absolute top-3 right-3">
+                          <span className="rounded-full bg-yellow-500 px-3 py-1 text-xs font-medium text-yellow-900">
+                            Destacado
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Contenido de la tarjeta */}
+                    <div className="p-6">
+                      {/* Metadatos */}
+                      <div className="mb-3 flex items-center space-x-3 text-xs text-gray-500">
+                        <time dateTime={article.createdAt}>
+                          {formatDate(article.createdAt)}
+                        </time>
+                        <span>•</span>
+                        <span className="truncate">{article.author}</span>
+                      </div>
+
+                      {/* Título */}
+                      <h3 className="text-navy mb-3 font-serif text-xl font-bold line-clamp-2 group-hover:text-blue-700 transition-colors duration-300">
+                        {article.title}
+                      </h3>
+
+                      {/* Excerpt */}
+                      <div
+                        className="mb-4 text-gray-600 line-clamp-3"
+                        dangerouslySetInnerHTML={{
+                          __html: truncateFormattedText(article.excerpt, 120)
+                        }}
+                      />
+
+                      {/* Tags */}
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        {(() => {
+                          const tags = parseTags(article.tags);
+                          return tags.slice(0, 3).map((tag, index) => (
+                            <span
+                              key={index}
+                              className="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600"
+                            >
+                              {tag}
+                            </span>
+                          ));
+                        })()}
+                      </div>
+
+                      {/* Botones de acción */}
+                      <div className="flex gap-3">
+                        <Link 
+                          href={`/noticias/${article.slug}`}
+                          className="flex-1"
+                        >
+                          <Button variant="outline" size="sm" className="w-full">
+                            Leer Artículo
+                          </Button>
+                        </Link>
+                        <button
+                          onClick={() => openModal(article)}
+                          className="flex-shrink-0"
+                        >
+                          <Button size="sm" className="px-3">
+                            Vista Rápida
+                          </Button>
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
               </div>
             </div>
           )}
