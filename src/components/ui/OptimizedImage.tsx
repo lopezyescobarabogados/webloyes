@@ -143,7 +143,8 @@ export function ApiImage({
       width,
       height,
       fill,
-      isApiImage: src?.startsWith('/api/images/') || src?.includes('/api/images/')
+      isApiImage: src?.startsWith('/api/images/') || src?.includes('/api/images/'),
+      isProductionUrl: src?.includes('lopezyescobarabogados.com')
     });
   }
 
@@ -220,6 +221,10 @@ export function ApiImage({
     return <FallbackComponent />;
   }
 
+  // Para imágenes de API en producción con URLs absolutas, usar configuración especial
+  const isProductionApiImage = isApiImage && src?.includes('lopezyescobarabogados.com');
+
+  // Configuración unificada para todas las imágenes
   const imageProps = {
     src,
     alt,
@@ -231,14 +236,31 @@ export function ApiImage({
       ${className}
     `,
     priority,
-    // Importante: deshabilitar optimización para imágenes de API local
-    unoptimized: isApiImage,
-    // Configuración para imágenes de API
-    ...(isApiImage && {
-      quality: 90,
-      placeholder: 'empty' as const,
+    // Para URLs absolutas de API, usar unoptimized y loader personalizado
+    ...(isProductionApiImage ? {
+      unoptimized: true,
+      loader: ({ src }: { src: string }) => src,
+    } : {
+      // Importante: deshabilitar optimización para imágenes de API local
+      unoptimized: isApiImage,
+      // Configuración para imágenes de API
+      ...(isApiImage && {
+        quality: 90,
+        placeholder: 'empty' as const,
+      }),
     }),
   };
+
+  // Debug temporal para desarrollo
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    console.log('🔧 [DEV] Configuración de imagen:', {
+      src: src?.substring(0, 50),
+      isApiImage,
+      isProductionApiImage,
+      unoptimized: imageProps.unoptimized,
+      hasLoader: 'loader' in imageProps
+    });
+  }
 
   return (
     <div className={fill ? 'relative' : 'relative inline-block'} style={fill ? {} : { width, height }}>
