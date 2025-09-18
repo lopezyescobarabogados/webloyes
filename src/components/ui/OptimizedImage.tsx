@@ -152,11 +152,19 @@ export function ApiImage({
   const isApiImage = src?.startsWith('/api/images/') || src?.includes('/api/images/');
 
   const handleLoad = () => {
+    // Debug temporal para desarrollo
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('✅ [DEV] Imagen cargada exitosamente:', src?.substring(0, 50));
+    }
     setIsLoading(false);
     setHasError(false);
   };
 
   const handleError = () => {
+    // Debug temporal para desarrollo
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('❌ [DEV] Error cargando imagen:', src?.substring(0, 50));
+    }
     setIsLoading(false);
     setHasError(true);
   };
@@ -222,7 +230,10 @@ export function ApiImage({
   }
 
   // Para imágenes de API en producción con URLs absolutas, usar configuración especial
-  const isProductionApiImage = isApiImage && src?.includes('lopezyescobarabogados.com');
+  const isProductionApiImage = isApiImage && (
+    src?.includes('lopezyescobarabogados.com') || 
+    src?.includes('railway.app')
+  );
 
   // Configuración unificada para todas las imágenes
   const imageProps = {
@@ -258,8 +269,56 @@ export function ApiImage({
       isApiImage,
       isProductionApiImage,
       unoptimized: imageProps.unoptimized,
-      hasLoader: 'loader' in imageProps
+      hasLoader: 'loader' in imageProps,
+      isLoading,
+      hasError
     });
+  }
+
+  // SOLUCIÓN DEFINITIVA: Para URLs absolutas de producción
+  // Usar img nativo optimizado con mejor manejo de estados
+  if (isProductionApiImage) {
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('🚨 [DEV] Usando img nativo optimizado para URL de producción:', src);
+    }
+
+    return (
+      <div className={fill ? 'relative' : 'relative inline-block'} style={fill ? {} : { width, height }}>
+        {/* Mostrar loader mientras carga */}
+        {isLoading && <LoadingComponent />}
+        
+        {/* Imagen nativa optimizada para URLs de producción */}
+        <img
+          src={src}
+          alt={alt}
+          onLoad={handleLoad}
+          onError={handleError}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className={`
+            transition-opacity duration-300 
+            ${isLoading ? 'opacity-0' : 'opacity-100'} 
+            ${className}
+          `.trim()}
+          style={fill ? { 
+            position: 'absolute', 
+            height: '100%', 
+            width: '100%', 
+            inset: 0, 
+            objectFit: 'cover',
+            display: 'block',
+            backgroundColor: 'transparent'
+          } : { 
+            width: '100%', 
+            height: '100%', 
+            objectFit: 'cover',
+            display: 'block',
+            backgroundColor: 'transparent'
+          }}
+          crossOrigin="anonymous"
+        />
+      </div>
+    );
   }
 
   return (
