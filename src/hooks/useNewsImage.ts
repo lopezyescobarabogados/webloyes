@@ -33,16 +33,33 @@ export function useNewsImage(news: NewsImageData) {
     if (news.imageUrl && news.imageUrl.trim().length > 0) {
       let processedUrl = news.imageUrl;
       
+      // Si la URL ya es absoluta de producción, usarla tal como está
+      if (news.imageUrl.startsWith('https://') && 
+          (news.imageUrl.includes('lopezyescobarabogados.com') || news.imageUrl.includes('railway.app'))) {
+        processedUrl = news.imageUrl;
+      }
       // En producción, convertir URLs relativas a absolutas
-      if (typeof window !== 'undefined' && 
+      else if (typeof window !== 'undefined' && 
           news.imageUrl.startsWith('/api/images/') && 
           window.location.hostname.includes('lopezyescobarabogados.com')) {
         processedUrl = `https://${window.location.hostname}${news.imageUrl}`;
       }
+      // En desarrollo, si la URL es relativa pero la base de datos es de producción
+      else if (typeof window !== 'undefined' && 
+               window.location.hostname === 'localhost' &&
+               news.imageUrl.startsWith('/api/images/')) {
+        // Asumir que es una imagen de producción
+        processedUrl = `https://www.lopezyescobarabogados.com${news.imageUrl}`;
+      }
       
       // Debug temporal para desarrollo
       if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        console.log('✅ [DEV] Usando imageUrl procesada:', processedUrl);
+        console.log('✅ [DEV] Usando imageUrl procesada:', {
+          original: news.imageUrl,
+          processed: processedUrl,
+          isAbsolute: processedUrl.startsWith('https://'),
+          isProduction: processedUrl.includes('lopezyescobarabogados.com')
+        });
       }
       
       setImageUrl(processedUrl);
@@ -58,10 +75,20 @@ export function useNewsImage(news: NewsImageData) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
         fallbackUrl = `https://${window.location.hostname}/api/images/${news.id}`;
       }
+      // En desarrollo, si estamos conectados a BD de producción, usar URL de producción
+      else if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        // Asumir que la BD es de producción y usar URL absoluta
+        fallbackUrl = `https://www.lopezyescobarabogados.com/api/images/${news.id}`;
+      }
       
       // Debug temporal para desarrollo
       if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        console.log('🔄 [DEV] Usando fallback URL:', fallbackUrl);
+        console.log('🔄 [DEV] Usando fallback URL:', {
+          newsId: news.id,
+          fallbackUrl,
+          isAbsolute: fallbackUrl.startsWith('https://'),
+          isProduction: fallbackUrl.includes('lopezyescobarabogados.com')
+        });
       }
       
       setImageUrl(fallbackUrl);
