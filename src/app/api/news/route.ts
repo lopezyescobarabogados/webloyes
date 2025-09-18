@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { processWhatsAppFormatting } from '@/utils/textFormatting'
 import slugify from 'slugify'
 
 // Tipos MIME permitidos para seguridad
@@ -33,6 +34,14 @@ function validateRequiredFields(data: NewsData): string[] {
 // Sanitizador básico para prevenir XSS
 function sanitizeString(str: string): string {
   return str.trim().replace(/[<>]/g, '');
+}
+
+// Sanitizador que preserva HTML seguro (solo strong permitido)
+function sanitizeContent(str: string): string {
+  return str.trim()
+    .replace(/<(?!\/?strong\b)[^>]*>/g, '') // Remove all HTML except <strong> and </strong>
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
 }
 
 // Procesador seguro de tags JSON
@@ -134,7 +143,7 @@ export async function POST(request: NextRequest) {
       const formData = await request.formData();
       
       title = sanitizeString(formData.get('title') as string || '');
-      content = sanitizeString(formData.get('content') as string || '');
+      content = formData.get('content') as string || '';
       excerpt = sanitizeString(formData.get('excerpt') as string || content.substring(0, 200));
       author = sanitizeString(formData.get('author') as string || '');
       category = sanitizeString(formData.get('category') as string || '');
@@ -142,12 +151,16 @@ export async function POST(request: NextRequest) {
       published = formData.get('published') === 'true';
       featured = formData.get('featured') === 'true';
       imageFile = formData.get('image') as File | null;
+      
+      // Procesar formato WhatsApp en contenido FormData también
+      content = processWhatsAppFormatting(content);
+      content = sanitizeContent(content);
     } else {
       // Manejo de JSON (sin imagen)
       const body = await request.json();
       
       title = sanitizeString(body.title || '');
-      content = sanitizeString(body.content || '');
+      content = body.content || '';
       excerpt = sanitizeString(body.excerpt || content.substring(0, 200));
       author = sanitizeString(body.author || '');
       category = sanitizeString(body.category || '');
@@ -163,6 +176,12 @@ export async function POST(request: NextRequest) {
           tags = [];
         }
       }
+      
+      // Procesar formato WhatsApp en contenido (IMPORTANTE: no sanitizar antes)
+      content = processWhatsAppFormatting(content);
+      
+      // Ahora sí sanitizar después del procesamiento (preservando <strong>)
+      content = sanitizeContent(content);
     }
 
     // Validar campos requeridos

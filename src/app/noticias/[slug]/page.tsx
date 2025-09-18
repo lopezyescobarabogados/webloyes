@@ -6,6 +6,7 @@ import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import SmartNewsImage from '@/components/news/SmartNewsImage';
+import { renderNewsContent } from '@/utils/textFormatting';
 
 interface NewsItem {
   id: string;
@@ -218,12 +219,13 @@ export default function NoticiaPage({ params }: Props) {
         <section className="bg-gray-50 py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
-              <div className="relative h-64 overflow-hidden rounded-2xl shadow-lg sm:h-80 md:h-96">
+              <div className="relative h-64 overflow-hidden rounded-2xl shadow-lg sm:h-80 md:h-96 bg-gray-100">
                 <SmartNewsImage
                   news={article}
                   fill={true}
                   priority={true}
-                  className="object-cover"
+                  className="object-contain"
+                  objectFit="contain"
                 />
               </div>
             </div>
@@ -236,31 +238,11 @@ export default function NoticiaPage({ params }: Props) {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <article className="prose prose-lg prose-navy max-w-none">
-              {/* Convertir el contenido markdown a HTML de forma básica */}
+              {/* Convertir el contenido con formato WhatsApp */}
               <div
                 className="leading-relaxed text-gray-700 text-justify"
                 dangerouslySetInnerHTML={{
-                  __html: article.content
-                    .replace(
-                      /# (.*)/g,
-                      '<h1 class="text-3xl font-serif font-bold text-navy mb-6 mt-8">$1</h1>'
-                    )
-                    .replace(
-                      /## (.*)/g,
-                      '<h2 class="text-2xl font-serif font-bold text-navy mb-4 mt-6">$1</h2>'
-                    )
-                    .replace(
-                      /### (.*)/g,
-                      '<h3 class="text-xl font-serif font-semibold text-navy mb-3 mt-4">$1</h3>'
-                    )
-                    .replace(/- (.*)/g, '<li class="mb-2">$1</li>')
-                    .replace(/\n\n/g, '</p><p class="mb-4">')
-                    .replace(/^(.*)$/gm, '<p class="mb-4">$1</p>')
-                    .replace(
-                      /<p class="mb-4"><li/g,
-                      '<ul class="list-disc list-inside mb-4 space-y-2"><li'
-                    )
-                    .replace(/<\/li><\/p>/g, '</li></ul>'),
+                  __html: renderNewsContent(article.content)
                 }}
               />
             </article>

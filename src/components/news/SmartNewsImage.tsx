@@ -14,6 +14,7 @@ export function SmartNewsImage({
   priority = false,
   className = '',
   fill = false,
+  objectFit = 'cover',
 }: SmartNewsImageProps) {
   const { imageUrl } = useNewsImage(news);
   const imageProps = getNewsImageProps(news, { size, priority, className });
@@ -26,6 +27,7 @@ export function SmartNewsImage({
         fill={true}
         priority={priority}
         className={className}
+        objectFit={objectFit}
         fallbackText="Imagen no disponible"
       />
     );
@@ -35,6 +37,7 @@ export function SmartNewsImage({
     <ApiImage
       {...imageProps}
       src={imageUrl || imageProps.src}
+      objectFit={objectFit}
     />
   );
 }

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import SmartNewsImage from '@/components/news/SmartNewsImage';
 import { normalizeCategory } from '@/utils/newsNormalizer';
+import { renderNewsContent } from '@/utils/textFormatting';
 
 interface NewsModalProps {
   isOpen: boolean;
@@ -80,12 +81,13 @@ export default function NewsModal({
           <div className="p-6">
             {/* Imagen */}
             {article.imageUrl && (
-              <div className="relative mb-6 h-64 lg:h-96 rounded-xl overflow-hidden">
+              <div className="relative mb-6 h-64 lg:h-96 rounded-xl overflow-hidden bg-gray-100">
                 <SmartNewsImage
                   news={article}
                   size="xl"
                   priority={true}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full"
+                  objectFit="contain"
                 />
               </div>
             )}
@@ -134,7 +136,7 @@ export default function NewsModal({
               <div 
                 className="text-gray-700 leading-relaxed text-justify"
                 dangerouslySetInnerHTML={{ 
-                  __html: article.content.replace(/\n/g, '<br />') 
+                  __html: renderNewsContent(article.content)
                 }}
               />
             </div>

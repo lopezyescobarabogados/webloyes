@@ -145,4 +145,5 @@ export interface SmartNewsImageProps {
   priority?: boolean;
   className?: string;
   fill?: boolean;
+  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 }

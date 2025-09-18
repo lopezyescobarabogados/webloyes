@@ -119,6 +119,8 @@ interface ApiImageProps {
   fallbackText?: string;
   /** Mostrar indicador de carga */
   showLoader?: boolean;
+  /** Object-fit CSS property */
+  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
 }
 
 export function ApiImage({
@@ -131,6 +133,7 @@ export function ApiImage({
   fill = false,
   fallbackText = 'Sin imagen',
   showLoader = true,
+  objectFit = 'cover',
 }: ApiImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -264,12 +267,12 @@ export function ApiImage({
             height: '100%', 
             width: '100%', 
             inset: 0, 
-            objectFit: 'cover',
+            objectFit: objectFit,
             display: 'block'
           } : { 
             width: '100%', 
             height: '100%', 
-            objectFit: 'cover',
+            objectFit: objectFit,
             display: 'block'
           }}
           crossOrigin="anonymous"
@@ -290,7 +293,7 @@ export function ApiImage({
           fill
           alt={alt}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: objectFit }}
         />
       ) : (
         <Image
@@ -298,7 +301,7 @@ export function ApiImage({
           width={width}
           height={height}
           alt={alt}
-          style={{ objectFit: 'cover' }}
+          style={{ objectFit: objectFit }}
         />
       )}
     </div>
