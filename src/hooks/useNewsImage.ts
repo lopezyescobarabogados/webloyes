@@ -52,16 +52,6 @@ export function useNewsImage(news: NewsImageData) {
         processedUrl = `https://www.lopezyescobarabogados.com${news.imageUrl}`;
       }
       
-      // Debug temporal para desarrollo
-      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        console.log('✅ [DEV] Usando imageUrl procesada:', {
-          original: news.imageUrl,
-          processed: processedUrl,
-          isAbsolute: processedUrl.startsWith('https://'),
-          isProduction: processedUrl.includes('lopezyescobarabogados.com')
-        });
-      }
-      
       setImageUrl(processedUrl);
       setHasValidImage(true);
       return;
@@ -75,20 +65,9 @@ export function useNewsImage(news: NewsImageData) {
       if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
         fallbackUrl = `https://${window.location.hostname}/api/images/${news.id}`;
       }
-      // En desarrollo, si estamos conectados a BD de producción, usar URL de producción
+      // En desarrollo, usar URL de producción
       else if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        // Asumir que la BD es de producción y usar URL absoluta
         fallbackUrl = `https://www.lopezyescobarabogados.com/api/images/${news.id}`;
-      }
-      
-      // Debug temporal para desarrollo
-      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-        console.log('🔄 [DEV] Usando fallback URL:', {
-          newsId: news.id,
-          fallbackUrl,
-          isAbsolute: fallbackUrl.startsWith('https://'),
-          isProduction: fallbackUrl.includes('lopezyescobarabogados.com')
-        });
       }
       
       setImageUrl(fallbackUrl);
@@ -99,11 +78,6 @@ export function useNewsImage(news: NewsImageData) {
     // Si no hay nada, establecer como sin imagen
     setImageUrl(null);
     setHasValidImage(false);
-    
-    // Debug temporal para desarrollo
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      console.log('❌ [DEV] Sin imagen disponible para:', news.id);
-    }
   }, [news.imageUrl, news.id, news.title]);
 
   return {

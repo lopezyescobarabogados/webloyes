@@ -207,12 +207,14 @@ export default function NoticiasPage() {
                           {/* Imagen del artículo */}
                           <div className="relative h-64 lg:h-96">
                             {article.imageUrl ? (
-                              <SmartNewsImage
-                                news={article}
-                                fill={true}
-                                className="object-cover"
-                                priority={currentIndex === 0} // Prioridad para primera imagen
-                              />
+                              <div className="relative h-full w-full overflow-hidden">
+                                <SmartNewsImage
+                                  news={article}
+                                  size="xl"
+                                  className="absolute inset-0 h-full w-full object-cover"
+                                  priority={currentIndex === 0}
+                                />
+                              </div>
                             ) : (
                               <div className="from-navy flex h-full w-full items-center justify-center bg-gradient-to-br to-blue-700 text-white">
                                 <div className="p-8 text-center">

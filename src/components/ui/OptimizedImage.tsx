@@ -135,36 +135,15 @@ export function ApiImage({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  // Debug temporal para desarrollo
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    console.log('🖼️ [DEV] ApiImage props:', {
-      src,
-      alt: alt?.substring(0, 30),
-      width,
-      height,
-      fill,
-      isApiImage: src?.startsWith('/api/images/') || src?.includes('/api/images/'),
-      isProductionUrl: src?.includes('lopezyescobarabogados.com')
-    });
-  }
-
   // Detectar si es una imagen de la API local
   const isApiImage = src?.startsWith('/api/images/') || src?.includes('/api/images/');
 
   const handleLoad = () => {
-    // Debug temporal para desarrollo
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      console.log('✅ [DEV] Imagen cargada exitosamente:', src?.substring(0, 50));
-    }
     setIsLoading(false);
     setHasError(false);
   };
 
   const handleError = () => {
-    // Debug temporal para desarrollo
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      console.log('❌ [DEV] Error cargando imagen:', src?.substring(0, 50));
-    }
     setIsLoading(false);
     setHasError(true);
   };
@@ -262,32 +241,12 @@ export function ApiImage({
     }),
   };
 
-  // Debug temporal para desarrollo
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    console.log('🔧 [DEV] Configuración de imagen:', {
-      src: src?.substring(0, 50),
-      isApiImage,
-      isProductionApiImage,
-      unoptimized: imageProps.unoptimized,
-      hasLoader: 'loader' in imageProps,
-      isLoading,
-      hasError
-    });
-  }
-
-  // SOLUCIÓN DEFINITIVA: Para URLs absolutas de producción
-  // Usar img nativo optimizado con mejor manejo de estados
+  // Para URLs absolutas de producción usar img nativo (fix crítico)
   if (isProductionApiImage) {
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      console.log('🚨 [DEV] Usando img nativo optimizado para URL de producción:', src);
-    }
-
     return (
       <div className={fill ? 'relative' : 'relative inline-block'} style={fill ? {} : { width, height }}>
-        {/* Mostrar loader mientras carga */}
         {isLoading && <LoadingComponent />}
         
-        {/* Imagen nativa optimizada para URLs de producción */}
         <img
           src={src}
           alt={alt}
@@ -306,14 +265,12 @@ export function ApiImage({
             width: '100%', 
             inset: 0, 
             objectFit: 'cover',
-            display: 'block',
-            backgroundColor: 'transparent'
+            display: 'block'
           } : { 
             width: '100%', 
             height: '100%', 
             objectFit: 'cover',
-            display: 'block',
-            backgroundColor: 'transparent'
+            display: 'block'
           }}
           crossOrigin="anonymous"
         />

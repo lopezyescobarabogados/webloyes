@@ -83,9 +83,9 @@ export default function NewsModal({
               <div className="relative mb-6 h-64 lg:h-96 rounded-xl overflow-hidden">
                 <SmartNewsImage
                   news={article}
-                  fill={true}
+                  size="xl"
                   priority={true}
-                  className="object-cover"
+                  className="h-full w-full object-cover"
                 />
               </div>
             )}
