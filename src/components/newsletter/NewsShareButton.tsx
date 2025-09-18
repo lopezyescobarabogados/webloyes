@@ -14,7 +14,7 @@ export default function NewsShareButton({ title, slug, excerpt, className = '' }
   const [isOpen, setIsOpen] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/noticias/${slug}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://www.lopezyescobarabogados.com'}/noticias/${slug}`;
 
   const copyToClipboard = async () => {
     try {

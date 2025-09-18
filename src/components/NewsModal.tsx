@@ -134,7 +134,10 @@ export default function NewsModal({
               <div 
                 className="text-gray-700 leading-relaxed text-justify"
                 dangerouslySetInnerHTML={{ 
-                  __html: article.content.replace(/\n/g, '<br />') 
+                  __html: article.content
+                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-navy">$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<strong class="font-semibold text-navy">$1</strong>')
+                    .replace(/\n/g, '<br />') 
                 }}
               />
             </div>

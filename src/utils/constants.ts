@@ -3,7 +3,7 @@
 export const SITE_CONFIG = {
   name: 'López y Escobar Abogados Asociados',
   description: 'Firma de abogados especializada en derecho corporativo, civil, penal y administrativo en Colombia',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.lopezyescobarabogados.com',
   author: 'López y Escobar Abogados Asociados',
 } as const;
 
