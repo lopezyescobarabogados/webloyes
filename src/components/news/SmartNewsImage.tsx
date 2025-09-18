@@ -18,6 +18,18 @@ export function SmartNewsImage({
   const { imageUrl } = useNewsImage(news);
   const imageProps = getNewsImageProps(news, { size, priority, className });
 
+  // Debug temporal para desarrollo
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    console.log('📰 [DEV] SmartNewsImage DEBUG:', {
+      newsId: news.id,
+      newsTitle: news.title?.substring(0, 30),
+      originalImageUrl: news.imageUrl,
+      processedImageUrl: imageUrl,
+      finalSrc: imageUrl || imageProps.src,
+      fill
+    });
+  }
+
   if (fill) {
     return (
       <ApiImage
