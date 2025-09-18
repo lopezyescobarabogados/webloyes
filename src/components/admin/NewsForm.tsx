@@ -171,46 +171,27 @@ export default function NewsForm({
     }
   };
 
-  // Subir imagen al servidor
-  const uploadImage = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('type', 'news'); // Especificar que es para noticias
-    
-    const response = await fetch('/api/admin/upload', {
-      method: 'POST',
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error('Error al subir la imagen');
-    }
-
-    const data = await response.json();
-    return data.url;
-  };
-
   const onSubmit = async (data: NewsFormData) => {
     setIsSubmitting(true);
 
     try {
       let imageUrl = data.imageUrl;
 
-      // Si hay un archivo seleccionado, subirlo primero
-      if (selectedFile) {
-        imageUrl = await uploadImage(selectedFile);
-      } else if (data.imageUrl && processedImageUrl) {
-        // Si tenemos una URL procesada, usarla
-        imageUrl = processedImageUrl;
-      } else if (data.imageUrl) {
-        // Si no está procesada, procesarla ahora
-        imageUrl = await processImageUrl(data.imageUrl);
+      // Si NO hay archivo seleccionado, procesar URL externa si existe
+      if (!selectedFile && data.imageUrl) {
+        if (processedImageUrl) {
+          // Si tenemos una URL procesada, usarla
+          imageUrl = processedImageUrl;
+        } else {
+          // Si no está procesada, procesarla ahora
+          imageUrl = await processImageUrl(data.imageUrl);
+        }
       }
 
       const newsData = {
         ...data,
         excerpt: processWhatsAppFormatting(data.excerpt), // Procesar el formato antes de guardar
-        imageUrl,
+        imageUrl: selectedFile ? '' : imageUrl, // Si hay archivo, dejar vacío para que /api/news genere la URL
         // Campos adicionales requeridos por la base de datos con valores por defecto
         content: processWhatsAppFormatting(data.excerpt), // Usar el resumen formateado como contenido
         featured: false,
@@ -225,7 +206,7 @@ export default function NewsForm({
 
       let response;
 
-      // Si hay archivo seleccionado, usar FormData para el endpoint /api/news
+      // SIEMPRE usar FormData si hay archivo seleccionado
       if (selectedFile) {
         const formData = new FormData();
         formData.append('title', newsData.title);
@@ -236,14 +217,14 @@ export default function NewsForm({
         formData.append('tags', newsData.tags);
         formData.append('published', String(newsData.published));
         formData.append('featured', String(newsData.featured));
-        formData.append('image', selectedFile);
+        formData.append('image', selectedFile); // Archivo original va aquí
 
         response = await fetch(url, {
           method,
           body: formData, // Sin Content-Type para FormData
         });
       } else {
-        // Sin archivo, usar JSON como antes
+        // Sin archivo, usar JSON como antes (para URLs externas)
         response = await fetch(url, {
           method,
           headers: {
