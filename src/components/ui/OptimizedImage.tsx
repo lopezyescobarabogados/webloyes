@@ -135,6 +135,18 @@ export function ApiImage({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  // Debug temporal para desarrollo
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    console.log('🖼️ [DEV] ApiImage props:', {
+      src,
+      alt: alt?.substring(0, 30),
+      width,
+      height,
+      fill,
+      isApiImage: src?.startsWith('/api/images/') || src?.includes('/api/images/')
+    });
+  }
+
   // Detectar si es una imagen de la API local
   const isApiImage = src?.startsWith('/api/images/') || src?.includes('/api/images/');
 

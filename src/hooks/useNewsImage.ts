@@ -19,6 +19,16 @@ export function useNewsImage(news: NewsImageData) {
   const [hasValidImage, setHasValidImage] = useState(false);
 
   useEffect(() => {
+    // Debug temporal para desarrollo
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('🐛 [DEV] useNewsImage DEBUG:', {
+        newsId: news.id,
+        newsTitle: news.title?.substring(0, 30),
+        originalImageUrl: news.imageUrl,
+        hostname: window.location.hostname
+      });
+    }
+
     // Si tenemos una imageUrl válida, procesarla
     if (news.imageUrl && news.imageUrl.trim().length > 0) {
       let processedUrl = news.imageUrl;
@@ -28,6 +38,11 @@ export function useNewsImage(news: NewsImageData) {
           news.imageUrl.startsWith('/api/images/') && 
           window.location.hostname.includes('lopezyescobarabogados.com')) {
         processedUrl = `https://${window.location.hostname}${news.imageUrl}`;
+      }
+      
+      // Debug temporal para desarrollo
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        console.log('✅ [DEV] Usando imageUrl procesada:', processedUrl);
       }
       
       setImageUrl(processedUrl);
@@ -44,6 +59,11 @@ export function useNewsImage(news: NewsImageData) {
         fallbackUrl = `https://${window.location.hostname}/api/images/${news.id}`;
       }
       
+      // Debug temporal para desarrollo
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        console.log('🔄 [DEV] Usando fallback URL:', fallbackUrl);
+      }
+      
       setImageUrl(fallbackUrl);
       setHasValidImage(true);
       return;
@@ -52,6 +72,11 @@ export function useNewsImage(news: NewsImageData) {
     // Si no hay nada, establecer como sin imagen
     setImageUrl(null);
     setHasValidImage(false);
+    
+    // Debug temporal para desarrollo
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('❌ [DEV] Sin imagen disponible para:', news.id);
+    }
   }, [news.imageUrl, news.id, news.title]);
 
   return {
