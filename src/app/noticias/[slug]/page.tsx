@@ -253,14 +253,6 @@ export default function NoticiaPage({ params }: Props) {
                       /### (.*)/g,
                       '<h3 class="text-xl font-serif font-semibold text-navy mb-3 mt-4">$1</h3>'
                     )
-                    .replace(
-                      /\*\*(.*?)\*\*/g,
-                      '<strong class="font-semibold text-navy">$1</strong>'
-                    )
-                    .replace(
-                      /\*(.*?)\*/g,
-                      '<strong class="font-semibold text-navy">$1</strong>'
-                    )
                     .replace(/- (.*)/g, '<li class="mb-2">$1</li>')
                     .replace(/\n\n/g, '</p><p class="mb-4">')
                     .replace(/^(.*)$/gm, '<p class="mb-4">$1</p>')

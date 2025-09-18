@@ -133,3 +133,10 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #0a2342;
 }
+
+/* Estilos para contenido de noticias */
+.prose strong,
+.text-gray-700 strong {
+  font-weight: 600;
+  color: #0a2342;
+}
