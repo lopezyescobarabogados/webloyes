@@ -45,12 +45,9 @@ export default function NoticiasPage() {
         const response = await fetch('/api/news');
         if (response.ok) {
           const rawData = await response.json();
-          console.log('📊 Datos de noticias cargados:', rawData); // DEBUG
           const publishedNews = rawData.filter((item: NewsItem) => item.published);
-          console.log('📰 Noticias publicadas:', publishedNews); // DEBUG
           // Normalizar las noticias para asegurar categorías como strings
           const normalizedNews = normalizeNewsArray(publishedNews);
-          console.log('✅ Noticias normalizadas:', normalizedNews); // DEBUG
           setNews(normalizedNews);
         }
       } catch (error) {

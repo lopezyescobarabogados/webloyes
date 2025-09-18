@@ -19,16 +19,6 @@ export function useNewsImage(news: NewsImageData) {
   const [hasValidImage, setHasValidImage] = useState(false);
 
   useEffect(() => {
-    // Debug para producción
-    if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
-      console.log('🐛 useNewsImage DEBUG:', {
-        newsId: news.id,
-        newsTitle: news.title?.substring(0, 30),
-        originalImageUrl: news.imageUrl,
-        hostname: window.location.hostname
-      });
-    }
-
     // Si tenemos una imageUrl válida, procesarla
     if (news.imageUrl && news.imageUrl.trim().length > 0) {
       let processedUrl = news.imageUrl;
@@ -38,16 +28,10 @@ export function useNewsImage(news: NewsImageData) {
           news.imageUrl.startsWith('/api/images/') && 
           window.location.hostname.includes('lopezyescobarabogados.com')) {
         processedUrl = `https://${window.location.hostname}${news.imageUrl}`;
-        console.log('🔄 Convertida URL relativa a absoluta:', processedUrl);
       }
       
       setImageUrl(processedUrl);
       setHasValidImage(true);
-      
-      // Debug adicional para URLs problemáticas
-      if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
-        console.log('✅ Usando imageUrl procesada:', processedUrl);
-      }
       return;
     }
 
@@ -58,7 +42,6 @@ export function useNewsImage(news: NewsImageData) {
       // En producción, usar URL absoluta
       if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
         fallbackUrl = `https://${window.location.hostname}/api/images/${news.id}`;
-        console.log('🔄 Usando fallback URL absoluta:', fallbackUrl);
       }
       
       setImageUrl(fallbackUrl);
@@ -69,10 +52,6 @@ export function useNewsImage(news: NewsImageData) {
     // Si no hay nada, establecer como sin imagen
     setImageUrl(null);
     setHasValidImage(false);
-    
-    if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
-      console.log('❌ Sin imagen disponible para:', news.id);
-    }
   }, [news.imageUrl, news.id, news.title]);
 
   return {
