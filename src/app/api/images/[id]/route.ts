@@ -81,6 +81,12 @@ export async function GET(
   } catch (error) {
     // Log seguro sin exponer información sensible
     console.error('[IMAGE-API] Error:', error instanceof Error ? error.message : 'Unknown error');
+    
+    // En desarrollo, devolver 404 en lugar de 500 para evitar errores molestos
+    if (process.env.NODE_ENV === 'development') {
+      return new NextResponse('Image not found in development', { status: 404 });
+    }
+    
     return new NextResponse('Internal Server Error', { status: 500 });
   }
 }

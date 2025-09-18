@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      // Permitir cualquier dominio HTTPS para flexibilidad con URLs externas
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
       // API local para desarrollo
       {
         protocol: 'http',
@@ -25,6 +30,17 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '*.railway.app',
+        pathname: '/api/images/**',
+      },
+      // Dominio de producción específico
+      {
+        protocol: 'https',
+        hostname: 'lopezyescobarabogados.com',
+        pathname: '/api/images/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.lopezyescobarabogados.com',
         pathname: '/api/images/**',
       }
     ],

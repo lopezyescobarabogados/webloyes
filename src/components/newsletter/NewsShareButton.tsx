@@ -57,7 +57,7 @@ export default function NewsShareButton({ title, slug, excerpt, className = '' }
     <div className={`relative ${className}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-all duration-200"
+        className="p-2 rounded-full text-gray-600 hover:text-gray-800 bg-white/90 hover:bg-white backdrop-blur-sm transition-all duration-200 shadow-sm"
         title="Compartir noticia"
       >
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -73,7 +73,7 @@ export default function NewsShareButton({ title, slug, excerpt, className = '' }
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute right-0 top-full z-20 mt-2 w-48 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-1"
+              className="absolute right-0 top-full z-50 mt-2 w-48 rounded-lg bg-white shadow-lg ring-1 ring-black/5 py-1"
             >
               <button
                 onClick={shareOnWhatsApp}
@@ -121,7 +121,7 @@ export default function NewsShareButton({ title, slug, excerpt, className = '' }
             
             {/* Overlay para cerrar */}
             <div 
-              className="fixed inset-0 z-10" 
+              className="fixed inset-0 z-40" 
               onClick={() => setIsOpen(false)} 
             />
           </>

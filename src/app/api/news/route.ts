@@ -58,6 +58,60 @@ export async function GET() {
     return NextResponse.json(news)
   } catch (error) {
     console.error('Error fetching news:', error)
+    
+    // Fallback para desarrollo cuando no hay base de datos
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔄 Usando datos mock para desarrollo...')
+      const mockNews = [
+        {
+          id: 'mock-1',
+          title: 'Nueva Reforma Laboral 2025',
+          slug: 'nueva-reforma-laboral-2025',
+          excerpt: 'Análisis completo de los cambios más importantes en la legislación laboral colombiana.',
+          content: 'La nueva reforma laboral introduce cambios significativos...',
+          author: 'Dr. López Escobar',
+          category: 'Derecho Laboral',
+          tags: '["reforma", "laboral", "2025"]',
+          published: true,
+          featured: true,
+          imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'mock-2',
+          title: 'Cambios en el Código Civil',
+          slug: 'cambios-codigo-civil',
+          excerpt: 'Modificaciones recientes al Código Civil que afectan contratos.',
+          content: 'El Congreso aprobó importantes modificaciones...',
+          author: 'Dra. María Escobar',
+          category: 'Derecho Civil',
+          tags: '["código civil", "contratos"]',
+          published: true,
+          featured: false,
+          imageUrl: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=600&fit=crop',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        },
+        {
+          id: 'mock-3',
+          title: 'Jurisprudencia Constitucional',
+          slug: 'jurisprudencia-constitucional',
+          excerpt: 'Análisis de las sentencias más relevantes de la Corte Constitucional.',
+          content: 'La Corte Constitucional ha emitido decisiones fundamentales...',
+          author: 'Dr. Carlos López',
+          category: 'Derecho Constitucional',
+          tags: '["jurisprudencia", "constitucional"]',
+          published: true,
+          featured: false,
+          imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ];
+      return NextResponse.json(mockNews);
+    }
+    
     return NextResponse.json(
       { error: 'Error al obtener las noticias' },
       { status: 500 }

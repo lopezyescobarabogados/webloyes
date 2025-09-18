@@ -135,17 +135,39 @@ export function ApiImage({
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  // Debug para producción: logging de props
+  if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
+    console.log('🖼️ ApiImage props:', {
+      src,
+      alt: alt?.substring(0, 30),
+      width,
+      height,
+      fill,
+      isApiImage: src?.startsWith('/api/images/')
+    });
+  }
+
   // Detectar si es una imagen de la API local
-  const isApiImage = src?.startsWith('/api/images/');
+  const isApiImage = src?.startsWith('/api/images/') || src?.includes('/api/images/');
 
   const handleLoad = () => {
     setIsLoading(false);
     setHasError(false);
+    
+    // Debug para producción
+    if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
+      console.log('✅ ApiImage loaded successfully:', src);
+    }
   };
 
   const handleError = () => {
     setIsLoading(false);
     setHasError(true);
+    
+    // Debug para producción
+    if (typeof window !== 'undefined' && window.location.hostname.includes('lopezyescobarabogados.com')) {
+      console.error('❌ ApiImage failed to load:', src);
+    }
   };
 
   // Componente de fallback cuando hay error o no hay imagen
