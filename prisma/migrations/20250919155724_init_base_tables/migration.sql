@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "news" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "excerpt" TEXT NOT NULL,
@@ -11,17 +11,17 @@ CREATE TABLE "news" (
     "published" BOOLEAN NOT NULL DEFAULT false,
     "featured" BOOLEAN NOT NULL DEFAULT false,
     "imageUrl" TEXT,
-    "imageData" BLOB,
+    "imageData" BYTEA,
     "imageType" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    "pdfUrl" TEXT,
-    "pdfName" TEXT
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "news_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "team_members" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "position" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -34,13 +34,15 @@ CREATE TABLE "team_members" (
     "specialties" TEXT NOT NULL,
     "education" TEXT,
     "experience" TEXT,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "team_members_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "contact_messages" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT,
@@ -49,19 +51,32 @@ CREATE TABLE "contact_messages" (
     "company" TEXT,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
     "priority" TEXT NOT NULL DEFAULT 'MEDIUM',
-    "source" TEXT NOT NULL DEFAULT 'WEB_FORM',
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "source" TEXT NOT NULL DEFAULT 'WEBSITE',
+    "tags" TEXT,
+    "assignedTo" TEXT,
+    "notes" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "contact_messages_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "newsletter_subscriptions" (
-    "id" TEXT NOT NULL PRIMARY KEY,
-    "name" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "isActive" BOOLEAN NOT NULL DEFAULT true,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "name" TEXT,
+    "status" TEXT NOT NULL DEFAULT 'ACTIVE',
+    "interests" TEXT,
+    "source" TEXT NOT NULL DEFAULT 'WEBSITE',
+    "confirmed" BOOLEAN NOT NULL DEFAULT false,
+    "confirmedAt" TIMESTAMP(3),
+    "unsubscribedAt" TIMESTAMP(3),
+    "metadata" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "newsletter_subscriptions_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

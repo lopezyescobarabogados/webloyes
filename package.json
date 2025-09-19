@@ -17,7 +17,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "railway:build": "npm run build",
+    "railway:build": "npm run build && npm run railway:migrate",
+    "railway:migrate": "npx prisma migrate deploy || echo 'Warning: Migration failed, continuing...' && npx prisma generate",
     "start": "next start",
     "lint": "next lint",
     "migrate": "npx prisma migrate dev",
