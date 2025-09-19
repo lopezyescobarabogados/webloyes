@@ -26,7 +26,6 @@ export const siteConfig = {
 };
 
 export const defaultMetadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -152,25 +151,6 @@ export const generateNewsMetadata = (
       images: image ? [image] : defaultMetadata.openGraph?.images,
       publishedTime,
       authors: author ? [author] : undefined,
-    },
-  };
-};
-
-// Función para generar metadatos de páginas (compatibilidad)
-export const generatePageMetadata = (
-  title: string,
-  description: string,
-  path?: string,
-  keywords?: string[],
-  noIndex?: boolean
-): Metadata => {
-  const url = path ? `${siteConfig.url}${path}` : siteConfig.url;
-  
-  return {
-    ...generateMetadata(title, description, undefined, noIndex),
-    keywords: keywords || siteConfig.keywords,
-    alternates: {
-      canonical: url,
     },
   };
 };

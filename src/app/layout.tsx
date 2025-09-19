@@ -39,7 +39,6 @@ export default function RootLayout({
     <html lang="es" className="font-sans">
       <head>
         <PreloadResources />
-        <link rel="icon" href="/icons/icon-48.png" sizes="48x48" type="image/png" />
         <link rel="icon" href="/Logo2.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />

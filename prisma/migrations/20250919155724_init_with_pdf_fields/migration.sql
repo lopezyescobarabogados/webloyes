@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "news" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "excerpt" TEXT NOT NULL,
@@ -11,15 +11,17 @@ CREATE TABLE "news" (
     "published" BOOLEAN NOT NULL DEFAULT false,
     "featured" BOOLEAN NOT NULL DEFAULT false,
     "imageUrl" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "news_pkey" PRIMARY KEY ("id")
+    "imageData" BLOB,
+    "imageType" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    "pdfUrl" TEXT,
+    "pdfName" TEXT
 );
 
 -- CreateTable
 CREATE TABLE "team_members" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "position" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -32,15 +34,13 @@ CREATE TABLE "team_members" (
     "specialties" TEXT NOT NULL,
     "education" TEXT,
     "experience" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "team_members_pkey" PRIMARY KEY ("id")
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "contact_messages" (
-    "id" TEXT NOT NULL,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT,
@@ -50,11 +50,22 @@ CREATE TABLE "contact_messages" (
     "status" TEXT NOT NULL DEFAULT 'PENDING',
     "priority" TEXT NOT NULL DEFAULT 'MEDIUM',
     "source" TEXT NOT NULL DEFAULT 'WEB_FORM',
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
+);
 
-    CONSTRAINT "contact_messages_pkey" PRIMARY KEY ("id")
+-- CreateTable
+CREATE TABLE "newsletter_subscriptions" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateIndex
 CREATE UNIQUE INDEX "news_slug_key" ON "news"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "newsletter_subscriptions_email_key" ON "newsletter_subscriptions"("email");

@@ -6,6 +6,7 @@ import MainLayout from '@/layouts/MainLayout';
 import Button from '@/components/ui/Button';
 import Link from 'next/link';
 import SmartNewsImage from '@/components/news/SmartNewsImage';
+import PdfDownload from '@/components/news/PdfDownload';
 import { renderNewsContent } from '@/utils/textFormatting';
 
 interface NewsItem {
@@ -20,6 +21,8 @@ interface NewsItem {
   published: boolean;
   featured: boolean;
   imageUrl?: string;
+  pdfUrl?: string;
+  pdfName?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -300,6 +303,9 @@ export default function NoticiaPage({ params }: Props) {
                 </Link>
               </div>
             </div>
+
+            {/* Documento PDF */}
+            <PdfDownload pdfUrl={article.pdfUrl} pdfName={article.pdfName} />
           </div>
         </div>
       </section>

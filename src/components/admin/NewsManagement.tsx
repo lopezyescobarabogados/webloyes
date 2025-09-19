@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import NewsTable from './NewsTable';
 import NewsForm from './NewsForm';
+import PdfUploadModal from './PdfUploadModal';
 import { normalizeNewsArray } from '@/utils/newsNormalizer';
 
 export interface NewsItem {
@@ -18,6 +19,8 @@ export interface NewsItem {
   published: boolean;
   featured: boolean;
   imageUrl?: string;
+  pdfUrl?: string;
+  pdfName?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -29,6 +32,7 @@ export default function NewsManagement() {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false);
   const [error, setError] = useState('');
 
   // Cargar noticias al montar el componente
@@ -182,23 +186,34 @@ export default function NewsManagement() {
               </svg>
             </button>
           </div>
-          <button
-            onClick={handleCreateNews}
-            className="bg-navy hover:bg-navy-600 rounded-lg px-4 py-2 font-medium text-white transition-colors"
-          >
-            <svg
-              className="mr-2 inline h-5 w-5"
-              fill="currentColor"
-              viewBox="0 0 20 20"
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowPdfModal(true)}
+              className="border border-navy text-navy hover:bg-navy hover:text-white rounded-lg px-4 py-2 font-medium transition-colors flex items-center"
             >
-              <path
-                fillRule="evenodd"
-                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Nueva Noticia
-          </button>
+              <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
+              </svg>
+              Añadir PDF
+            </button>
+            <button
+              onClick={handleCreateNews}
+              className="bg-navy hover:bg-navy-600 rounded-lg px-4 py-2 font-medium text-white transition-colors"
+            >
+              <svg
+                className="mr-2 inline h-5 w-5"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              Nueva Noticia
+            </button>
+          </div>
         </div>
       </div>
 
@@ -218,6 +233,15 @@ export default function NewsManagement() {
           onSuccess={handleFormSuccess}
         />
       )}
+
+      {/* PDF Upload Modal */}
+      <PdfUploadModal
+        isOpen={showPdfModal}
+        onClose={() => setShowPdfModal(false)}
+        onSuccess={() => {
+          loadNews(); // Refrescar la lista
+        }}
+      />
     </div>
   );
 }
