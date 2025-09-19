@@ -51,7 +51,8 @@ export const defaultMetadata: Metadata = {
     {
       rel: 'icon',
       url: '/favicon.ico',
-      sizes: 'any',
+      sizes: '32x32',
+      type: 'image/x-icon',
     },
     {
       rel: 'icon',
@@ -60,8 +61,20 @@ export const defaultMetadata: Metadata = {
     },
     {
       rel: 'apple-touch-icon',
+      url: '/apple-touch-icon.png',
+      sizes: '180x180',
+      type: 'image/png',
+    },
+    {
+      rel: 'icon',
       url: '/icons/icon-192.png',
       sizes: '192x192',
+      type: 'image/png',
+    },
+    {
+      rel: 'shortcut icon',
+      url: '/favicon.ico',
+      type: 'image/x-icon',
     },
   ],
   manifest: '/manifest.json',
