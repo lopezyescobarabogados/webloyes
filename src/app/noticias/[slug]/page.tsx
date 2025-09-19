@@ -142,7 +142,7 @@ export default function NoticiaPage({ params }: Props) {
 
             {/* Categoría */}
             <div className="mb-4">
-              <span className="inline-block rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+              <span className="inline-block rounded-full bg-white/400 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
                 {article.category}
               </span>
             </div>
