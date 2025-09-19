@@ -1,6 +1,36 @@
 /**
- * Convierte texto con marcadores de WhatsApp a HTML con negritas de forma robusta
+ * Convierte texto con ma  // 1. Función auxiliar para limpiar y corregir tags malformados
+  function cleanMalformedTags(text: string): string {
+    let cleaned = text;
+    
+    // Patrón para capturar: strongN./ [contenido] strongN.
+    const altPattern = /strong\d*\.\/(.*?)strong\d*\./g;
+    cleaned = cleaned.replace(altPattern, (match, content) => {
+      // Limpiar el contenido capturado de "strong" al inicio si existe
+      const cleanContent = content.replace(/^strong\s+/, '').trim();
+      return cleanContent ? `<strong>${cleanContent}</strong>` : '';
+    });
+    
+    // Limpiar cualquier residuo de patrones malformados
+    cleaned = cleaned.replace(/strong\d*\.\//g, '');
+    cleaned = cleaned.replace(/strong\d*\./g, '');
+    cleaned = cleaned.replace(/\/strong/g, '');
+    
+    // Limpiar tags vacíos y malformados
+    cleaned = cleaned.replace(/<strong><\/strong>/g, '');
+    cleaned = cleaned.replace(/<strong><>/g, '');
+    cleaned = cleaned.replace(/<><\/strong>/g, '');
+    cleaned = cleaned.replace(/<>/g, ''); // Limpiar <> solos
+    
+    return cleaned;
+  }
+  
+  // Aplicar limpieza de tags malformados
+  processedText = cleanMalformedTags(processedText);
+  
+  // 2. Aplicar formateo de asteriscos en el texto restantesApp a HTML con negritas de forma robusta
  * *texto* -> <strong>texto</strong>
+ * También corrige patrones malformados como strong1./strong -> <strong>texto</strong>
  * Protege code blocks y inline code del procesamiento
  * @param text - El texto a procesar
  * @returns Texto con HTML para negritas
@@ -25,11 +55,29 @@ export function processWhatsAppFormatting(text: string): string {
     inlineCodes.push(match);
     return placeholder;
   });
+
+  // 1. Función auxiliar para limpiar y corregir tags malformados
+  function cleanMalformedTags(text: string): string {
+    // Primero, buscar y corregir patrones específicos conocidos
+    let cleaned = text;
+    
+    // Reemplazar strong1./ strong2. con <strong></strong> 
+    // Buscar patrones como: strongN./ [contenido] strongN.
+    const strongPattern = /strong(\d*)\.\/(.*?)strong(\d*)\./g;
+    cleaned = cleaned.replace(strongPattern, '<strong>$2</strong>');
+    
+    // Limpiar cualquier residuo
+    cleaned = cleaned.replace(/strong\d*\.\//g, '');
+    cleaned = cleaned.replace(/strong\d*\./g, '');
+    
+    return cleaned;
+  }
   
-  // Aplicar formateo de asteriscos en el texto restante
-  // Mejorado: evitar procesar asteriscos dentro de tags HTML existentes
+  // Aplicar limpieza de tags malformados
+  processedText = cleanMalformedTags(processedText);
+  
+  // 2. Aplicar formateo de asteriscos en el texto restante
   processedText = processedText.replace(/\*([^*\n<>]+)\*/g, (match, content) => {
-    // Verificar que no estemos dentro de un tag HTML
     return `<strong>${content.trim()}</strong>`;
   });
   

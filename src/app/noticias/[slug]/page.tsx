@@ -152,11 +152,6 @@ export default function NoticiaPage({ params }: Props) {
               {article.title}
             </h1>
 
-            {/* Extracto */}
-            <p className="mb-8 text-lg leading-relaxed text-gray-200 sm:text-xl text-justify">
-              {article.excerpt}
-            </p>
-
             {/* Metadatos del artículo */}
             <div className="flex flex-wrap items-center gap-4 border-t border-white/20 pt-6 text-sm text-gray-300">
               <div className="flex items-center gap-2">
@@ -214,7 +209,7 @@ export default function NoticiaPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Imagen destacada */}
+      {/* Imagen del artículo */}
       {article.imageUrl && (
         <section className="bg-gray-50 py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
