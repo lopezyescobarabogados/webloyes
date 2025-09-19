@@ -8,9 +8,6 @@
 export function processWhatsAppFormatting(text: string): string {
   if (!text) return '';
   
-  // Si ya contiene <strong>, evitar doble procesamiento
-  if (text.includes('<strong>')) return text;
-  
   // Almacenar code blocks temporalmente para protegerlos
   const codeBlocks: string[] = [];
   const inlineCodes: string[] = [];
@@ -30,8 +27,11 @@ export function processWhatsAppFormatting(text: string): string {
   });
   
   // Aplicar formateo de asteriscos en el texto restante
-  // Solo procesar asteriscos que rodeen palabras/frases (con límites de palabra)
-  processedText = processedText.replace(/\*([^*\n]+)\*/g, '<strong>$1</strong>');
+  // Mejorado: evitar procesar asteriscos dentro de tags HTML existentes
+  processedText = processedText.replace(/\*([^*\n<>]+)\*/g, (match, content) => {
+    // Verificar que no estemos dentro de un tag HTML
+    return `<strong>${content.trim()}</strong>`;
+  });
   
   // Restaurar code blocks
   codeBlocks.forEach((code, index) => {
@@ -69,7 +69,7 @@ export function previewFormattedText(text: string): string {
 
 /**
  * Función compartida para renderizar contenido de noticias de forma consistente
- * Aplica procesamiento de WhatsApp, saltos de línea y sanitización básica
+ * Aplica procesamiento de WhatsApp, saltos de línea y formateo básico
  * @param content - Contenido de la noticia
  * @returns HTML procesado y listo para renderizar
  */
@@ -79,11 +79,42 @@ export function renderNewsContent(content: string): string {
   // 1. Procesar asteriscos de WhatsApp
   let processedContent = processWhatsAppFormatting(content);
   
+  // 2. Convertir saltos de línea simples a <br> pero preservar párrafos
+  processedContent = processedContent
+    .replace(/\n\n/g, '</p><p>')  // Párrafos dobles
+    .replace(/\n/g, '<br />');    // Saltos simples
+  
+  // 3. Envolver en párrafos si no hay estructura de párrafos
+  if (!processedContent.includes('<p>')) {
+    processedContent = `<p>${processedContent}</p>`;
+  }
+  
+  // 4. Limpiar el contenido final
+  processedContent = processedContent
+    .replace(/<p><\/p>/g, '')     // Eliminar párrafos vacíos
+    .replace(/<p><br \/>/g, '<p>') // Limpiar <br> al inicio de párrafos
+    .replace(/<br \/><\/p>/g, '</p>') // Limpiar <br> al final de párrafos
+    .trim();
+  
+  return processedContent;
+}
+
+/**
+ * Función alternativa simplificada para renderizar contenido sin formateo de párrafos
+ * @param content - Contenido de la noticia
+ * @returns HTML procesado y listo para renderizar
+ */
+export function renderNewsContentSimple(content: string): string {
+  if (!content) return '';
+  
+  // 1. Procesar asteriscos de WhatsApp
+  let processedContent = processWhatsAppFormatting(content);
+  
   // 2. Convertir saltos de línea a <br>
   processedContent = processedContent.replace(/\n/g, '<br />');
   
-  // 3. Sanitización básica adicional (mantener solo tags seguros)
-  // Ya se hace en el backend, pero reforzamos aquí
+  // 3. Limpiar el contenido
+  processedContent = processedContent.trim();
   
   return processedContent;
 }
