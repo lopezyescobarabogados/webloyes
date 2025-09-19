@@ -4,7 +4,8 @@ export const siteConfig = {
   name: 'López & Escobar Abogados Asociados',
   description: 'Firma de abogados especializada en derecho corporativo, civil, penal y administrativo. Experiencia, profesionalismo y resultados efectivos.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com',
-  ogImage: '/icons/icon-512.png',
+  ogImage: '/og-image.png',
+  twitterImage: '/twitter-image.png',
   icon: '/Logo2.svg',
   links: {
     twitter: 'https://twitter.com/lopezescobarabogados',
@@ -74,9 +75,10 @@ export const defaultMetadata: Metadata = {
     images: [
       {
         url: siteConfig.ogImage,
-        width: 512,
-        height: 512,
-        alt: siteConfig.name,
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} - Logo`,
+        type: 'image/png',
       },
     ],
   },
@@ -84,7 +86,14 @@ export const defaultMetadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
-    images: [siteConfig.ogImage],
+    images: [
+      {
+        url: siteConfig.twitterImage,
+        width: 800,
+        height: 400,
+        alt: `${siteConfig.name} - Logo`,
+      },
+    ],
     creator: '@lopezescobarabogados',
   },
   robots: {
@@ -129,7 +138,14 @@ export const generateMetadata = (
       ...defaultMetadata.twitter,
       title: title || siteConfig.name,
       description: description || siteConfig.description,
-      images: image ? [image] : defaultMetadata.twitter?.images,
+      images: image ? [
+        {
+          url: image,
+          width: 800,
+          height: 400,
+          alt: title || siteConfig.name,
+        }
+      ] : defaultMetadata.twitter?.images,
     },
   };
 };
@@ -149,7 +165,15 @@ export const generateNewsMetadata = (
       type: 'article',
       title,
       description: excerpt,
-      images: image ? [image] : defaultMetadata.openGraph?.images,
+      images: image ? [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+          type: 'image/png',
+        }
+      ] : defaultMetadata.openGraph?.images,
       publishedTime,
       authors: author ? [author] : undefined,
     },

@@ -12,7 +12,8 @@ export function generateOrganizationSchema() {
     '@type': 'LegalService',
     name: 'López y Escobar Abogados Asociados',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com',
-    logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com'}/images/logo.png`,
+    logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com'}/og-image.png`,
+    image: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://lopez-escobar.com'}/og-image.png`,
     description: 'Firma de abogados especializada en derecho corporativo, civil, penal y administrativo',
     address: {
       '@type': 'PostalAddress',

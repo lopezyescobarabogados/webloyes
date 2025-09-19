@@ -5,6 +5,17 @@
 
 set -e
 
+echo "🔧 Ejecutando post-build para Railway..."
+
+# Primero ejecutar migraciones de Prisma
+echo "🗄️ Aplicando migraciones de base de datos..."
+if [ "$NODE_ENV" = "production" ] && [ -n "$DATABASE_URL" ]; then
+    echo "🔄 Ejecutando migraciones en producción..."
+    npx prisma migrate deploy || echo "⚠️ Warning: Failed to run migrations, continuing..."
+else
+    echo "ℹ️ Saltando migraciones (no es producción o no hay DATABASE_URL)"
+fi
+
 echo "🔧 Copiando binarios de Prisma al standalone..."
 
 # Directorios

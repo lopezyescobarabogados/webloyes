@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm run railway:build"
+buildCommand = "npm run railway:build && chmod +x scripts/migrate-pdf-fields.sh && ./scripts/migrate-pdf-fields.sh && chmod +x scripts/post-build.sh && ./scripts/post-build.sh"
 
 [deploy]
 startCommand = "npm start"

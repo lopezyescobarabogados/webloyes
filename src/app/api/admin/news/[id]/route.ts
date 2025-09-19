@@ -9,9 +9,45 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const news = await prisma.news.findUnique({
-      where: { id }
-    })
+    
+    // Intenta obtener noticia con campos PDF, maneja el error si no existen
+    let news;
+    try {
+      news = await prisma.news.findUnique({
+        where: { id }
+      });
+    } catch (dbError: unknown) {
+      // Si el error es por campos PDF que no existen, hacer consulta sin esos campos
+      const errorMessage = dbError instanceof Error ? dbError.message : String(dbError);
+      const errorCode = (dbError as { code?: string })?.code;
+      
+      if (errorCode === 'P2022' && errorMessage.includes('pdfUrl')) {
+        console.log('⚠️ Campos PDF no existen aún en admin single, usando consulta compatible...');
+        news = await prisma.news.findUnique({
+          where: { id },
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            excerpt: true,
+            content: true,
+            author: true,
+            category: true,
+            tags: true,
+            published: true,
+            featured: true,
+            imageUrl: true,
+            imageData: true,
+            imageType: true,
+            createdAt: true,
+            updatedAt: true,
+            // No incluir pdfUrl y pdfName si no existen
+          }
+        });
+      } else {
+        throw dbError;
+      }
+    }
 
     if (!news) {
       return NextResponse.json(

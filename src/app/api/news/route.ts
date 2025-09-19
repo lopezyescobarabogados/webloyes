@@ -59,11 +59,49 @@ function processTags(tagsInput: FormDataEntryValue | null): string[] {
 // GET - Obtener todas las noticias
 export async function GET() {
   try {
-    const news = await prisma.news.findMany({
-      orderBy: {
-        createdAt: 'desc'
+    // Intenta obtener noticias con campos PDF, maneja el error si no existen
+    let news;
+    try {
+      news = await prisma.news.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        }
+      });
+    } catch (dbError: unknown) {
+      // Si el error es por campos PDF que no existen, hacer consulta sin esos campos
+      const errorMessage = dbError instanceof Error ? dbError.message : String(dbError);
+      const errorCode = (dbError as { code?: string })?.code;
+      
+      if (errorCode === 'P2022' && errorMessage.includes('pdfUrl')) {
+        console.log('⚠️ Campos PDF no existen aún, usando consulta compatible...');
+        news = await prisma.news.findMany({
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            excerpt: true,
+            content: true,
+            author: true,
+            category: true,
+            tags: true,
+            published: true,
+            featured: true,
+            imageUrl: true,
+            imageData: true,
+            imageType: true,
+            createdAt: true,
+            updatedAt: true,
+            // No incluir pdfUrl y pdfName si no existen
+          },
+          orderBy: {
+            createdAt: 'desc'
+          }
+        });
+      } else {
+        throw dbError;
       }
-    })
+    }
+    
     return NextResponse.json(news)
   } catch (error) {
     console.error('Error fetching news:', error)
