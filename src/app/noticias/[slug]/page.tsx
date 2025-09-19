@@ -214,12 +214,12 @@ export default function NoticiaPage({ params }: Props) {
         <section className="bg-gray-50 py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl">
-              <div className="relative h-64 overflow-hidden rounded-2xl shadow-lg sm:h-80 md:h-96 bg-gray-100">
+              <div className="relative mb-6 h-64 lg:h-96 rounded-xl overflow-hidden bg-gray-100">
                 <SmartNewsImage
                   news={article}
-                  fill={true}
+                  size="xl"
                   priority={true}
-                  className="object-contain"
+                  className="h-full w-full"
                   objectFit="contain"
                 />
               </div>
